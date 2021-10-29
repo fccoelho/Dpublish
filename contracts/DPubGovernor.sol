@@ -2,13 +2,13 @@
 pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/governance/Governor.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
+import "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 
 /// @custom:security-contact fccoelho@gmail.com
-contract DPubGovernor is Governor, GovernorCountingSimple, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
+contract DPubGovernor is Governor, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
     constructor(ERC20Votes _token, TimelockController _timelock)
         Governor("DPubGovernor")
         GovernorVotes(_token)
@@ -22,6 +22,10 @@ contract DPubGovernor is Governor, GovernorCountingSimple, GovernorVotes, Govern
 
     function votingPeriod() public pure override returns (uint256) {
         return 45818; // 1 week
+    }
+
+    function proposalThreshold() public pure override returns (uint256) {
+        return 0e18;
     }
 
     // The following functions are overrides required by Solidity.
@@ -47,7 +51,7 @@ contract DPubGovernor is Governor, GovernorCountingSimple, GovernorVotes, Govern
     function state(uint256 proposalId)
         public
         view
-        override(Governor, GovernorTimelockControl)
+        override(Governor, IGovernor, GovernorTimelockControl)
         returns (ProposalState)
     {
         return super.state(proposalId);
@@ -55,7 +59,7 @@ contract DPubGovernor is Governor, GovernorCountingSimple, GovernorVotes, Govern
 
     function propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
         public
-        override(Governor, IGovernor)
+        override(Governor, GovernorCompatibilityBravo, IGovernor)
         returns (uint256)
     {
         return super.propose(targets, values, calldatas, description);
@@ -88,7 +92,7 @@ contract DPubGovernor is Governor, GovernorCountingSimple, GovernorVotes, Govern
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(Governor, GovernorTimelockControl)
+        override(Governor, IERC165, GovernorTimelockControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
