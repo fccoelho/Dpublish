@@ -17,7 +17,7 @@ contract('DPubToken', function (accounts) {
   const name = 'DPubToken';
   const symbol = 'DPTK';
 
-  const initialSupply = new BN(1000000);//1000000000000000000000000);
+  const initialSupply = new BN(1000000);
 
   beforeEach(async function () {
     this.token = await DPubToken.new();//name, symbol, initialHolder, initialSupply);
