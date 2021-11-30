@@ -8,7 +8,7 @@ const {
   shouldBehaveLikeERC20Approve,
 } = require('./ERC20.behavior');
 
-const DPubToken = artifacts.require('DPubToken');
+const DPubToken = artifacts.require('DPubToken'); 
 //const ERC20DecimalsMock = artifacts.require('ERC20DecimalsMock');
 
 contract('DPubToken', function (accounts) {
