@@ -6,7 +6,17 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PaperToken is ERC721, ERC721URIStorage, Ownable {
-    constructor() ERC721("PaperToken", "PTK") {}
+
+    uint256 private tokenID;
+
+    function newID() public returns(uint256){
+        tokenID = tokenID + 1;
+        return tokenID;
+    }
+
+    constructor() ERC721("PaperToken", "PTK") {
+        tokenID =1;
+    }
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://dpublish.org";

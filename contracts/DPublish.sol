@@ -5,13 +5,18 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 import "./DpubToken.sol";
+import "./PaperToken.sol";
+import "./ReviewToken.sol";
 
 
 contract DPublish {
 
     address public plublisher;
 
-    mapping (address => uint) private fund;
+    DPubToken public token; 
+
+    PaperToken public paperNFT;
+    
 
     struct _plublisherWalet {
         address addr;
@@ -20,10 +25,13 @@ contract DPublish {
 
     constructor(){
         plublisher = msg.sender;
+        token = new DPubToken();
+        paperNFT = new PaperToken();
     }
 
 
     enum StatusDoc {unrevised, partial_review, revised}
+    
 
     uint minimunRate = 10000;
     struct PublishDoc {
@@ -32,39 +40,41 @@ contract DPublish {
         StatusDoc status;
         string contentLink;
         uint priority;
+        uint256 paperID;
     }
 
     struct walet{
         PublishDoc[] myDocs;
         uint NumberOfDocs;
-        uint amount;
     }
 
-
+    mapping (address => uint) private fund;
     mapping(address => walet) private MyRecord;
 
 
     function newDoc(string memory _name, string memory _contentLlink, uint amount) public returns(string memory){
         require(amount>minimunRate, "Your payment is insufficient.");
-        require(MyRecord[msg.sender].amount - amount>0, "Your balance is insufficient.");
-        bool x = transferFrom(msg.sender,plublisher,amount);  
+        require(fund[msg.sender] - amount>0, "Your balance is insufficient.");
+        bool x = token.transferFrom(msg.sender,plublisher,amount);  
         if (x){
-            PublishDoc memory AuxDoc = PublishDoc({
-            owner: msg.sender,
-            name: _name,
-            status: StatusDoc.unrevised,
-            contentLink: _contentLlink,
-            priority: amount
-        });
-      
-        MyRecord[msg.sender].myDocs.push(AuxDoc);
-        return("Add a new doc");
+
+                PublishDoc memory AuxDoc = PublishDoc({
+                owner: msg.sender,
+                name: _name,
+                status: StatusDoc.unrevised,
+                contentLink: _contentLlink,
+                priority: amount,
+                paperID: paperNFT.newID()
+            });
+            MyRecord[msg.sender].myDocs.push(AuxDoc);
+            paperNFT.safeMint(msg.sender, AuxDoc.paperID);
+            return("Add a new doc");
         }else{
             return "Error performing the transfer";
         }
     }
 
-    function getDocsPublic(address _address) public view returns(PublishDoc[] memory){
+    function getDocsPublished(address _address) public view returns(PublishDoc[] memory){
 
         uint j=0;
         uint i = 0;
@@ -82,18 +92,6 @@ contract DPublish {
         return aux; 
 
     } 
-
-    function balanceOf(address owner) public view returns(uint) {
-        return MyRecord[owner].amount;
-    }
-    
-    function transferFrom(address from, address to, uint value) public returns(bool) {
-        require(balanceOf(from) >= value, 'Your balance is insufficient.');
-        MyRecord[to].amount += value;
-        MyRecord[from].amount -= value;
-        emit Transfer(from, to, value);
-        return true;
-    }
     
 
     function revised(PublishDoc memory doc, address reviewer) public returns(bool){
@@ -101,7 +99,7 @@ contract DPublish {
             return false;
         }
         else {
-            bool x = transferFrom(plublisher,reviewer,doc.priority*2/5);
+            bool x = token.transferFrom(plublisher,reviewer,doc.priority*2/5);
             if (doc.status == StatusDoc.unrevised && x){
                 doc.status = StatusDoc.partial_review; 
             }else if(doc.status==StatusDoc.partial_review && x){
@@ -111,10 +109,13 @@ contract DPublish {
         }
     } 
 
+
     event Transfer(address indexed from, address indexed to, uint value);
 
-    event CreateDoc(string indexed _name,string indexed _contentLlink,int amount);
+    event NewDoc(string indexed _name,string indexed _contentLlink,int amount);
 
+    event Revised(PublishDoc indexed _doc, address _reviewer);
 
+    event GetDocsPublished(address indexed _address);
 
 }
