@@ -16,6 +16,8 @@ contract DPublish {
     DPubToken public token; 
 
     PaperToken public paperNFT;
+
+    ReviewToken public reviewNFT;
     
 
     struct _plublisherWalet {
@@ -27,6 +29,7 @@ contract DPublish {
         plublisher = msg.sender;
         token = new DPubToken();
         paperNFT = new PaperToken();
+        reviewNFT = new ReviewToken();
     }
 
 
@@ -45,12 +48,14 @@ contract DPublish {
 
     struct walet{
         PublishDoc[] myDocs;
+        PublishDoc[] RevisedDoc; 
         uint NumberOfDocs;
     }
 
     mapping (address => uint) private fund;
     mapping(address => walet) private MyRecord;
-
+    mapping(string => address) private reviewer1;
+    mapping(string => address) private reviewer2;
 
     function newDoc(string memory _name, string memory _contentLlink, uint amount) public returns(string memory){
         require(amount>minimunRate, "Your payment is insufficient.");
@@ -99,15 +104,32 @@ contract DPublish {
             return false;
         }
         else {
-            bool x = token.transferFrom(plublisher,reviewer,doc.priority*2/5);
+            bool x;
+            if (reviewer1[doc.name] == reviewer){
+                x = false;
+            }
+            else{
+                x = token.transferFrom(plublisher,reviewer,doc.priority*2/5);
+            }
             if (doc.status == StatusDoc.unrevised && x){
+                reviewNFT.safeMint(doc.owner, doc.paperID);
                 doc.status = StatusDoc.partial_review; 
-            }else if(doc.status==StatusDoc.partial_review && x){
+                reviewer1[doc.name] = reviewer;
+                MyRecord[reviewer].RevisedDoc.push(doc);
+            }
+            else if(doc.status==StatusDoc.partial_review && x){
+                reviewNFT.safeMint(doc.owner, doc.paperID);
                 doc.status = StatusDoc.revised;
+                reviewer2[doc.name] = reviewer;
+                MyRecord[reviewer].RevisedDoc.push(doc);
             }
             return x;
         }
     } 
+
+    function getReviews(address _address) public view returns(PublishDoc[] memory){
+        return MyRecord[_address].RevisedDoc;
+    }
 
 
     event Transfer(address indexed from, address indexed to, uint value);
@@ -117,5 +139,7 @@ contract DPublish {
     event Revised(PublishDoc indexed _doc, address _reviewer);
 
     event GetDocsPublished(address indexed _address);
+
+    event etReviews(address indexed _address);
 
 }
