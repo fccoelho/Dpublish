@@ -15,6 +15,10 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
     }
+    
+    function register(address to, uint256 userId) public onlyOwner {
+        register(to, userId);
+    }
 
     // The following functions are overrides required by Solidity.
 

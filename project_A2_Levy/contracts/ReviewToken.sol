@@ -16,6 +16,11 @@ contract ReviewToken is ERC721, ERC721URIStorage, Ownable {
         _safeMint(to, tokenId);
     }
 
+    function review(address to, uint256 userId) public onlyOwner {
+        review(to, userId);
+    }
+
+
     // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
