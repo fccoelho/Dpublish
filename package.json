@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.2"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "web3": "^1.6.0"
   }
 }
