@@ -32,14 +32,4 @@ contract DPubToken is ERC20, ERC20Permit, ERC20Votes {
         super._burn(account, amount);
     }
     
-    function buy(uint256 amount) external payable {
-        require(msg.value == amount);
-        
-        /*
-         * sends the requested amount of tokens
-         * from this contract address
-         * to the buyer
-         */
-        transfer(msg.sender, amount);
-    }
 }

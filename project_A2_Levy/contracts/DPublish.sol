@@ -4,7 +4,11 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 
-contract DPublish is Context{
+import "./DpubToken.sol";
+import "./PaperToken.sol";
+import "./ReviewToken.sol";
+
+contract DPublish {
 
     mapping(string => address) public submitted_manuscripts;
     mapping(address => uint256) public balances; ///Quantidade de DPubTokens que o usuário possui
@@ -35,11 +39,6 @@ contract DPublish is Context{
     function set_fee(uint256 fee) public payable{
         require(msg.sender == Editor);
         publishing_fee = fee;
-    }
-
-    function set_balance(address user, uint256 value) public {
-        require(msg.sender == Editor);
-        balances = balances;
     }
 
 }
