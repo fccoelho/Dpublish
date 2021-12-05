@@ -236,7 +236,7 @@ abstract contract ERC20Votes is ERC20Permit {
 
     function _writeCheckpoint(
         Checkpoint[] storage ckpts,
-        function(uint25a6, uint256) view returns (uint256) op,
+        function(uint256, uint256) view returns (uint256) op,
         uint256 delta
     ) private returns (uint256 oldWeight, uint256 newWeight) {
         uint256 pos = ckpts.length;
