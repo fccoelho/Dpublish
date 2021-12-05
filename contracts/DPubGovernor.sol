@@ -48,8 +48,8 @@ contract DPublish {
         publishing_fee = fee;
     }
 
-    // function set_balance(address user, uint256 valeu) public{
-    //     require(msg.sender == Editor);
-    // }
+    function set_balance(address user, uint256 valeu) public{
+        require(msg.sender == Editor);
+    }
 
 }

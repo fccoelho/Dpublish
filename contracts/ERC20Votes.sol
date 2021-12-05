@@ -25,6 +25,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
  *
  * _Available since v4.2._
  */
+ 
 abstract contract ERC20Votes is ERC20Permit {
     struct Checkpoint {
         uint32 fromBlock;

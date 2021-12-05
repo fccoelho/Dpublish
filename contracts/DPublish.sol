@@ -8,7 +8,8 @@ contract DPublish {
     mapping(address => uint256) public balances;
     // Pagamentos para os revisores
     mapping(string => uint256) public bounties;
-
+    
+    // 
     address private Editor;
 
     uint256 public publishing_fee;
@@ -48,8 +49,8 @@ contract DPublish {
         publishing_fee = fee;
     }
 
-    // function set_balance(address user, uint256 valeu) public{
-    //     require(msg.sender == Editor);
-    // }
+    function set_balance(address user, uint256 valeu) public{
+        require(msg.sender == Editor);
+    }
 
 }
