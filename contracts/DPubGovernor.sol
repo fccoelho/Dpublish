@@ -1,100 +1,55 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/governance/Governor.sol";
-import "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol";
-import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
+contract DPublish {
+    // "Convertendo" string para um endereço
+    mapping(string => address) public submitted_manuscripts;
+    // Total de tokens que o usuario possui
+    mapping(address => uint256) public balances;
+    // Pagamentos para os revisores
+    mapping(string => uint256) public bounties;
 
-/// @custom:security-contact fccoelho@gmail.com
-contract DPubGovernor is Governor, GovernorCompatibilityBravo, GovernorVotes, GovernorVotesQuorumFraction, GovernorTimelockControl {
-    constructor(ERC20Votes _token, TimelockController _timelock)
-        Governor("DPubGovernor")
-        GovernorVotes(_token)
-        GovernorVotesQuorumFraction(4)
-        GovernorTimelockControl(_timelock)
-    {}
+    address private Editor;
 
-    function votingDelay() public pure override returns (uint256) {
-        return 1; // 1 block
+    uint256 public publishing_fee;
+
+    uint16 public review_time;
+
+    // Eventos
+    event PaymentReceived(address from, uint256 amount);
+    
+    ///Erro
+    error NotEnoughFunds(uint256 requested, uint256 available);
+
+    constructor(){
+        Editor = msg.sender;
     }
 
-    function votingPeriod() public pure override returns (uint256) {
-        return 45818; // 1 week
+    function submit_manuscript(string memory idmanuscript) public payable{
+        // Armazenando o endereço do usuário
+        submitted_manuscripts[idmanuscript] = msg.sender;
+        // Adquirindo o saldo em conta do usuário
+        uint balance = balances[msg.sender];
+        // Verificando se o usuário possui saldo suficiente
+        if (balance < publishing_fee) 
+        // Retornando erro caso falte saldo
+            revert NotEnoughFunds(publishing_fee, balance);
+        
+        // Retirando o saldo cliente
+        balances[msg.sender] -= publishing_fee;
+        // Salvando a quantidade paga
+        bounties[idmanuscript] = publishing_fee;
+        
+        emit PaymentReceived(msg.sender, publishing_fee);
     }
 
-    function proposalThreshold() public pure override returns (uint256) {
-        return 0e18;
+    function set_fee(uint256 fee) public payable{
+        require(msg.sender == Editor);
+        publishing_fee = fee;
     }
 
-    // The following functions are overrides required by Solidity.
+    // function set_balance(address user, uint256 valeu) public{
+    //     require(msg.sender == Editor);
+    // }
 
-    function quorum(uint256 blockNumber)
-        public
-        view
-        override(IGovernor, GovernorVotesQuorumFraction)
-        returns (uint256)
-    {
-        return super.quorum(blockNumber);
-    }
-
-    function getVotes(address account, uint256 blockNumber)
-        public
-        view
-        override(IGovernor, GovernorVotes)
-        returns (uint256)
-    {
-        return super.getVotes(account, blockNumber);
-    }
-
-    function state(uint256 proposalId)
-        public
-        view
-        override(Governor, IGovernor, GovernorTimelockControl)
-        returns (ProposalState)
-    {
-        return super.state(proposalId);
-    }
-
-    function propose(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, string memory description)
-        public
-        override(Governor, GovernorCompatibilityBravo, IGovernor)
-        returns (uint256)
-    {
-        return super.propose(targets, values, calldatas, description);
-    }
-
-    function _execute(uint256 proposalId, address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
-        internal
-        override(Governor, GovernorTimelockControl)
-    {
-        super._execute(proposalId, targets, values, calldatas, descriptionHash);
-    }
-
-    function _cancel(address[] memory targets, uint256[] memory values, bytes[] memory calldatas, bytes32 descriptionHash)
-        internal
-        override(Governor, GovernorTimelockControl)
-        returns (uint256)
-    {
-        return super._cancel(targets, values, calldatas, descriptionHash);
-    }
-
-    function _executor()
-        internal
-        view
-        override(Governor, GovernorTimelockControl)
-        returns (address)
-    {
-        return super._executor();
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(Governor, IERC165, GovernorTimelockControl)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
-    }
 }
