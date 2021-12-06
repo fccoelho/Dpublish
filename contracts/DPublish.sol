@@ -49,7 +49,7 @@ contract DPublish {
         publishing_fee = fee;
     }
 
-    function set_balance(address user, uint256 valeu) public{
+    function set_balance(address user, uint256 value) public{
         require(msg.sender == Editor);
     }
 
