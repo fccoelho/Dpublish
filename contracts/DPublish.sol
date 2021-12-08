@@ -8,14 +8,22 @@ contract DPublish {
     mapping(address => uint256) public balances;
     // Dicionario que armazena o pagamento para os revisores
     mapping(string => uint256) public bounties;
+
+    mapping (address => string) public review_archive;
+
+    mapping(address => bool) public is_reviewer;
     
     // Endereco do editor
     address private Editor;
     // taxa de publiacao
     uint256 public publishing_fee;
-    // tempo de revisao
-    uint16 public review_time;
-
+    // Pagamento para o revisor
+    uint16 public review_payment;
+    
+    address[10] reviewrs;
+    
+    uint16 count_review = 0;
+    
     // Eventos
     event PaymentReceived(address from, uint256 amount);
     
@@ -57,5 +65,26 @@ contract DPublish {
         // Atribuindo um saldo
         balances[user] = value;
     }
+
+    function subscribe_to_review(address user) public{
+        require(count_review <= 10, "Nao pode mais revisar");
+        require(!(is_reviewer[msg.sender]==true), "Precisa se inscrever como revisor");
+        reviewrs[count_review] = user;
+        count_review += 1 ;
+        is_reviewer[user] = true;
+    }
+
+
+    function sent_review(string memory linkIPFS) public{
+        require(is_reviewer[msg.sender]==true, "Precisa se inscrever como revisor");
+        review_archive[msg.sender] = linkIPFS;
+        pay_review(msg.sender);
+
+    }
+
+    function pay_review(address reviewer) private{
+        balances[reviewer] += review_payment;
+    }
+
 
 }
