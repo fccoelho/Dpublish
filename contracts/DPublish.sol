@@ -2,18 +2,18 @@
 pragma solidity ^0.8.4;
 
 contract DPublish {
-    // "Convertendo" string para um endereço
+    // Armazena no dicionario os enderecos
     mapping(string => address) public submitted_manuscripts;
-    // Total de tokens que o usuario possui
+    // Armazena o total de tokens que o usuario possui
     mapping(address => uint256) public balances;
-    // Pagamentos para os revisores
+    // Dicionario que armazena o pagamento para os revisores
     mapping(string => uint256) public bounties;
     
-    // 
+    // Endereco do editor
     address private Editor;
-
+    // taxa de publiacao
     uint256 public publishing_fee;
-
+    // tempo de revisao
     uint16 public review_time;
 
     // Eventos
@@ -23,11 +23,13 @@ contract DPublish {
     error NotEnoughFunds(uint256 requested, uint256 available);
 
     constructor(){
+        // Salvando o endereco do autor do contrato
         Editor = msg.sender;
     }
 
+
     function submit_manuscript(string memory idmanuscript) public payable{
-        // Armazenando o endereço do usuário
+        // Armazenando o endereço do usuário que publicou
         submitted_manuscripts[idmanuscript] = msg.sender;
         // Adquirindo o saldo em conta do usuário
         uint balance = balances[msg.sender];
@@ -45,12 +47,15 @@ contract DPublish {
     }
 
     function set_fee(uint256 fee) public payable{
+        // Se o endereco for o mesmo do admnistrador, sera feita a publicação
         require(msg.sender == Editor);
         publishing_fee = fee;
     }
 
     function set_balance(address user, uint256 value) public{
         require(msg.sender == Editor);
+        // Atribuindo um saldo
+        balances[user] = value;
     }
 
 }
