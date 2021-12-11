@@ -7,8 +7,8 @@ contract DPublish {
     /**
     * Submit manuscript
      */
-    function submit_manuscript(string idmanuscript) public view{
-        submitted_manuscripts[idmanuscript] = _msgSender;
+    function submit_manuscript(string memory idmanuscript) public view{
+        submitted_manuscripts[idmanuscript]; 
     }
 
 
