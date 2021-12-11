@@ -180,15 +180,15 @@
     "absolutePath": "@openzeppelin/contracts/access/IAccessControl.sol",
     "exportedSymbols": {
       "IAccessControl": [
-        9526
+        8100
       ]
     },
-    "id": 9527,
+    "id": 8101,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 9455,
+        "id": 8029,
         "literals": [
           "solidity",
           "^",
@@ -205,15 +205,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 9456,
+          "id": 8030,
           "nodeType": "StructuredDocumentation",
           "src": "119:89:1",
           "text": " @dev External interface of AccessControl declared to support ERC165 detection."
         },
         "fullyImplemented": false,
-        "id": 9526,
+        "id": 8100,
         "linearizedBaseContracts": [
-          9526
+          8100
         ],
         "name": "IAccessControl",
         "nameLocation": "219:14:1",
@@ -222,28 +222,28 @@
           {
             "anonymous": false,
             "documentation": {
-              "id": 9457,
+              "id": 8031,
               "nodeType": "StructuredDocumentation",
               "src": "240:292:1",
               "text": " @dev Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole`\n `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite\n {RoleAdminChanged} not being emitted signaling this.\n _Available since v3.1._"
             },
-            "id": 9465,
+            "id": 8039,
             "name": "RoleAdminChanged",
             "nameLocation": "543:16:1",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 9464,
+              "id": 8038,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9459,
+                  "id": 8033,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "576:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9465,
+                  "scope": 8039,
                   "src": "560:20:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -252,7 +252,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9458,
+                    "id": 8032,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "560:7:1",
@@ -265,13 +265,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9461,
+                  "id": 8035,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "previousAdminRole",
                   "nameLocation": "598:17:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9465,
+                  "scope": 8039,
                   "src": "582:33:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -280,7 +280,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9460,
+                    "id": 8034,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "582:7:1",
@@ -293,13 +293,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9463,
+                  "id": 8037,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "newAdminRole",
                   "nameLocation": "633:12:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9465,
+                  "scope": 8039,
                   "src": "617:28:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -308,7 +308,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9462,
+                    "id": 8036,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "617:7:1",
@@ -327,28 +327,28 @@
           {
             "anonymous": false,
             "documentation": {
-              "id": 9466,
+              "id": 8040,
               "nodeType": "StructuredDocumentation",
               "src": "653:212:1",
               "text": " @dev Emitted when `account` is granted `role`.\n `sender` is the account that originated the contract call, an admin role\n bearer except when using {AccessControl-_setupRole}."
             },
-            "id": 9474,
+            "id": 8048,
             "name": "RoleGranted",
             "nameLocation": "876:11:1",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 9473,
+              "id": 8047,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9468,
+                  "id": 8042,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "904:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9474,
+                  "scope": 8048,
                   "src": "888:20:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -357,7 +357,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9467,
+                    "id": 8041,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "888:7:1",
@@ -370,13 +370,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9470,
+                  "id": 8044,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "926:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9474,
+                  "scope": 8048,
                   "src": "910:23:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -385,7 +385,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9469,
+                    "id": 8043,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "910:7:1",
@@ -399,13 +399,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9472,
+                  "id": 8046,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "sender",
                   "nameLocation": "951:6:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9474,
+                  "scope": 8048,
                   "src": "935:22:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -414,7 +414,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9471,
+                    "id": 8045,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "935:7:1",
@@ -434,28 +434,28 @@
           {
             "anonymous": false,
             "documentation": {
-              "id": 9475,
+              "id": 8049,
               "nodeType": "StructuredDocumentation",
               "src": "965:275:1",
               "text": " @dev Emitted when `account` is revoked `role`.\n `sender` is the account that originated the contract call:\n   - if using `revokeRole`, it is the admin role bearer\n   - if using `renounceRole`, it is the role bearer (i.e. `account`)"
             },
-            "id": 9483,
+            "id": 8057,
             "name": "RoleRevoked",
             "nameLocation": "1251:11:1",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 9482,
+              "id": 8056,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9477,
+                  "id": 8051,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "1279:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9483,
+                  "scope": 8057,
                   "src": "1263:20:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -464,7 +464,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9476,
+                    "id": 8050,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "1263:7:1",
@@ -477,13 +477,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9479,
+                  "id": 8053,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "1301:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9483,
+                  "scope": 8057,
                   "src": "1285:23:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -492,7 +492,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9478,
+                    "id": 8052,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1285:7:1",
@@ -506,13 +506,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 9481,
+                  "id": 8055,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "sender",
                   "nameLocation": "1326:6:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9483,
+                  "scope": 8057,
                   "src": "1310:22:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -521,7 +521,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9480,
+                    "id": 8054,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1310:7:1",
@@ -540,13 +540,13 @@
           },
           {
             "documentation": {
-              "id": 9484,
+              "id": 8058,
               "nodeType": "StructuredDocumentation",
               "src": "1340:76:1",
               "text": " @dev Returns `true` if `account` has been granted `role`."
             },
             "functionSelector": "91d14854",
-            "id": 9493,
+            "id": 8067,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -554,17 +554,17 @@
             "nameLocation": "1430:7:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9489,
+              "id": 8063,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9486,
+                  "id": 8060,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "1446:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9493,
+                  "scope": 8067,
                   "src": "1438:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -573,7 +573,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9485,
+                    "id": 8059,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "1438:7:1",
@@ -586,12 +586,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 9488,
+                  "id": 8062,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "1460:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9493,
+                  "scope": 8067,
                   "src": "1452:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -600,7 +600,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9487,
+                    "id": 8061,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1452:7:1",
@@ -616,17 +616,17 @@
               "src": "1437:31:1"
             },
             "returnParameters": {
-              "id": 9492,
+              "id": 8066,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9491,
+                  "id": 8065,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9493,
+                  "scope": 8067,
                   "src": "1492:4:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -635,7 +635,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 9490,
+                    "id": 8064,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1492:4:1",
@@ -649,7 +649,7 @@
               ],
               "src": "1491:6:1"
             },
-            "scope": 9526,
+            "scope": 8100,
             "src": "1421:77:1",
             "stateMutability": "view",
             "virtual": false,
@@ -657,13 +657,13 @@
           },
           {
             "documentation": {
-              "id": 9494,
+              "id": 8068,
               "nodeType": "StructuredDocumentation",
               "src": "1504:184:1",
               "text": " @dev Returns the admin role that controls `role`. See {grantRole} and\n {revokeRole}.\n To change a role's admin, use {AccessControl-_setRoleAdmin}."
             },
             "functionSelector": "248a9ca3",
-            "id": 9501,
+            "id": 8075,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -671,17 +671,17 @@
             "nameLocation": "1702:12:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9497,
+              "id": 8071,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9496,
+                  "id": 8070,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "1723:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9501,
+                  "scope": 8075,
                   "src": "1715:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -690,7 +690,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9495,
+                    "id": 8069,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "1715:7:1",
@@ -705,17 +705,17 @@
               "src": "1714:14:1"
             },
             "returnParameters": {
-              "id": 9500,
+              "id": 8074,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9499,
+                  "id": 8073,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9501,
+                  "scope": 8075,
                   "src": "1752:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -724,7 +724,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9498,
+                    "id": 8072,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "1752:7:1",
@@ -738,7 +738,7 @@
               ],
               "src": "1751:9:1"
             },
-            "scope": 9526,
+            "scope": 8100,
             "src": "1693:68:1",
             "stateMutability": "view",
             "virtual": false,
@@ -746,13 +746,13 @@
           },
           {
             "documentation": {
-              "id": 9502,
+              "id": 8076,
               "nodeType": "StructuredDocumentation",
               "src": "1767:239:1",
               "text": " @dev Grants `role` to `account`.\n If `account` had not been already granted `role`, emits a {RoleGranted}\n event.\n Requirements:\n - the caller must have ``role``'s admin role."
             },
             "functionSelector": "2f2ff15d",
-            "id": 9509,
+            "id": 8083,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -760,17 +760,17 @@
             "nameLocation": "2020:9:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9507,
+              "id": 8081,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9504,
+                  "id": 8078,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "2038:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9509,
+                  "scope": 8083,
                   "src": "2030:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -779,7 +779,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9503,
+                    "id": 8077,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "2030:7:1",
@@ -792,12 +792,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 9506,
+                  "id": 8080,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "2052:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9509,
+                  "scope": 8083,
                   "src": "2044:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -806,7 +806,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9505,
+                    "id": 8079,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2044:7:1",
@@ -822,12 +822,12 @@
               "src": "2029:31:1"
             },
             "returnParameters": {
-              "id": 9508,
+              "id": 8082,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2069:0:1"
             },
-            "scope": 9526,
+            "scope": 8100,
             "src": "2011:59:1",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -835,13 +835,13 @@
           },
           {
             "documentation": {
-              "id": 9510,
+              "id": 8084,
               "nodeType": "StructuredDocumentation",
               "src": "2076:223:1",
               "text": " @dev Revokes `role` from `account`.\n If `account` had been granted `role`, emits a {RoleRevoked} event.\n Requirements:\n - the caller must have ``role``'s admin role."
             },
             "functionSelector": "d547741f",
-            "id": 9517,
+            "id": 8091,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -849,17 +849,17 @@
             "nameLocation": "2313:10:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9515,
+              "id": 8089,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9512,
+                  "id": 8086,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "2332:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9517,
+                  "scope": 8091,
                   "src": "2324:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -868,7 +868,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9511,
+                    "id": 8085,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "2324:7:1",
@@ -881,12 +881,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 9514,
+                  "id": 8088,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "2346:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9517,
+                  "scope": 8091,
                   "src": "2338:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -895,7 +895,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9513,
+                    "id": 8087,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2338:7:1",
@@ -911,12 +911,12 @@
               "src": "2323:31:1"
             },
             "returnParameters": {
-              "id": 9516,
+              "id": 8090,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2363:0:1"
             },
-            "scope": 9526,
+            "scope": 8100,
             "src": "2304:60:1",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -924,13 +924,13 @@
           },
           {
             "documentation": {
-              "id": 9518,
+              "id": 8092,
               "nodeType": "StructuredDocumentation",
               "src": "2370:480:1",
               "text": " @dev Revokes `role` from the calling account.\n Roles are often managed via {grantRole} and {revokeRole}: this function's\n purpose is to provide a mechanism for accounts to lose their privileges\n if they are compromised (such as when a trusted device is misplaced).\n If the calling account had been granted `role`, emits a {RoleRevoked}\n event.\n Requirements:\n - the caller must be `account`."
             },
             "functionSelector": "36568abe",
-            "id": 9525,
+            "id": 8099,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -938,17 +938,17 @@
             "nameLocation": "2864:12:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9523,
+              "id": 8097,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9520,
+                  "id": 8094,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "2885:4:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9525,
+                  "scope": 8099,
                   "src": "2877:12:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -957,7 +957,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 9519,
+                    "id": 8093,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "2877:7:1",
@@ -970,12 +970,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 9522,
+                  "id": 8096,
                   "mutability": "mutable",
                   "name": "account",
                   "nameLocation": "2899:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 9525,
+                  "scope": 8099,
                   "src": "2891:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -984,7 +984,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 9521,
+                    "id": 8095,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2891:7:1",
@@ -1000,19 +1000,19 @@
               "src": "2876:31:1"
             },
             "returnParameters": {
-              "id": 9524,
+              "id": 8098,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2916:0:1"
             },
-            "scope": 9526,
+            "scope": 8100,
             "src": "2855:62:1",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 9527,
+        "scope": 8101,
         "src": "209:2710:1",
         "usedErrors": []
       }
