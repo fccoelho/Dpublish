@@ -12,12 +12,16 @@ contract DPubToken is ERC20, ERC20Permit, ERC20Votes {
 
     // The following functions are overrides required by Solidity.
 
+    // mint and burn 
+    // ref: https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_afterTokenTransfer-address-address-uint256-
     function _afterTokenTransfer(address from, address to, uint256 amount)
         internal override(ERC20, ERC20Votes)
     {
         super._afterTokenTransfer(from, to, amount);
     }
 
+    // assign amount to account "to"
+    // ref: https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_mint-address-uint256-
     function _mint(address to, uint256 amount)
         internal
         override(ERC20, ERC20Votes)
@@ -25,6 +29,8 @@ contract DPubToken is ERC20, ERC20Permit, ERC20Votes {
         super._mint(to, amount);
     }
 
+    // destroy amount from account
+    // ref: https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_burn-address-uint256-
     function _burn(address account, uint256 amount)
         internal
         override(ERC20, ERC20Votes)
