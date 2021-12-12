@@ -145,13 +145,13 @@ contract DPublish {
 	    return rating_threshold; 
     } 
 
-    function setReviewThreshold(uint threshold) private {
-	    reviewThreshold = threshold; 
+    function setReviewerThreshold(uint threshold) private {
+	    reviewerThreshold = threshold; 
     } 
 
-    function getReviewThreshold() public returns(uint) {
-	    return reviewThreshold; 
-    } 
+    function getReviewerThreshold() public returns(uint) {
+	   return reviewerThreshold; 
+    }  
 
     function setReviewRelease(uint threshold) private {
 	    reviewRelease = threshold; 
