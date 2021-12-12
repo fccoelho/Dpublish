@@ -34,7 +34,7 @@ contract DPublish {
         papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
 
 	papersMetadata.manuscriptsFee[address(tk)] = msg.value; 
-	papersMetadata.status[address(tk)] = "OnSubmission"; 
+	papersMetadata.isReleased[address(tk)] = false; 
     }
 	
 
@@ -156,7 +156,7 @@ contract DPublish {
 	     reviewsMetadata.scores[reviewer].push(score); 
     } 
     
-    function releaseManuscript(string memory idmanuscript) public {
+    function releaseManuscript(string memory idmanuscript) public payable {
 	    // Release the manuscript. 
 	    // For each review, this functions verify (1) whether
 	    // the reviewer has the stake to review, (2) if the 
@@ -195,7 +195,12 @@ contract DPublish {
 	    } 
 
 	    require(true, "The document will be relsead, author!"); 
+	    
+	    papersMetadata.isRelased[manuscriptToken] = true; 
+
 	    // return true; 
+
+		
 	} 
 	
 	function checkReviewer(address reviewer) public view returns(bool) {
