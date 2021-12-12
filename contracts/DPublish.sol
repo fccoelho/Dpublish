@@ -89,6 +89,7 @@ contract DPublish {
 	ReviewToken tk = new ReviewToken(); 
 	reviewsMetadata.reviewers[msg.sender].push(address(tk)); 
 	reviewsMetadata.papers[address(tk)] = papersMetadata.manuscriptIdentifiers[idmanuscript];   
+	reviewsMetadata.reviewToReviewer[address(tk)] = msg.sender;  
     } 
 
     function isReviewing(address reviewer, string memory idmanuscript) private returns(bool) { 
@@ -148,12 +149,9 @@ contract DPublish {
 	     require(msg.sender.balance >= getRatingThreshold, 
 			"There is a (stake) threshold for rating reviews!"); 
 		
-	     address reviewer = getReviewer(review); 
+	     address reviewer = reviewsMetadata.reviewToReviewer[review];  
 	     reviewsMetadata.score[reviewer].push(score); 
     } 
     
-    function getReviewer(address review) private returns(address) { 
-	    ReviewsList reviews = reviewsMetadata.reviews[review]; 
-    } 
   
 }
