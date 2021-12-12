@@ -9,6 +9,7 @@ contract DPublish {
     // mapping(address => uint) private balances; 
     uint private submission_fee = 1000; 
     uint private review_fee = 99; 
+    uint private rating_threshold = 9999; 
 
     PaperTokens papersMetadata; 
     ReviewTokens reviewsMetadata; 
@@ -77,7 +78,7 @@ contract DPublish {
     function getReviewFee() public returns(uint) { 
 	    return review_fee; 
     } 
-    
+       
     function registerReviewer(string memory idmanuscript) public payable {
 	require(papersMetadata.isSubmitted[idmanuscript], 
 		"The paper doesn't exist!"); 
@@ -105,13 +106,13 @@ contract DPublish {
 
     // Function overflow 
     function isReviewing(address reviewer, address review) private returns(bool) {
+	    // Check whether `reviewer` is resposible for `review`. 
 	    address manuscriptToken = reviewsMetadata.papers[review]; 
 	    address[] memory reviewerTokens = reviewsMetadata.reviewers[reviewer]; 
 
 	    for(uint i = 0; i < reviewerTokens.length; i++) {
 		    address reviewToken = reviewerTokens[i]; 
-		    address manuscript = reviewsMetadata.papers[reviewToken]; 
-		    if (manuscript == manuscriptToken) 
+		    if (reviewToken == review) 
 			    return true; 
 	    } 
 
@@ -131,9 +132,28 @@ contract DPublish {
 	    reviewsMetadata.reviews[manuscriptToken].reviews.push(score); 
 	    reviewsMetadata.reviews[manuscriptToken].reviewers.push(msg.sender); 
     } 
+	
+    function setRatingThreshold(uint threshold) private {
+	    rating_threshold = threshold; 
+    } 
+
+    function getRatingThreshold() private returns(uint) {
+	    return rating_threshold; 
+    } 
 
     function rateReview(address review, uint score) public {
 	     require(!isReviewing(msg.sender, review), 
 		     "You shouldn't rate your own reviews!"); 
+	     
+	     require(msg.sender.balance >= getRatingThreshold, 
+			"There is a (stake) threshold for rating reviews!"); 
+		
+	     address reviewer = getReviewer(review); 
+	     reviewsMetadata.score[reviewer].push(score); 
     } 
+    
+    function getReviewer(address review) private returns(address) { 
+	    ReviewsList reviews = reviewsMetadata.reviews[review]; 
+    } 
+  
 }
