@@ -79,6 +79,8 @@ contract DPublish {
     } 
     
     function registerReviewer(string memory idmanuscript) public payable {
+	require(papersMetadata.isSubmitted[idmanuscript], 
+		"The paper doesn't exist!"); 
 	require(!isReviewing(msg.sender, idmanuscript), 
 		"You're already reviewing this paper!"); 
 	require(msg.value >= getReviewFee(), 
@@ -100,4 +102,6 @@ contract DPublish {
  	} 
 	return false; 
     } 	 
+
+
 }
