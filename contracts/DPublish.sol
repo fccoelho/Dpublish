@@ -3,6 +3,7 @@ pragma solidity ^0.8.2;
 
 import "./PaperToken.sol"; 
 import "./ReviewToken.sol"; 
+import "./DPubToken.sol"; 
 
 contract DPublish {
     // mapping(string => address) public submitted_manuscripts;
@@ -13,6 +14,9 @@ contract DPublish {
     uint private quantityReviewers = 3; // Quantity of reviewer to release a manuscript 
     uint private reviewRelease = 3; // Review, in a scale from 1 to 5, to release the manuscript 
     uint private reviewerThreshold = 2; // Reviewer score to validate its review
+    
+    mapping(address => address[]) tokens; // The DPubTokens of each user. 
+    uint weiToDPubToken = 1000; // A (arbitrary) value to compute DPubTokens given the balance. 
 
     PaperTokens papersMetadata; 
     ReviewTokens reviewsMetadata; 
@@ -260,5 +264,14 @@ contract DPublish {
 			return false; 
 		else 
 			return true; 
+	} 
+
+
+	function buyToken() public payable {
+		// Buy a DPubToken. 
+		require(msg.value >= weiToDPubToken, 
+			"You must provide more currencies!"); 
+		DPubToken tk = new DPubToken(msg.value); 
+		tokens[msg.sender].push(address(tk)); 
 	} 
 }
