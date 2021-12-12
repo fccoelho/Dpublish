@@ -87,6 +87,17 @@ contract DPublish {
 	reviewsMetadata.reviewers[msg.sender].push(address(tk)); 
 	reviewsMetadata.papers[address(tk)] = papersMetadata.manuscriptIdentifiers[idmanuscript];   
     } 
-	
-    function review	
+
+    function isReviewing(address reviewer, string memory idmanuscript) private returns(bool) { 
+	// Check whether reviewer `reviewer` is reviewing manuscript `idmanuscript`. 
+	address[] memory reviewerTokens = reviewsMetadata.reviewers[reviewer]; 
+	address manuscriptToken = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	for (uint i = 0; i < reviewerTokens.length; i++) {
+		address token = reviewerTokens[i]; 
+		address manuscript = reviewsMetadata.papers[token]; 
+		if (manuscript == manuscriptToken) 
+			return true; 
+ 	} 
+	return false; 
+    } 	 
 }
