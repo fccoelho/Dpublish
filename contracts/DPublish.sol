@@ -145,6 +145,30 @@ contract DPublish {
 	    return rating_threshold; 
     } 
 
+    function setReviewThreshold(uint threshold) private {
+	    reviewThreshold = threshold; 
+    } 
+
+    function getReviewThreshold() public returns(uint) {
+	    return reviewThreshold; 
+    } 
+
+    function setReviewRelease(uint threshold) private {
+	    reviewRelease = threshold; 
+    } 
+    
+    function getReviewRelease() public returns(uint) {
+	    return reviewRelease; 
+    } 
+    
+    function setQuantityReviewers(uint quantity) private {
+	    quantityReviewers = quantity; 
+    } 
+
+    function getQuantityReviewers() public returns(uint) {
+	    return quantityReviewers; 
+    } 
+   
     function rateReview(address ratingReview, uint score) public {
 	     require(!isReviewing(msg.sender, ratingReview), 
 		     "You shouldn't rate your own reviews!"); 
