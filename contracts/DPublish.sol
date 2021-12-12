@@ -19,20 +19,27 @@ contract DPublish {
         uint _id = papersMetadata.manuscripts.length;
         papersMetadata.isSubmitted[idmanuscript] = true;
         papersMetadata.submittedManuscripts[address(tk)] = msg.sender;
-        papersMetadata.manuscriptsIdentifier[idmanuscript] = address(tk);
+        papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
     }
 
     function unsubmit_manuscript(string memory idmanuscript) public {
-        require(papersMetadata.isSubmitted[idmanuscript] && checkAuthor(idmanuscript, msg.sender),
+        require(papersMetadata.isSubmitted[idmanuscript],
                     "Thou must burn an existing manuscript!");
-        address _id = papersMetadata.manuscriptsIdentifier[idmanuscript];
+	require(checkAuthorship(msg.sender, idmanuscript), 
+		"You must be the author!"); 
+        address _id = papersMetadata.manuscriptIdentifiers[idmanuscript];
         // delete manuscripts[_id]; // Keep!
         delete papersMetadata.submittedManuscripts[_id];
-        delete papersMetadata.manuscriptsIdentifier[idmanuscript];
+        delete papersMetadata.manuscriptIdentifiers[idmanuscript];
 	delete papersMetadata.isSubmitted[idmanuscript]; 
     }
 
-
+    function checkAuthorship(address author, string memory idmanuscript) private returns(bool){
+	address tk = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	address tkAuthor = papersMetadata.submittedManuscripts[tk]; 
+	return (author == tkAuthor); 
+    } 
+    
     uint internal submission_fee = 100; 	
 
     function setSubmissionFee(uint fee) internal {
