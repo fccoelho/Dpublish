@@ -53,7 +53,7 @@ contract DPublish {
         delete papersMetadata.manuscriptIdentifiers[idmanuscript];
 	delete papersMetadata.isSubmitted[idmanuscript]; 
 	delete papersMetadata.manuscriptsFee[_id]; 
-	delete papersMetadata.status[_id]; 
+	delete papersMetadata.isReleased[_id]; 
     }
 
     function checkAuthorship(address author, string memory idmanuscript) private returns(bool){
@@ -196,14 +196,27 @@ contract DPublish {
 
 	    require(true, "The document will be relsead, author!"); 
 	    
-	    papersMetadata.isRelased[manuscriptToken] = true; 
-
+	    papersMetadata.isReleased[manuscriptToken] = true; 
+	    
 	    // return true; 
 
-		
+	    // Search for valid reviewers and validate fees 
+	    uint manuscriptFee = papersMetadata.manuscriptsFee[manuscriptToken]; 
+	    uint feePerReviewer = manuscriptFee/n; 
+	
+	    for(uint i = 0; i < reviewsLength; i++) {
+		    address reviewer = reviews.reviewers[i]; 
+		    bool isValidReviewer = checkReviewer(reviewer); 
+		    if(isValidReviewer) 
+			    payable(reviewer).send(feePerReviewer); 
+	    } 
+
+	    		
 	} 
 	
 	function checkReviewer(address reviewer) public view returns(bool) {
+		// Check whether reviewer has an appropriate rating; 
+		// it will be used to validate its review. 
 		uint[] memory scores = reviewsMetadata.scores[reviewer];
 		
 		uint n = 0; 
