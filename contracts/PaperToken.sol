@@ -10,6 +10,7 @@ struct PaperTokens {
 	mapping (string => bool) isSubmitted; 
 	mapping (address => address) submittedManuscripts; 
         mapping (string => address) manuscriptIdentifiers; 
+	mapping (address => uint) manuscriptsFee; 
 } 	
 
 contract PaperToken is ERC721, ERC721URIStorage, Ownable {

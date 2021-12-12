@@ -5,7 +5,7 @@ import "./PaperToken.sol";
 
 contract DPublish {
     // mapping(string => address) public submitted_manuscripts;
-    mapping(address => uint) private balances; 
+    // mapping(address => uint) private balances; 
     uint private submission_fee = 10; 
 
     PaperTokens papersMetadata; 
@@ -25,6 +25,8 @@ contract DPublish {
         papersMetadata.isSubmitted[idmanuscript] = true;
         papersMetadata.submittedManuscripts[address(tk)] = msg.sender;
         papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
+
+	papersMetadata.manuscriptsFee[address(tk)] = msg.value; 
     }
 	
 
@@ -35,9 +37,14 @@ contract DPublish {
 		"You must be the author!"); 
         address _id = papersMetadata.manuscriptIdentifiers[idmanuscript];
         // delete manuscripts[_id]; // Keep!
+	
+	// The sender is the author 
+	payable(msg.sender).send(papersMetadata.manuscriptsFee[_id] + msg.value); 
+
         delete papersMetadata.submittedManuscripts[_id];
         delete papersMetadata.manuscriptIdentifiers[idmanuscript];
 	delete papersMetadata.isSubmitted[idmanuscript]; 
+	delete papersMetadata.manuscriptsFee[_id]; 
     }
 
     function checkAuthorship(address author, string memory idmanuscript) private returns(bool){
