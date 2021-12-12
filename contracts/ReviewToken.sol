@@ -5,6 +5,13 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+struct ReviewTokens {
+	mapping (address => address) papers; // Map a review token to the paper 
+	mapping (address => address[]) reviewers; // Map a paper to a set of reviewers 
+      	mapping (address => uint[]) reviews; // Map a paper to a set of reviews 
+	mapping (address => uint[]) score; // Map a reviewer to its current score  
+} 
+
 contract ReviewToken is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("ReviewToken", "RTK") {}
 
