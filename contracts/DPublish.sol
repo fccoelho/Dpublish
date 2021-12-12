@@ -2,6 +2,7 @@
 pragma solidity ^0.8.2;
 
 import "./PaperToken.sol"; 
+import "./ReviewToken.sol"; 
 
 contract DPublish {
     // mapping(string => address) public submitted_manuscripts;
@@ -27,6 +28,7 @@ contract DPublish {
         papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
 
 	papersMetadata.manuscriptsFee[address(tk)] = msg.value; 
+	papersMetadata.status[address(tk)] = "OnSubmission" 
     }
 	
 
@@ -45,6 +47,7 @@ contract DPublish {
         delete papersMetadata.manuscriptIdentifiers[idmanuscript];
 	delete papersMetadata.isSubmitted[idmanuscript]; 
 	delete papersMetadata.manuscriptsFee[_id]; 
+	delete papersMetadata.status[_id]; 
     }
 
     function checkAuthorship(address author, string memory idmanuscript) private returns(bool){
