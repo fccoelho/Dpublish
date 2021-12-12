@@ -146,12 +146,12 @@ contract DPublish {
 	     require(!isReviewing(msg.sender, review), 
 		     "You shouldn't rate your own reviews!"); 
 	     
-	     require(msg.sender.balance >= getRatingThreshold, 
+	     require(msg.sender.balance >= getRatingThreshold(), 
 			"There is a (stake) threshold for rating reviews!"); 
 		
 	     address reviewer = reviewsMetadata.reviewToReviewer[review];  
 	     reviewsMetadata.score[reviewer].push(score); 
     } 
     
-  
+      
 }
