@@ -7,6 +7,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PaperToken is ERC721, ERC721URIStorage, Ownable {
     constructor() ERC721("PaperToken", "PTK") {}
+	
+    string[] public manuscripts; 
+    mapping (string => bool) isSubmitted; 
+    mapping (uint => address) submittedManuscripts; 
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://dpublish.org";
@@ -16,6 +20,24 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
         _safeMint(to, tokenId);
     }
 
+    function mint(string memory idmanuscript) public {
+	require(!isSubmitted[idmanuscript], 
+		"Manuscript already submitted! Wait for a review."); 
+
+	manuscripts.push(idmanuscript); 
+	uint _id = manuscripts.length; 
+	isSubmitted[idmanuscript] = true; 
+	submittedManuscripts[_id] = msg.sender; 
+	_mint(msg.sender, _id); 
+    } 
+
+    // The user can get a refund for extracting the paper 
+	
+    function burn(string memory idmanuscript) public {
+	    require(isSubmitted[idmanuscript], 
+		    "You must burn a manuscript that exists!"); 
+	
+    } 
     // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
