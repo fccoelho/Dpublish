@@ -5,10 +5,15 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+struct ReviewList { 
+	address[] reviewers; 
+        uint[] reviews; 
+} 
+
 struct ReviewTokens {
 	mapping (address => address) papers; // Map a review token to the paper 
 	mapping (address => address[]) reviewers; // Map a reviewer to a set of review tokens  
-      	mapping (address => mapping (address => uint) ) reviews; // Map a paper to a set of (reviewers, reviews)  
+      	mapping (address => ReviewList) reviews; // Map a paper to a set of (reviewers, reviews)  
 	mapping (address => uint[]) score; // Map a reviewer to its current score  
 } 
 

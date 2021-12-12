@@ -112,7 +112,10 @@ contract DPublish {
 	    // the numbers 1 and 5 -- a five star rating. 
 	    require(1 <= score && score <= 5, 
 		    "The review must be a number between 1 and 5, reviewer!"); 
-	    
+	    address manuscriptToken = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	    reviewsMetadata.reviews[manuscriptToken].reviews.push(score); 
+	    reviewsMetadata.reviews[manuscriptToken].reviewers.push(msg.sender); 
     } 
+
 
 }
