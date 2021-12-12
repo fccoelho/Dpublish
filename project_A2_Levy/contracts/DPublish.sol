@@ -26,12 +26,25 @@ contract DPublish {
 
     ///Eventos:
     event PaymentReceived(address from, uint256 amount); ///Aviso de pagamento recebido
+    event Transfer(address indexed from, address indexed to, uint value); ///Transferência
     ////Erros:
     error NotEnoughFunds(uint256 requested, uint256 available); ///Falta de tokens suficientes para pagamento
 
     constructor(){
         Editor = msg.sender; ///Guarda o endereço do autor
     } 
+
+    //struct Ratings{
+    //    string dt_contents;
+    //    int dt_rating;
+    //}
+
+    //struct Writer_review{
+    //    mapping(bytes32 => Ratings) datas;
+    //}
+
+    //address writer;
+    //mapping(address => Writer_review) reviews;
 
     function submit_manuscripts(string memory idmanuscript) public payable{
         submitted_manuscripts[idmanuscript] = msg.sender;  ///Armazena o endereço de quem publicou
@@ -46,7 +59,7 @@ contract DPublish {
 
     function set_fee(uint256 fee) public payable{
         require(msg.sender == Editor); ///Publica o artigo caso o expedidor do contrato seja o editor
-        publishing_fee = fee;
+        publishing_fee = fee; ///Atribui uma taxa
     }
 
     function set_balance(address user, uint256 value) public{
@@ -62,7 +75,6 @@ contract DPublish {
         is_reviewer[user] = true;
     }
 
-
     function sent_review(string memory linkIPFS) public{
         require(is_reviewer[msg.sender]==true, "Precisa se inscrever como revisor"); ///Envio de revisão
         review_archive[msg.sender] = linkIPFS;
@@ -71,10 +83,37 @@ contract DPublish {
 
     }
 
+    //function exist_review(address id, bytes32 metadata) public{ ///constant returns(int){
+    //    if (reviews[id].datas[metadata].dt_rating==0){
+    //        return 0;
+    //        }
+    //    else{
+    //         return 1;
+    //    }
+    //}
+
+    //function set_review(bytes32 metadata, string memory contents, int rating)
+    //public returns(int){
+    //    writer = msg.sender;
+    //    reviews[writer].datas[metadata].dt_contents = contents;
+    //    reviews[writer].datas[metadata].dt_rating = rating;
+    //    return 1; 
+    //}
+
     function pay_review(address reviewer) private{
         balances[reviewer] += review_payment; ///Paga a revisão
     }
 
+    function get_review(address reviewer) public{
+        review_archive[reviewer]; ///Pega a revisão
+    }
 
+    ///function get_review(address id, bytes32 metadata) public returns(string){ ///public constant returns(string){
+    ///    return (reviews[id].datas[metadata].dt_contents);
+    ///}
+
+    ///function get_rating(address id, bytes32 metadata) public returns(int){ ///public constant returns(int){
+    ///    return (reviews[id].datas[metadata].dt_rating);
+    ///}
 
 }
