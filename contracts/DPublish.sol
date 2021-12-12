@@ -6,23 +6,29 @@ import "./PaperToken.sol";
 contract DPublish {
     // mapping(string => address) public submitted_manuscripts;
     mapping(address => uint) private balances; 
-	
-    PaperTokens papersMetadata; 
+    uint private submission_fee = 10; 
 
-    function submit_manuscript(string memory idmanuscript) public {
+    PaperTokens papersMetadata; 
+       
+    receive() external payable {} 
+
+    function submit_manuscript(string memory idmanuscript) public payable {
         require(!papersMetadata.isSubmitted[idmanuscript],
                 "Manuscript already submitted! Wait for a review.");
 
+	require(msg.value >= getSubmissionFee(), 
+		"There is a submission fee!"); 
         PaperToken tk = new PaperToken();
-
+ 	
         papersMetadata.manuscripts.push(idmanuscript);
         uint _id = papersMetadata.manuscripts.length;
         papersMetadata.isSubmitted[idmanuscript] = true;
         papersMetadata.submittedManuscripts[address(tk)] = msg.sender;
         papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
     }
+	
 
-    function unsubmit_manuscript(string memory idmanuscript) public {
+    function unsubmit_manuscript(string memory idmanuscript) public payable {
         require(papersMetadata.isSubmitted[idmanuscript],
                     "Thou must burn an existing manuscript!");
 	require(checkAuthorship(msg.sender, idmanuscript), 
@@ -40,13 +46,15 @@ contract DPublish {
 	return (author == tkAuthor); 
     } 
     
-    uint internal submission_fee = 100; 	
-
-    function setSubmissionFee(uint fee) internal {
+    function setSubmissionFee(uint fee) private {
 	    submission_fee = fee; 
     } 
 
-    function getBalance() public view returns (uint) { 
+    function getSubmissionFee() public returns(uint) {
+	    return submission_fee; 
+    } 
+
+    function getBalance(address author) public view returns (uint) { 
 	    return address(this).balance; 
     } 
 
