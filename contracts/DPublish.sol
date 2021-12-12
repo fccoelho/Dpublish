@@ -7,13 +7,12 @@ contract DPublish {
     /**
     * Submit manuscript
      */
-    function submit_manuscript(string memory idmanuscript, address submit_to) public payable{
-        submitted_manuscripts[idmanuscript] = submit_to; 
+    function submit_manuscript(string memory idmanuscript) public payable{
+        submitted_manuscripts[idmanuscript] = msg.sender; 
     }
 
     function get_submitted_manuscript(string memory idmanuscript) public view returns (address){
 	    return submitted_manuscripts[idmanuscript]; 
     } 
-
 
 }
