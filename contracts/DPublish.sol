@@ -103,5 +103,16 @@ contract DPublish {
 	return false; 
     } 	 
 
+    function review(string memory idmanuscript, uint score) public { 
+	    require(isReviewing(msg.sender, idmanuscript), 
+		    "You must register to review a paper!"); 
+	    // In the real world, the reviewer would update e copyedited version 
+	    // of the original paper and a rating; however, since we are not dealing, 
+	    // in this script, with databases, the review will consist of a score between 
+	    // the numbers 1 and 5 -- a five star rating. 
+	    require(1 <= score && score <= 5, 
+		    "The review must be a number between 1 and 5, reviewer!"); 
+	    
+    } 
 
 }
