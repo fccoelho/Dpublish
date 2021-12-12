@@ -7,10 +7,12 @@ import "./ReviewToken.sol";
 contract DPublish {
     // mapping(string => address) public submitted_manuscripts;
     // mapping(address => uint) private balances; 
-    uint private submission_fee = 10; 
+    uint private submission_fee = 1000; 
+    uint private review_fee = 99; 
 
     PaperTokens papersMetadata; 
-       
+    ReviewTokens reviewsMetadata; 
+
     receive() external payable {} 
 
     function submit_manuscript(string memory idmanuscript) public payable {
@@ -28,7 +30,7 @@ contract DPublish {
         papersMetadata.manuscriptIdentifiers[idmanuscript] = address(tk);
 
 	papersMetadata.manuscriptsFee[address(tk)] = msg.value; 
-	papersMetadata.status[address(tk)] = "OnSubmission" 
+	papersMetadata.status[address(tk)] = "OnSubmission"; 
     }
 	
 
@@ -68,5 +70,23 @@ contract DPublish {
 	    return address(this).balance; 
     } 
 
+    function setReviewFee(uint fee) private {
+	review_fee = fee; 
+    } 
 
+    function getReviewFee() public returns(uint) { 
+	    return review_fee; 
+    } 
+    
+    function registerReviewer(string memory idmanuscript) public payable {
+	require(!isReviewing(msg.sender, idmanuscript), 
+		"You're already reviewing this paper!"); 
+	require(msg.value >= getReviewFee(), 
+		"There is a fee for reviewing!"); 
+	ReviewToken tk = new ReviewToken(); 
+	reviewsMetadata.reviewers[msg.sender].push(address(tk)); 
+	reviewsMetadata.papers[address(tk)] = papersMetadata.manuscriptIdentifiers[idmanuscript];   
+    } 
+	
+    function review	
 }

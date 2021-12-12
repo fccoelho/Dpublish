@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 struct ReviewTokens {
 	mapping (address => address) papers; // Map a review token to the paper 
-	mapping (address => address[]) reviewers; // Map a paper to a set of reviewers 
+	mapping (address => address[]) reviewers; // Map a reviewer to a set of review tokens  
       	mapping (address => uint[]) reviews; // Map a paper to a set of reviews 
 	mapping (address => uint[]) score; // Map a reviewer to its current score  
 } 
