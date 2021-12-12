@@ -11,6 +11,7 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
     string[] public manuscripts; 
     mapping (string => bool) isSubmitted; 
     mapping (uint => address) submittedManuscripts; 
+    mapping (string => uint) manuscriptsIdentifier; 
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://dpublish.org";
@@ -28,16 +29,21 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
 	uint _id = manuscripts.length; 
 	isSubmitted[idmanuscript] = true; 
 	submittedManuscripts[_id] = msg.sender; 
+	manuscriptsIdentifier[idmanuscript] = _id; 
 	_mint(msg.sender, _id); 
     } 
 
     // The user can get a refund for extracting the paper 
-	
     function burn(string memory idmanuscript) public {
-	    require(isSubmitted[idmanuscript], 
-		    "You must burn a manuscript that exists!"); 
-	
-    } 
+	require(isSubmitted[idmanuscript], 
+		    "Thou must burn an existing manuscript!"); 
+	uint _id = manuscriptsIdentifier[idmanuscript]; 
+	delete manuscripts[_id]; 
+	delete submittedManuscripts[_id]; 
+	delete manuscriptsIdentifier[idmanuscript]; 
+	_burn(_id); 
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
