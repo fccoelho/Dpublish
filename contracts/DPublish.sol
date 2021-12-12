@@ -103,6 +103,21 @@ contract DPublish {
 	return false; 
     } 	 
 
+    // Function overflow 
+    function isReviewing(address reviewer, address review) private returns(bool) {
+	    address manuscriptToken = reviewsMetadata.papers[review]; 
+	    address[] memory reviewerTokens = reviewsMetadata.reviewers[reviewer]; 
+
+	    for(uint i = 0; i < reviewerTokens.length; i++) {
+		    address reviewToken = reviewerTokens[i]; 
+		    address manuscript = reviewsMetadata.papers[reviewToken]; 
+		    if (manuscript == manuscriptToken) 
+			    return true; 
+	    } 
+
+	    return false; 
+    } 
+
     function review(string memory idmanuscript, uint score) public { 
 	    require(isReviewing(msg.sender, idmanuscript), 
 		    "You must register to review a paper!"); 
@@ -117,5 +132,8 @@ contract DPublish {
 	    reviewsMetadata.reviews[manuscriptToken].reviewers.push(msg.sender); 
     } 
 
-
+    function rateReview(address review, uint score) public {
+	     require(!isReviewing(msg.sender, review), 
+		     "You shouldn't rate your own reviews!"); 
+    } 
 }
