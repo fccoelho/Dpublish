@@ -1,17 +1,24 @@
 {
   "abi": [
     {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "idmanuscript",
-          "type": "string"
-        }
-      ],
-      "name": "get_submitted_manuscript",
+      "inputs": [],
+      "name": "getBalance",
       "outputs": [
         {
-          "internalType": "address",
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "papers",
+      "outputs": [
+        {
+          "internalType": "contract PaperToken",
           "name": "",
           "type": "address"
         }
@@ -25,54 +32,67 @@
           "internalType": "string",
           "name": "idmanuscript",
           "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "submit_to",
-          "type": "address"
         }
       ],
       "name": "submit_manuscript",
       "outputs": [],
       "stateMutability": "payable",
       "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "name": "submitted_manuscripts",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
     }
   ],
   "allSourcePaths": {
-    "30": "contracts/DPublish.sol"
+    "36": "contracts/DPublish.sol",
+    "39": "contracts/PaperToken.sol"
   },
   "ast": {
     "absolutePath": "contracts/DPublish.sol",
     "exportedSymbols": {
+      "Address": [
+        6136
+      ],
+      "Context": [
+        6158
+      ],
       "DPublish": [
-        362
+        381
+      ],
+      "ERC165": [
+        6550
+      ],
+      "ERC721": [
+        8670
+      ],
+      "ERC721URIStorage": [
+        8798
+      ],
+      "IERC165": [
+        9013
+      ],
+      "IERC721": [
+        9438
+      ],
+      "IERC721Metadata": [
+        9483
+      ],
+      "IERC721Receiver": [
+        9456
+      ],
+      "Ownable": [
+        7839
+      ],
+      "PaperToken": [
+        4732
+      ],
+      "Strings": [
+        9001
       ]
     },
-    "id": 363,
+    "id": 382,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 330,
+        "id": 327,
         "literals": [
           "solidity",
           "^",
@@ -80,7 +100,19 @@
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:30"
+        "src": "32:23:36"
+      },
+      {
+        "absolutePath": "contracts/PaperToken.sol",
+        "file": "./PaperToken.sol",
+        "id": 328,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 382,
+        "sourceUnit": 4733,
+        "src": "57:26:36",
+        "symbolAliases": [],
+        "unitAlias": ""
       },
       {
         "abstract": false,
@@ -89,286 +121,341 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 362,
+        "id": 381,
         "linearizedBaseContracts": [
-          362
+          381
         ],
         "name": "DPublish",
-        "nameLocation": "66:8:30",
+        "nameLocation": "95:8:36",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "functionSelector": "f46f4fe5",
-            "id": 334,
+            "id": 332,
             "mutability": "mutable",
-            "name": "submitted_manuscripts",
-            "nameLocation": "115:21:30",
+            "name": "balances",
+            "nameLocation": "207:8:36",
             "nodeType": "VariableDeclaration",
-            "scope": 362,
-            "src": "81:55:30",
+            "scope": 381,
+            "src": "174:41:36",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
-              "typeString": "mapping(string => address)"
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 333,
+              "id": 331,
               "keyType": {
-                "id": 331,
-                "name": "string",
-                "nodeType": "ElementaryTypeName",
-                "src": "89:6:30",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                }
-              },
-              "nodeType": "Mapping",
-              "src": "81:26:30",
-              "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
-                "typeString": "mapping(string => address)"
-              },
-              "valueType": {
-                "id": 332,
+                "id": 329,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "99:7:30",
-                "stateMutability": "nonpayable",
+                "src": "182:7:36",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
+              },
+              "nodeType": "Mapping",
+              "src": "174:24:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 330,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "193:4:36",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "constant": false,
+            "functionSelector": "222027ca",
+            "id": 335,
+            "mutability": "mutable",
+            "name": "papers",
+            "nameLocation": "241:6:36",
+            "nodeType": "VariableDeclaration",
+            "scope": 381,
+            "src": "223:24:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PaperToken_$4732",
+              "typeString": "contract PaperToken"
+            },
+            "typeName": {
+              "id": 334,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 333,
+                "name": "PaperToken",
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 4732,
+                "src": "223:10:36"
+              },
+              "referencedDeclaration": 4732,
+              "src": "223:10:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PaperToken_$4732",
+                "typeString": "contract PaperToken"
               }
             },
             "visibility": "public"
           },
           {
+            "constant": false,
+            "id": 338,
+            "mutability": "mutable",
+            "name": "submission_fee",
+            "nameLocation": "269:14:36",
+            "nodeType": "VariableDeclaration",
+            "scope": 381,
+            "src": "255:34:36",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 336,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "255:4:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "hexValue": "313030",
+              "id": 337,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "286:3:36",
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_100_by_1",
+                "typeString": "int_const 100"
+              },
+              "value": "100"
+            },
+            "visibility": "internal"
+          },
+          {
             "body": {
-              "id": 348,
+              "id": 347,
               "nodeType": "Block",
-              "src": "271:65:30",
+              "src": "343:35:36",
               "statements": [
                 {
                   "expression": {
-                    "id": 346,
+                    "id": 345,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "baseExpression": {
-                        "id": 342,
-                        "name": "submitted_manuscripts",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 334,
-                        "src": "281:21:30",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
-                          "typeString": "mapping(string memory => address)"
-                        }
-                      },
-                      "id": 344,
-                      "indexExpression": {
-                        "id": 343,
-                        "name": "idmanuscript",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 337,
-                        "src": "303:12:30",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_string_memory_ptr",
-                          "typeString": "string memory"
-                        }
-                      },
-                      "isConstant": false,
-                      "isLValue": true,
-                      "isPure": false,
-                      "lValueRequested": true,
-                      "nodeType": "IndexAccess",
-                      "src": "281:35:30",
+                      "id": 343,
+                      "name": "submission_fee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 338,
+                      "src": "350:14:36",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
                       }
                     },
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 345,
-                      "name": "submit_to",
+                      "id": 344,
+                      "name": "fee",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 339,
-                      "src": "319:9:30",
+                      "referencedDeclaration": 340,
+                      "src": "367:3:36",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
                       }
                     },
-                    "src": "281:47:30",
+                    "src": "350:20:36",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
-                  "id": 347,
+                  "id": 346,
                   "nodeType": "ExpressionStatement",
-                  "src": "281:47:30"
+                  "src": "350:20:36"
                 }
               ]
             },
-            "documentation": {
-              "id": 335,
-              "nodeType": "StructuredDocumentation",
-              "src": "143:35:30",
-              "text": " Submit manuscript"
-            },
-            "functionSelector": "694549f6",
-            "id": 349,
+            "id": 348,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
-            "name": "submit_manuscript",
-            "nameLocation": "192:17:30",
+            "name": "setSubmissionFee",
+            "nameLocation": "307:16:36",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 340,
+              "id": 341,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 337,
+                  "id": 340,
                   "mutability": "mutable",
-                  "name": "idmanuscript",
-                  "nameLocation": "224:12:30",
+                  "name": "fee",
+                  "nameLocation": "329:3:36",
                   "nodeType": "VariableDeclaration",
-                  "scope": 349,
-                  "src": "210:26:30",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 336,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "210:6:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 339,
-                  "mutability": "mutable",
-                  "name": "submit_to",
-                  "nameLocation": "246:9:30",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 349,
-                  "src": "238:17:30",
+                  "scope": 348,
+                  "src": "324:8:36",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 338,
-                    "name": "address",
+                    "id": 339,
+                    "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "238:7:30",
-                    "stateMutability": "nonpayable",
+                    "src": "324:4:36",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "209:47:30"
+              "src": "323:10:36"
             },
             "returnParameters": {
-              "id": 341,
+              "id": 342,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "271:0:30"
+              "src": "343:0:36"
             },
-            "scope": 362,
-            "src": "183:153:30",
-            "stateMutability": "payable",
+            "scope": 381,
+            "src": "298:80:36",
+            "stateMutability": "nonpayable",
             "virtual": false,
-            "visibility": "public"
+            "visibility": "internal"
           },
           {
             "body": {
-              "id": 360,
+              "id": 359,
               "nodeType": "Block",
-              "src": "433:57:30",
+              "src": "434:44:36",
               "statements": [
                 {
                   "expression": {
-                    "baseExpression": {
+                    "expression": {
+                      "arguments": [
+                        {
+                          "id": 355,
+                          "name": "this",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -28,
+                          "src": "457:4:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_DPublish_$381",
+                            "typeString": "contract DPublish"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_DPublish_$381",
+                            "typeString": "contract DPublish"
+                          }
+                        ],
+                        "id": 354,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "449:7:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 353,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "449:7:36",
+                          "typeDescriptions": {}
+                        }
+                      },
                       "id": 356,
-                      "name": "submitted_manuscripts",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 334,
-                      "src": "447:21:30",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "449:13:36",
+                      "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
-                        "typeString": "mapping(string memory => address)"
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
                       }
                     },
-                    "id": 358,
-                    "indexExpression": {
-                      "id": 357,
-                      "name": "idmanuscript",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 351,
-                      "src": "469:12:30",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_memory_ptr",
-                        "typeString": "string memory"
-                      }
-                    },
+                    "id": 357,
                     "isConstant": false,
-                    "isLValue": true,
+                    "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
-                    "nodeType": "IndexAccess",
-                    "src": "447:35:30",
+                    "memberName": "balance",
+                    "nodeType": "MemberAccess",
+                    "src": "449:21:36",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 355,
-                  "id": 359,
+                  "functionReturnParameters": 352,
+                  "id": 358,
                   "nodeType": "Return",
-                  "src": "440:42:30"
+                  "src": "442:28:36"
                 }
               ]
             },
-            "functionSelector": "25c6b879",
-            "id": 361,
+            "functionSelector": "12065fe0",
+            "id": 360,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
-            "name": "get_submitted_manuscript",
-            "nameLocation": "351:24:30",
+            "name": "getBalance",
+            "nameLocation": "394:10:36",
             "nodeType": "FunctionDefinition",
             "parameters": {
+              "id": 349,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "404:2:36"
+            },
+            "returnParameters": {
               "id": 352,
               "nodeType": "ParameterList",
               "parameters": [
@@ -376,11 +463,257 @@
                   "constant": false,
                   "id": 351,
                   "mutability": "mutable",
-                  "name": "idmanuscript",
-                  "nameLocation": "390:12:30",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 361,
-                  "src": "376:26:30",
+                  "scope": 360,
+                  "src": "428:4:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 350,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "428:4:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "427:6:36"
+            },
+            "scope": 381,
+            "src": "385:93:36",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 379,
+              "nodeType": "Block",
+              "src": "596:115:36",
+              "statements": [
+                {
+                  "assignments": [
+                    367
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 367,
+                      "mutability": "mutable",
+                      "name": "author",
+                      "nameLocation": "608:6:36",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 379,
+                      "src": "600:14:36",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 366,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "600:7:36",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 370,
+                  "initialValue": {
+                    "expression": {
+                      "id": 368,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -15,
+                      "src": "617:3:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 369,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "src": "617:10:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "600:27:36"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 375,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 372,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "646:3:36",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 373,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "src": "646:9:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": ">=",
+                        "rightExpression": {
+                          "id": 374,
+                          "name": "submission_fee",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 338,
+                          "src": "659:14:36",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "646:27:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "74686572652069732061207375626d697373696f6e20666565",
+                        "id": 376,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "675:27:36",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_e7c1112d51ab538d707110dc97f2d2ebb026a0a362de0ca42c3b26c8fe2514ba",
+                          "typeString": "literal_string \"there is a submission fee\""
+                        },
+                        "value": "there is a submission fee"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_e7c1112d51ab538d707110dc97f2d2ebb026a0a362de0ca42c3b26c8fe2514ba",
+                          "typeString": "literal_string \"there is a submission fee\""
+                        }
+                      ],
+                      "id": 371,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "638:7:36",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 377,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "638:65:36",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 378,
+                  "nodeType": "ExpressionStatement",
+                  "src": "638:65:36"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 361,
+              "nodeType": "StructuredDocumentation",
+              "src": "485:35:36",
+              "text": " Submit manuscript"
+            },
+            "functionSelector": "cdeca252",
+            "id": 380,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "submit_manuscript",
+            "nameLocation": "535:17:36",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 364,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 363,
+                  "mutability": "mutable",
+                  "name": "idmanuscript",
+                  "nameLocation": "567:12:36",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 380,
+                  "src": "553:26:36",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -388,10 +721,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 350,
+                    "id": 362,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "376:6:30",
+                    "src": "553:6:36",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -400,59 +733,30 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "375:28:30"
+              "src": "552:28:36"
             },
             "returnParameters": {
-              "id": 355,
+              "id": 365,
               "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 354,
-                  "mutability": "mutable",
-                  "name": "",
-                  "nameLocation": "-1:-1:-1",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 361,
-                  "src": "425:7:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 353,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "425:7:30",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "visibility": "internal"
-                }
-              ],
-              "src": "424:9:30"
+              "parameters": [],
+              "src": "596:0:36"
             },
-            "scope": 362,
-            "src": "342:148:30",
-            "stateMutability": "view",
+            "scope": 381,
+            "src": "526:185:36",
+            "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 363,
-        "src": "57:438:30",
+        "scope": 382,
+        "src": "86:628:36",
         "usedErrors": []
       }
     ],
-    "src": "32:464:30"
+    "src": "32:683:36"
   },
-  "bytecode": "608060405234801561001057600080fd5b506102ee806100206000396000f3fe6080604052600436106100345760003560e01c806325c6b87914610039578063694549f614610075578063f46f4fe51461008a575b600080fd5b34801561004557600080fd5b506100596100543660046101e2565b6100cb565b6040516001600160a01b03909116815260200160405180910390f35b61008861008336600461021f565b6100fb565b005b34801561009657600080fd5b506100596100a53660046101e2565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b600080826040516100dc919061027d565b908152604051908190036020019020546001600160a01b031692915050565b8060008360405161010c919061027d565b90815260405190819003602001902080546001600160a01b03929092166001600160a01b03199092169190911790555050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016657600080fd5b813567ffffffffffffffff808211156101815761018161013f565b604051601f8301601f19908116603f011681019082821181831017156101a9576101a961013f565b816040528381528660208588010111156101c257600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156101f457600080fd5b813567ffffffffffffffff81111561020b57600080fd5b61021784828501610155565b949350505050565b6000806040838503121561023257600080fd5b823567ffffffffffffffff81111561024957600080fd5b61025585828601610155565b92505060208301356001600160a01b038116811461027257600080fd5b809150509250929050565b6000825160005b8181101561029e5760208186018101518583015201610284565b818111156102ad576000828501525b50919091019291505056fea2646970667358221220ce2f1e53a0c6f4edf423d4457c6aef76fde5aa62785de241477a72c0fb554e6764736f6c634300080a0033",
-  "bytecodeSha1": "60af79487fadca8b6303d9ade697dc07d7a218dd",
+  "bytecode": "6080604052606460025534801561001557600080fd5b506101ff806100256000396000f3fe6080604052600436106100345760003560e01c806312065fe014610039578063222027ca14610059578063cdeca25214610091575b600080fd5b34801561004557600080fd5b506040514781526020015b60405180910390f35b34801561006557600080fd5b50600154610079906001600160a01b031681565b6040516001600160a01b039091168152602001610050565b6100a461009f366004610118565b6100a6565b005b60025433903410156100fe5760405162461bcd60e51b815260206004820152601960248201527f74686572652069732061207375626d697373696f6e2066656500000000000000604482015260640160405180910390fd5b5050565b634e487b7160e01b600052604160045260246000fd5b60006020828403121561012a57600080fd5b813567ffffffffffffffff8082111561014257600080fd5b818401915084601f83011261015657600080fd5b81358181111561016857610168610102565b604051601f8201601f19908116603f0116810190838211818310171561019057610190610102565b816040528281528760208487010111156101a957600080fd5b82602086016020830137600092810160200192909252509594505050505056fea2646970667358221220392eed207f70c546deee859430fdfdaa000f163af82687fdd637dfd4953bf27764736f6c634300080a0033",
+  "bytecodeSha1": "4156f176f4f8dc1f0bd70f9598e85cad2e82f8ae",
   "compiler": {
     "evm_version": "istanbul",
     "optimizer": {
@@ -464,2804 +768,1723 @@
   "contractName": "DPublish",
   "coverageMap": {
     "branches": {
-      "30": {}
+      "36": {
+        "DPublish.submit_manuscript": {
+          "2": [
+            646,
+            673,
+            true
+          ]
+        }
+      },
+      "39": {}
     },
     "statements": {
-      "30": {
-        "DPublish.get_submitted_manuscript": {
+      "36": {
+        "DPublish.getBalance": {
           "0": [
-            440,
-            482
+            442,
+            470
           ]
         },
         "DPublish.submit_manuscript": {
           "1": [
-            281,
-            328
+            638,
+            703
           ]
         }
-      }
+      },
+      "39": {}
     }
   },
-  "dependencies": [],
-  "deployedBytecode": "6080604052600436106100345760003560e01c806325c6b87914610039578063694549f614610075578063f46f4fe51461008a575b600080fd5b34801561004557600080fd5b506100596100543660046101e2565b6100cb565b6040516001600160a01b03909116815260200160405180910390f35b61008861008336600461021f565b6100fb565b005b34801561009657600080fd5b506100596100a53660046101e2565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b600080826040516100dc919061027d565b908152604051908190036020019020546001600160a01b031692915050565b8060008360405161010c919061027d565b90815260405190819003602001902080546001600160a01b03929092166001600160a01b03199092169190911790555050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016657600080fd5b813567ffffffffffffffff808211156101815761018161013f565b604051601f8301601f19908116603f011681019082821181831017156101a9576101a961013f565b816040528381528660208588010111156101c257600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156101f457600080fd5b813567ffffffffffffffff81111561020b57600080fd5b61021784828501610155565b949350505050565b6000806040838503121561023257600080fd5b823567ffffffffffffffff81111561024957600080fd5b61025585828601610155565b92505060208301356001600160a01b038116811461027257600080fd5b809150509250929050565b6000825160005b8181101561029e5760208186018101518583015201610284565b818111156102ad576000828501525b50919091019291505056fea2646970667358221220ce2f1e53a0c6f4edf423d4457c6aef76fde5aa62785de241477a72c0fb554e6764736f6c634300080a0033",
-  "deployedSourceMap": "57:438:30:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;342:148;;;;;;;;;;-1:-1:-1;342:148:30;;;;;:::i;:::-;;:::i;:::-;;;-1:-1:-1;;;;;1361:32:33;;;1343:51;;1331:2;1316:18;342:148:30;;;;;;;183:153;;;;;;:::i;:::-;;:::i;:::-;;81:55;;;;;;;;;;-1:-1:-1;81:55:30;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;81:55:30;;;342:148;425:7;447:21;469:12;447:35;;;;;;:::i;:::-;;;;;;;;;;;;;;;-1:-1:-1;;;;;447:35:30;;342:148;-1:-1:-1;;342:148:30:o;183:153::-;319:9;281:21;303:12;281:35;;;;;;:::i;:::-;;;;;;;;;;;;;;:47;;-1:-1:-1;;;;;281:47:30;;;;-1:-1:-1;;;;;;281:47:30;;;;;;;;;-1:-1:-1;;183:153:30:o;14:127:33:-;75:10;70:3;66:20;63:1;56:31;106:4;103:1;96:15;130:4;127:1;120:15;146:719;189:5;242:3;235:4;227:6;223:17;219:27;209:55;;260:1;257;250:12;209:55;296:6;283:20;322:18;359:2;355;352:10;349:36;;;365:18;;:::i;:::-;440:2;434:9;408:2;494:13;;-1:-1:-1;;490:22:33;;;514:2;486:31;482:40;470:53;;;538:18;;;558:22;;;535:46;532:72;;;584:18;;:::i;:::-;624:10;620:2;613:22;659:2;651:6;644:18;705:3;698:4;693:2;685:6;681:15;677:26;674:35;671:55;;;722:1;719;712:12;671:55;786:2;779:4;771:6;767:17;760:4;752:6;748:17;735:54;833:1;826:4;821:2;813:6;809:15;805:26;798:37;853:6;844:15;;;;;;146:719;;;;:::o;870:322::-;939:6;992:2;980:9;971:7;967:23;963:32;960:52;;;1008:1;1005;998:12;960:52;1048:9;1035:23;1081:18;1073:6;1070:30;1067:50;;;1113:1;1110;1103:12;1067:50;1136;1178:7;1169:6;1158:9;1154:22;1136:50;:::i;:::-;1126:60;870:322;-1:-1:-1;;;;870:322:33:o;1405:496::-;1483:6;1491;1544:2;1532:9;1523:7;1519:23;1515:32;1512:52;;;1560:1;1557;1550:12;1512:52;1600:9;1587:23;1633:18;1625:6;1622:30;1619:50;;;1665:1;1662;1655:12;1619:50;1688;1730:7;1721:6;1710:9;1706:22;1688:50;:::i;:::-;1678:60;-1:-1:-1;;1788:2:33;1773:18;;1760:32;-1:-1:-1;;;;;1821:31:33;;1811:42;;1801:70;;1867:1;1864;1857:12;1801:70;1890:5;1880:15;;;1405:496;;;;;:::o;1906:428::-;2037:3;2075:6;2069:13;2100:1;2110:129;2124:6;2121:1;2118:13;2110:129;;;2222:4;2206:14;;;2202:25;;2196:32;2183:11;;;2176:53;2139:12;2110:129;;;2257:6;2254:1;2251:13;2248:48;;;2292:1;2283:6;2278:3;2274:16;2267:27;2248:48;-1:-1:-1;2312:16:33;;;;;1906:428;-1:-1:-1;;1906:428:33:o",
+  "dependencies": [
+    "PaperToken"
+  ],
+  "deployedBytecode": "6080604052600436106100345760003560e01c806312065fe014610039578063222027ca14610059578063cdeca25214610091575b600080fd5b34801561004557600080fd5b506040514781526020015b60405180910390f35b34801561006557600080fd5b50600154610079906001600160a01b031681565b6040516001600160a01b039091168152602001610050565b6100a461009f366004610118565b6100a6565b005b60025433903410156100fe5760405162461bcd60e51b815260206004820152601960248201527f74686572652069732061207375626d697373696f6e2066656500000000000000604482015260640160405180910390fd5b5050565b634e487b7160e01b600052604160045260246000fd5b60006020828403121561012a57600080fd5b813567ffffffffffffffff8082111561014257600080fd5b818401915084601f83011261015657600080fd5b81358181111561016857610168610102565b604051601f8201601f19908116603f0116810190838211818310171561019057610190610102565b816040528281528760208487010111156101a957600080fd5b82602086016020830137600092810160200192909252509594505050505056fea2646970667358221220392eed207f70c546deee859430fdfdaa000f163af82687fdd637dfd4953bf27764736f6c634300080a0033",
+  "deployedSourceMap": "86:628:36:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;385:93;;;;;;;;;;-1:-1:-1;385:93:36;;449:21;160:25:40;;148:2;133:18;385:93:36;;;;;;;;223:24;;;;;;;;;;-1:-1:-1;223:24:36;;;;-1:-1:-1;;;;;223:24:36;;;;;;-1:-1:-1;;;;;379:32:40;;;361:51;;349:2;334:18;223:24:36;196:222:40;526:185:36;;;;;;:::i;:::-;;:::i;:::-;;;659:14;;617:10;;646:9;:27;;638:65;;;;-1:-1:-1;;;638:65:36;;1684:2:40;638:65:36;;;1666:21:40;1723:2;1703:18;;;1696:30;1762:27;1742:18;;;1735:55;1807:18;;638:65:36;;;;;;;;596:115;526:185;:::o;423:127:40:-;484:10;479:3;475:20;472:1;465:31;515:4;512:1;505:15;539:4;536:1;529:15;555:922;624:6;677:2;665:9;656:7;652:23;648:32;645:52;;;693:1;690;683:12;645:52;733:9;720:23;762:18;803:2;795:6;792:14;789:34;;;819:1;816;809:12;789:34;857:6;846:9;842:22;832:32;;902:7;895:4;891:2;887:13;883:27;873:55;;924:1;921;914:12;873:55;960:2;947:16;982:2;978;975:10;972:36;;;988:18;;:::i;:::-;1063:2;1057:9;1031:2;1117:13;;-1:-1:-1;;1113:22:40;;;1137:2;1109:31;1105:40;1093:53;;;1161:18;;;1181:22;;;1158:46;1155:72;;;1207:18;;:::i;:::-;1247:10;1243:2;1236:22;1282:2;1274:6;1267:18;1322:7;1317:2;1312;1308;1304:11;1300:20;1297:33;1294:53;;;1343:1;1340;1333:12;1294:53;1399:2;1394;1390;1386:11;1381:2;1373:6;1369:15;1356:46;1444:1;1422:15;;;1439:2;1418:24;1411:35;;;;-1:-1:-1;1426:6:40;555:922;-1:-1:-1;;;;;555:922:40:o",
   "language": "Solidity",
   "natspec": {
     "kind": "dev",
     "methods": {
-      "submit_manuscript(string,address)": {
+      "submit_manuscript(string)": {
         "notice": "Submit manuscript"
       }
     },
     "version": 1
   },
   "offset": [
-    57,
-    495
+    86,
+    714
   ],
-  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x4 CALLDATASIZE LT PUSH2 0x34 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x25C6B879 EQ PUSH2 0x39 JUMPI DUP1 PUSH4 0x694549F6 EQ PUSH2 0x75 JUMPI DUP1 PUSH4 0xF46F4FE5 EQ PUSH2 0x8A JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x45 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x59 PUSH2 0x54 CALLDATASIZE PUSH1 0x4 PUSH2 0x1E2 JUMP JUMPDEST PUSH2 0xCB JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP2 AND DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH2 0x88 PUSH2 0x83 CALLDATASIZE PUSH1 0x4 PUSH2 0x21F JUMP JUMPDEST PUSH2 0xFB JUMP JUMPDEST STOP JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x96 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x59 PUSH2 0xA5 CALLDATASIZE PUSH1 0x4 PUSH2 0x1E2 JUMP JUMPDEST DUP1 MLOAD PUSH1 0x20 DUP2 DUP4 ADD DUP2 ADD DUP1 MLOAD PUSH1 0x0 DUP3 MSTORE SWAP3 DUP3 ADD SWAP2 SWAP1 SWAP4 ADD KECCAK256 SWAP2 MSTORE SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND DUP2 JUMP JUMPDEST PUSH1 0x0 DUP1 DUP3 PUSH1 0x40 MLOAD PUSH2 0xDC SWAP2 SWAP1 PUSH2 0x27D JUMP JUMPDEST SWAP1 DUP2 MSTORE PUSH1 0x40 MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND SWAP3 SWAP2 POP POP JUMP JUMPDEST DUP1 PUSH1 0x0 DUP4 PUSH1 0x40 MLOAD PUSH2 0x10C SWAP2 SWAP1 PUSH2 0x27D JUMP JUMPDEST SWAP1 DUP2 MSTORE PUSH1 0x40 MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 KECCAK256 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 SWAP1 SWAP3 AND PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT SWAP1 SWAP3 AND SWAP2 SWAP1 SWAP2 OR SWAP1 SSTORE POP POP JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 DUP3 PUSH1 0x1F DUP4 ADD SLT PUSH2 0x166 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP3 GT ISZERO PUSH2 0x181 JUMPI PUSH2 0x181 PUSH2 0x13F JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1F DUP4 ADD PUSH1 0x1F NOT SWAP1 DUP2 AND PUSH1 0x3F ADD AND DUP2 ADD SWAP1 DUP3 DUP3 GT DUP2 DUP4 LT OR ISZERO PUSH2 0x1A9 JUMPI PUSH2 0x1A9 PUSH2 0x13F JUMP JUMPDEST DUP2 PUSH1 0x40 MSTORE DUP4 DUP2 MSTORE DUP7 PUSH1 0x20 DUP6 DUP9 ADD ADD GT ISZERO PUSH2 0x1C2 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP4 PUSH1 0x20 DUP8 ADD PUSH1 0x20 DUP4 ADD CALLDATACOPY PUSH1 0x0 PUSH1 0x20 DUP6 DUP4 ADD ADD MSTORE DUP1 SWAP5 POP POP POP POP POP SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x1F4 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x20B JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x217 DUP5 DUP3 DUP6 ADD PUSH2 0x155 JUMP JUMPDEST SWAP5 SWAP4 POP POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x232 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x249 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x255 DUP6 DUP3 DUP7 ADD PUSH2 0x155 JUMP JUMPDEST SWAP3 POP POP PUSH1 0x20 DUP4 ADD CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x272 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP1 SWAP2 POP POP SWAP3 POP SWAP3 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP3 MLOAD PUSH1 0x0 JUMPDEST DUP2 DUP2 LT ISZERO PUSH2 0x29E JUMPI PUSH1 0x20 DUP2 DUP7 ADD DUP2 ADD MLOAD DUP6 DUP4 ADD MSTORE ADD PUSH2 0x284 JUMP JUMPDEST DUP2 DUP2 GT ISZERO PUSH2 0x2AD JUMPI PUSH1 0x0 DUP3 DUP6 ADD MSTORE JUMPDEST POP SWAP2 SWAP1 SWAP2 ADD SWAP3 SWAP2 POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xCE 0x2F 0x1E MSTORE8 LOG0 0xC6 DELEGATECALL 0xED DELEGATECALL 0x23 0xD4 GASLIMIT PUSH29 0x6AEF76FDE5AA62785DE241477A72C0FB554E6764736F6C634300080A00 CALLER ",
+  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x4 CALLDATASIZE LT PUSH2 0x34 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x12065FE0 EQ PUSH2 0x39 JUMPI DUP1 PUSH4 0x222027CA EQ PUSH2 0x59 JUMPI DUP1 PUSH4 0xCDECA252 EQ PUSH2 0x91 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x45 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x40 MLOAD SELFBALANCE DUP2 MSTORE PUSH1 0x20 ADD JUMPDEST PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x65 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x1 SLOAD PUSH2 0x79 SWAP1 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP2 AND DUP2 MSTORE PUSH1 0x20 ADD PUSH2 0x50 JUMP JUMPDEST PUSH2 0xA4 PUSH2 0x9F CALLDATASIZE PUSH1 0x4 PUSH2 0x118 JUMP JUMPDEST PUSH2 0xA6 JUMP JUMPDEST STOP JUMPDEST PUSH1 0x2 SLOAD CALLER SWAP1 CALLVALUE LT ISZERO PUSH2 0xFE JUMPI PUSH1 0x40 MLOAD PUSH3 0x461BCD PUSH1 0xE5 SHL DUP2 MSTORE PUSH1 0x20 PUSH1 0x4 DUP3 ADD MSTORE PUSH1 0x19 PUSH1 0x24 DUP3 ADD MSTORE PUSH32 0x74686572652069732061207375626D697373696F6E2066656500000000000000 PUSH1 0x44 DUP3 ADD MSTORE PUSH1 0x64 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 REVERT JUMPDEST POP POP JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x12A JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP3 GT ISZERO PUSH2 0x142 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 DUP5 ADD SWAP2 POP DUP5 PUSH1 0x1F DUP4 ADD SLT PUSH2 0x156 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD DUP2 DUP2 GT ISZERO PUSH2 0x168 JUMPI PUSH2 0x168 PUSH2 0x102 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1F DUP3 ADD PUSH1 0x1F NOT SWAP1 DUP2 AND PUSH1 0x3F ADD AND DUP2 ADD SWAP1 DUP4 DUP3 GT DUP2 DUP4 LT OR ISZERO PUSH2 0x190 JUMPI PUSH2 0x190 PUSH2 0x102 JUMP JUMPDEST DUP2 PUSH1 0x40 MSTORE DUP3 DUP2 MSTORE DUP8 PUSH1 0x20 DUP5 DUP8 ADD ADD GT ISZERO PUSH2 0x1A9 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 PUSH1 0x20 DUP7 ADD PUSH1 0x20 DUP4 ADD CALLDATACOPY PUSH1 0x0 SWAP3 DUP2 ADD PUSH1 0x20 ADD SWAP3 SWAP1 SWAP3 MSTORE POP SWAP6 SWAP5 POP POP POP POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 CODECOPY 0x2E 0xED KECCAK256 PUSH32 0x70C546DEEE859430FDFDAA000F163AF82687FDD637DFD4953BF27764736F6C63 NUMBER STOP ADDMOD EXP STOP CALLER ",
   "pcMap": {
     "0": {
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x80"
     },
     "2": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x40"
     },
     "4": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "MSTORE",
-      "path": "30"
+      "path": "36"
     },
     "5": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x4"
     },
     "7": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "CALLDATASIZE",
-      "path": "30"
+      "path": "36"
     },
     "8": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "LT",
-      "path": "30"
+      "path": "36"
     },
     "9": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH2",
-      "path": "30",
+      "path": "36",
       "value": "0x34"
     },
     "12": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "JUMPI",
-      "path": "30"
+      "path": "36"
     },
     "13": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x0"
     },
     "15": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "CALLDATALOAD",
-      "path": "30"
+      "path": "36"
     },
     "16": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0xE0"
     },
     "18": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "SHR",
-      "path": "30"
+      "path": "36"
     },
     "19": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "20": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH4",
-      "path": "30",
-      "value": "0x25C6B879"
+      "path": "36",
+      "value": "0x12065FE0"
     },
     "25": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "EQ",
-      "path": "30"
+      "path": "36"
     },
     "26": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH2",
-      "path": "30",
+      "path": "36",
       "value": "0x39"
     },
     "29": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "JUMPI",
-      "path": "30"
+      "path": "36"
     },
     "30": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "31": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH4",
-      "path": "30",
-      "value": "0x694549F6"
+      "path": "36",
+      "value": "0x222027CA"
     },
     "36": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "EQ",
-      "path": "30"
+      "path": "36"
     },
     "37": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0x75"
+      "path": "36",
+      "value": "0x59"
     },
     "40": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "JUMPI",
-      "path": "30"
+      "path": "36"
     },
     "41": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "42": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH4",
-      "path": "30",
-      "value": "0xF46F4FE5"
+      "path": "36",
+      "value": "0xCDECA252"
     },
     "47": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "EQ",
-      "path": "30"
+      "path": "36"
     },
     "48": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0x8A"
+      "path": "36",
+      "value": "0x91"
     },
     "51": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "JUMPI",
-      "path": "30"
+      "path": "36"
     },
     "52": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "JUMPDEST",
-      "path": "30"
+      "path": "36"
     },
     "53": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x0"
     },
     "55": {
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "56": {
       "first_revert": true,
       "fn": null,
       "offset": [
-        57,
-        495
+        86,
+        714
       ],
       "op": "REVERT",
-      "path": "30"
+      "path": "36"
     },
     "57": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "JUMPDEST",
-      "path": "30"
+      "path": "36"
     },
     "58": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "CALLVALUE",
-      "path": "30"
+      "path": "36"
     },
     "59": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "60": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "ISZERO",
-      "path": "30"
+      "path": "36"
     },
     "61": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "PUSH2",
-      "path": "30",
+      "path": "36",
       "value": "0x45"
     },
     "64": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "JUMPI",
-      "path": "30"
+      "path": "36"
     },
     "65": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x0"
     },
     "67": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
     "68": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "REVERT",
-      "path": "30"
+      "path": "36"
     },
     "69": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "JUMPDEST",
-      "path": "30"
+      "path": "36"
     },
     "70": {
       "op": "POP"
     },
     "71": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x59"
-    },
-    "74": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x54"
-    },
-    "77": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "CALLDATASIZE",
-      "path": "30"
-    },
-    "78": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "PUSH1",
-      "path": "30",
-      "value": "0x4"
-    },
-    "80": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x1E2"
-    },
-    "83": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "jump": "i",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "84": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "85": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0xCB"
-    },
-    "88": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "jump": "i",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "89": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "90": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x40"
     },
-    "92": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "73": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "MLOAD",
-      "path": "30"
+      "path": "36"
     },
-    "93": {
-      "op": "PUSH1",
-      "value": "0x1"
+    "74": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        449,
+        470
+      ],
+      "op": "SELFBALANCE",
+      "path": "36",
+      "statement": 0
     },
-    "95": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "97": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "99": {
-      "op": "SHL"
-    },
-    "100": {
-      "op": "SUB"
-    },
-    "101": {
-      "op": "SWAP1"
-    },
-    "102": {
-      "op": "SWAP2"
-    },
-    "103": {
-      "op": "AND"
-    },
-    "104": {
+    "75": {
       "op": "DUP2"
     },
-    "105": {
+    "76": {
       "op": "MSTORE"
     },
-    "106": {
+    "77": {
       "op": "PUSH1",
       "value": "0x20"
     },
-    "108": {
+    "79": {
       "op": "ADD"
     },
-    "109": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "80": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
+      ],
+      "op": "JUMPDEST",
+      "path": "36"
+    },
+    "81": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        385,
+        478
       ],
       "op": "PUSH1",
-      "path": "30",
+      "path": "36",
       "value": "0x40"
     },
-    "111": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "83": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "MLOAD",
-      "path": "30"
+      "path": "36"
     },
-    "112": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "84": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
-    "113": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "85": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "SWAP2",
-      "path": "30"
+      "path": "36"
     },
-    "114": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "86": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "SUB",
-      "path": "30"
+      "path": "36"
     },
-    "115": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "87": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "SWAP1",
-      "path": "30"
+      "path": "36"
     },
-    "116": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "88": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        342,
-        490
+        385,
+        478
       ],
       "op": "RETURN",
-      "path": "30"
+      "path": "36"
     },
-    "117": {
-      "fn": "DPublish.submit_manuscript",
+    "89": {
       "offset": [
-        183,
-        336
+        223,
+        247
       ],
       "op": "JUMPDEST",
-      "path": "30"
+      "path": "36"
     },
-    "118": {
-      "fn": "DPublish.submit_manuscript",
+    "90": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        183,
-        336
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x88"
-    },
-    "121": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x83"
-    },
-    "124": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "CALLDATASIZE",
-      "path": "30"
-    },
-    "125": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x4"
-    },
-    "127": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x21F"
-    },
-    "130": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "131": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "132": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0xFB"
-    },
-    "135": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "136": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "137": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        336
-      ],
-      "op": "STOP",
-      "path": "30"
-    },
-    "138": {
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "139": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
+        223,
+        247
       ],
       "op": "CALLVALUE",
-      "path": "30"
+      "path": "36"
     },
-    "140": {
-      "fn": "DPublish.submit_manuscript",
+    "91": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        81,
-        136
+        223,
+        247
       ],
       "op": "DUP1",
-      "path": "30"
+      "path": "36"
     },
-    "141": {
-      "fn": "DPublish.submit_manuscript",
+    "92": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        81,
-        136
+        223,
+        247
       ],
       "op": "ISZERO",
-      "path": "30"
+      "path": "36"
     },
-    "142": {
-      "fn": "DPublish.submit_manuscript",
+    "93": {
+      "fn": "DPublish.getBalance",
       "offset": [
-        81,
-        136
+        223,
+        247
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0x96"
+      "path": "36",
+      "value": "0x65"
+    },
+    "96": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "JUMPI",
+      "path": "36"
+    },
+    "97": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x0"
+    },
+    "99": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "DUP1",
+      "path": "36"
+    },
+    "100": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "REVERT",
+      "path": "36"
+    },
+    "101": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "JUMPDEST",
+      "path": "36"
+    },
+    "102": {
+      "op": "POP"
+    },
+    "103": {
+      "offset": [
+        223,
+        247
+      ],
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x1"
+    },
+    "105": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "SLOAD",
+      "path": "36"
+    },
+    "106": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "PUSH2",
+      "path": "36",
+      "value": "0x79"
+    },
+    "109": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "SWAP1",
+      "path": "36"
+    },
+    "110": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "112": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "114": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "116": {
+      "op": "SHL"
+    },
+    "117": {
+      "op": "SUB"
+    },
+    "118": {
+      "offset": [
+        223,
+        247
+      ],
+      "op": "AND",
+      "path": "36"
+    },
+    "119": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "DUP2",
+      "path": "36"
+    },
+    "120": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "JUMP",
+      "path": "36"
+    },
+    "121": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "JUMPDEST",
+      "path": "36"
+    },
+    "122": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x40"
+    },
+    "124": {
+      "fn": "DPublish.getBalance",
+      "offset": [
+        223,
+        247
+      ],
+      "op": "MLOAD",
+      "path": "36"
+    },
+    "125": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "127": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "129": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "131": {
+      "op": "SHL"
+    },
+    "132": {
+      "op": "SUB"
+    },
+    "133": {
+      "op": "SWAP1"
+    },
+    "134": {
+      "op": "SWAP2"
+    },
+    "135": {
+      "op": "AND"
+    },
+    "136": {
+      "op": "DUP2"
+    },
+    "137": {
+      "op": "MSTORE"
+    },
+    "138": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "140": {
+      "op": "ADD"
+    },
+    "141": {
+      "offset": [
+        223,
+        247
+      ],
+      "op": "PUSH2",
+      "path": "36",
+      "value": "0x50"
+    },
+    "144": {
+      "op": "JUMP"
     },
     "145": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "JUMPI",
-      "path": "30"
+      "op": "JUMPDEST",
+      "path": "36"
     },
     "146": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x0"
-    },
-    "148": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP1",
-      "path": "30"
+      "op": "PUSH2",
+      "path": "36",
+      "value": "0xA4"
     },
     "149": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
-      ],
-      "op": "REVERT",
-      "path": "30"
-    },
-    "150": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "151": {
-      "op": "POP"
-    },
-    "152": {
-      "offset": [
-        81,
-        136
+        526,
+        711
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0x59"
+      "path": "36",
+      "value": "0x9F"
+    },
+    "152": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        526,
+        711
+      ],
+      "op": "CALLDATASIZE",
+      "path": "36"
+    },
+    "153": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        526,
+        711
+      ],
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x4"
     },
     "155": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0xA5"
+      "path": "36",
+      "value": "0x118"
     },
     "158": {
       "fn": "DPublish.submit_manuscript",
+      "jump": "i",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "CALLDATASIZE",
-      "path": "30"
+      "op": "JUMP",
+      "path": "36"
     },
     "159": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x4"
+      "op": "JUMPDEST",
+      "path": "36"
     },
-    "161": {
+    "160": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
       "op": "PUSH2",
-      "path": "30",
-      "value": "0x1E2"
+      "path": "36",
+      "value": "0xA6"
     },
-    "164": {
+    "163": {
       "fn": "DPublish.submit_manuscript",
       "jump": "i",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
       "op": "JUMP",
-      "path": "30"
+      "path": "36"
+    },
+    "164": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        526,
+        711
+      ],
+      "op": "JUMPDEST",
+      "path": "36"
     },
     "165": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "JUMPDEST",
-      "path": "30"
+      "op": "STOP",
+      "path": "36"
     },
     "166": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        526,
+        711
       ],
-      "op": "DUP1",
-      "path": "30"
+      "op": "JUMPDEST",
+      "path": "36"
     },
     "167": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
-      ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "168": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
+        659,
+        673
       ],
       "op": "PUSH1",
-      "path": "30",
-      "value": "0x20"
+      "path": "36",
+      "statement": 1,
+      "value": "0x2"
+    },
+    "169": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        659,
+        673
+      ],
+      "op": "SLOAD",
+      "path": "36"
     },
     "170": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        617,
+        627
       ],
-      "op": "DUP2",
-      "path": "30"
+      "op": "CALLER",
+      "path": "36"
     },
     "171": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        617,
+        627
       ],
-      "op": "DUP4",
-      "path": "30"
+      "op": "SWAP1",
+      "path": "36"
     },
     "172": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        646,
+        655
       ],
-      "op": "ADD",
-      "path": "30"
+      "op": "CALLVALUE",
+      "path": "36"
     },
     "173": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        646,
+        673
       ],
-      "op": "DUP2",
-      "path": "30"
+      "op": "LT",
+      "path": "36"
     },
     "174": {
+      "branch": 2,
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        646,
+        673
       ],
-      "op": "ADD",
-      "path": "30"
+      "op": "ISZERO",
+      "path": "36"
     },
     "175": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
-      "op": "DUP1",
-      "path": "30"
+      "op": "PUSH2",
+      "path": "36",
+      "value": "0xFE"
     },
-    "176": {
+    "178": {
+      "branch": 2,
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "177": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x0"
+      "op": "JUMPI",
+      "path": "36"
     },
     "179": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
-      "op": "DUP3",
-      "path": "30"
-    },
-    "180": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MSTORE",
-      "path": "30"
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x40"
     },
     "181": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
-      "op": "SWAP3",
-      "path": "30"
+      "op": "MLOAD",
+      "path": "36"
     },
     "182": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP3",
-      "path": "30"
-    },
-    "183": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "ADD",
-      "path": "30"
-    },
-    "184": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SWAP2",
-      "path": "30"
-    },
-    "185": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SWAP1",
-      "path": "30"
+      "op": "PUSH3",
+      "value": "0x461BCD"
     },
     "186": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SWAP4",
-      "path": "30"
-    },
-    "187": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "ADD",
-      "path": "30"
+      "op": "PUSH1",
+      "value": "0xE5"
     },
     "188": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "KECCAK256",
-      "path": "30"
+      "op": "SHL"
     },
     "189": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
-      "op": "SWAP2",
-      "path": "30"
+      "op": "DUP2",
+      "path": "36"
     },
     "190": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        638,
+        703
       ],
       "op": "MSTORE",
-      "path": "30"
+      "path": "36"
     },
     "191": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SLOAD",
-      "path": "30"
-    },
-    "192": {
       "op": "PUSH1",
-      "value": "0x1"
-    },
-    "194": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "196": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "198": {
-      "op": "SHL"
-    },
-    "199": {
-      "op": "SUB"
-    },
-    "200": {
-      "offset": [
-        81,
-        136
-      ],
-      "op": "AND",
-      "path": "30"
-    },
-    "201": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP2",
-      "path": "30"
-    },
-    "202": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "203": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "204": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        425,
-        432
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x0"
-    },
-    "206": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        468
-      ],
-      "op": "DUP1",
-      "path": "30",
-      "statement": 0
-    },
-    "207": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        469,
-        481
-      ],
-      "op": "DUP3",
-      "path": "30"
-    },
-    "208": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x40"
-    },
-    "210": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "211": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0xDC"
-    },
-    "214": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP2",
-      "path": "30"
-    },
-    "215": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "216": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x27D"
-    },
-    "219": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "jump": "i",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "220": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "221": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "222": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "DUP2",
-      "path": "30"
-    },
-    "223": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "MSTORE",
-      "path": "30"
-    },
-    "224": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x40"
-    },
-    "226": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "227": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "228": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "DUP2",
-      "path": "30"
-    },
-    "229": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "230": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SUB",
-      "path": "30"
-    },
-    "231": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "PUSH1",
-      "path": "30",
       "value": "0x20"
     },
-    "233": {
-      "fn": "DPublish.get_submitted_manuscript",
+    "193": {
+      "fn": "DPublish.submit_manuscript",
       "offset": [
-        447,
-        482
+        638,
+        703
+      ],
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x4"
+    },
+    "195": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        638,
+        703
+      ],
+      "op": "DUP3",
+      "path": "36"
+    },
+    "196": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        638,
+        703
       ],
       "op": "ADD",
-      "path": "30"
+      "path": "36"
     },
-    "234": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SWAP1",
-      "path": "30"
+    "197": {
+      "op": "MSTORE"
     },
-    "235": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "KECCAK256",
-      "path": "30"
-    },
-    "236": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "SLOAD",
-      "path": "30"
-    },
-    "237": {
+    "198": {
       "op": "PUSH1",
-      "value": "0x1"
+      "value": "0x19"
     },
-    "239": {
+    "200": {
       "op": "PUSH1",
-      "value": "0x1"
+      "value": "0x24"
+    },
+    "202": {
+      "op": "DUP3"
+    },
+    "203": {
+      "op": "ADD"
+    },
+    "204": {
+      "op": "MSTORE"
+    },
+    "205": {
+      "op": "PUSH32",
+      "value": "0x74686572652069732061207375626D697373696F6E2066656500000000000000"
+    },
+    "238": {
+      "op": "PUSH1",
+      "value": "0x44"
+    },
+    "240": {
+      "op": "DUP3"
     },
     "241": {
-      "op": "PUSH1",
-      "value": "0xA0"
+      "op": "ADD"
+    },
+    "242": {
+      "op": "MSTORE"
     },
     "243": {
-      "op": "SHL"
-    },
-    "244": {
-      "op": "SUB"
+      "op": "PUSH1",
+      "value": "0x64"
     },
     "245": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        447,
-        482
-      ],
-      "op": "AND",
-      "path": "30"
+      "op": "ADD"
     },
     "246": {
-      "fn": "DPublish.get_submitted_manuscript",
+      "fn": "DPublish.submit_manuscript",
       "offset": [
-        447,
-        482
+        638,
+        703
       ],
-      "op": "SWAP3",
-      "path": "30"
-    },
-    "247": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "offset": [
-        342,
-        490
-      ],
-      "op": "SWAP2",
-      "path": "30"
+      "op": "PUSH1",
+      "path": "36",
+      "value": "0x40"
     },
     "248": {
-      "op": "POP"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        638,
+        703
+      ],
+      "op": "MLOAD",
+      "path": "36"
     },
     "249": {
-      "op": "POP"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        638,
+        703
+      ],
+      "op": "DUP1",
+      "path": "36"
     },
     "250": {
-      "fn": "DPublish.get_submitted_manuscript",
-      "jump": "o",
+      "fn": "DPublish.submit_manuscript",
       "offset": [
-        342,
-        490
+        638,
+        703
       ],
-      "op": "JUMP",
-      "path": "30"
+      "op": "SWAP2",
+      "path": "36"
     },
     "251": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        183,
-        336
+        638,
+        703
       ],
-      "op": "JUMPDEST",
-      "path": "30"
+      "op": "SUB",
+      "path": "36"
     },
     "252": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        319,
-        328
+        638,
+        703
       ],
-      "op": "DUP1",
-      "path": "30",
-      "statement": 1
+      "op": "SWAP1",
+      "path": "36"
     },
     "253": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        281,
-        302
+        638,
+        703
       ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x0"
+      "op": "REVERT",
+      "optimizer_revert": true,
+      "path": "36"
+    },
+    "254": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        638,
+        703
+      ],
+      "op": "JUMPDEST",
+      "path": "36"
     },
     "255": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        303,
-        315
+        596,
+        711
       ],
-      "op": "DUP4",
-      "path": "30"
+      "op": "POP",
+      "path": "36"
     },
     "256": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        281,
-        316
+        526,
+        711
       ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x40"
+      "op": "POP",
+      "path": "36"
     },
-    "258": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "259": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x10C"
-    },
-    "262": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP2",
-      "path": "30"
-    },
-    "263": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "264": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "PUSH2",
-      "path": "30",
-      "value": "0x27D"
-    },
-    "267": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "JUMP",
-      "path": "30"
-    },
-    "268": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "JUMPDEST",
-      "path": "30"
-    },
-    "269": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "270": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "DUP2",
-      "path": "30"
-    },
-    "271": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "MSTORE",
-      "path": "30"
-    },
-    "272": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x40"
-    },
-    "274": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "MLOAD",
-      "path": "30"
-    },
-    "275": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "276": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "DUP2",
-      "path": "30"
-    },
-    "277": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "278": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SUB",
-      "path": "30"
-    },
-    "279": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "PUSH1",
-      "path": "30",
-      "value": "0x20"
-    },
-    "281": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "ADD",
-      "path": "30"
-    },
-    "282": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "283": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        316
-      ],
-      "op": "KECCAK256",
-      "path": "30"
-    },
-    "284": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "DUP1",
-      "path": "30"
-    },
-    "285": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SLOAD",
-      "path": "30"
-    },
-    "286": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "288": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "290": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "292": {
-      "op": "SHL"
-    },
-    "293": {
-      "op": "SUB"
-    },
-    "294": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP3",
-      "path": "30"
-    },
-    "295": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "296": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP3",
-      "path": "30"
-    },
-    "297": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "AND",
-      "path": "30"
-    },
-    "298": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "300": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "302": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "304": {
-      "op": "SHL"
-    },
-    "305": {
-      "op": "SUB"
-    },
-    "306": {
-      "op": "NOT"
-    },
-    "307": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "308": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP3",
-      "path": "30"
-    },
-    "309": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "AND",
-      "path": "30"
-    },
-    "310": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP2",
-      "path": "30"
-    },
-    "311": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "312": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP2",
-      "path": "30"
-    },
-    "313": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "OR",
-      "path": "30"
-    },
-    "314": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SWAP1",
-      "path": "30"
-    },
-    "315": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        328
-      ],
-      "op": "SSTORE",
-      "path": "30"
-    },
-    "316": {
-      "op": "POP"
-    },
-    "317": {
-      "op": "POP"
-    },
-    "318": {
+    "257": {
       "fn": "DPublish.submit_manuscript",
       "jump": "o",
       "offset": [
-        183,
-        336
+        526,
+        711
       ],
       "op": "JUMP",
-      "path": "30"
+      "path": "36"
     },
-    "319": {
+    "258": {
       "op": "JUMPDEST"
     },
-    "320": {
+    "259": {
       "op": "PUSH4",
       "value": "0x4E487B71"
     },
-    "325": {
+    "264": {
       "op": "PUSH1",
       "value": "0xE0"
     },
-    "327": {
+    "266": {
       "op": "SHL"
     },
-    "328": {
+    "267": {
       "op": "PUSH1",
       "value": "0x0"
     },
-    "330": {
+    "269": {
       "op": "MSTORE"
     },
-    "331": {
+    "270": {
       "op": "PUSH1",
       "value": "0x41"
     },
-    "333": {
+    "272": {
       "op": "PUSH1",
       "value": "0x4"
     },
-    "335": {
+    "274": {
       "op": "MSTORE"
     },
-    "336": {
+    "275": {
       "op": "PUSH1",
       "value": "0x24"
+    },
+    "277": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "279": {
+      "op": "REVERT"
+    },
+    "280": {
+      "op": "JUMPDEST"
+    },
+    "281": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "283": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "285": {
+      "op": "DUP3"
+    },
+    "286": {
+      "op": "DUP5"
+    },
+    "287": {
+      "op": "SUB"
+    },
+    "288": {
+      "op": "SLT"
+    },
+    "289": {
+      "op": "ISZERO"
+    },
+    "290": {
+      "op": "PUSH2",
+      "value": "0x12A"
+    },
+    "293": {
+      "op": "JUMPI"
+    },
+    "294": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "296": {
+      "op": "DUP1"
+    },
+    "297": {
+      "op": "REVERT"
+    },
+    "298": {
+      "op": "JUMPDEST"
+    },
+    "299": {
+      "op": "DUP2"
+    },
+    "300": {
+      "op": "CALLDATALOAD"
+    },
+    "301": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "310": {
+      "op": "DUP1"
+    },
+    "311": {
+      "op": "DUP3"
+    },
+    "312": {
+      "op": "GT"
+    },
+    "313": {
+      "op": "ISZERO"
+    },
+    "314": {
+      "op": "PUSH2",
+      "value": "0x142"
+    },
+    "317": {
+      "op": "JUMPI"
+    },
+    "318": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "320": {
+      "op": "DUP1"
+    },
+    "321": {
+      "op": "REVERT"
+    },
+    "322": {
+      "op": "JUMPDEST"
+    },
+    "323": {
+      "op": "DUP2"
+    },
+    "324": {
+      "op": "DUP5"
+    },
+    "325": {
+      "op": "ADD"
+    },
+    "326": {
+      "op": "SWAP2"
+    },
+    "327": {
+      "op": "POP"
+    },
+    "328": {
+      "op": "DUP5"
+    },
+    "329": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "331": {
+      "op": "DUP4"
+    },
+    "332": {
+      "op": "ADD"
+    },
+    "333": {
+      "op": "SLT"
+    },
+    "334": {
+      "op": "PUSH2",
+      "value": "0x156"
+    },
+    "337": {
+      "op": "JUMPI"
     },
     "338": {
       "op": "PUSH1",
       "value": "0x0"
     },
     "340": {
-      "op": "REVERT"
+      "op": "DUP1"
     },
     "341": {
-      "op": "JUMPDEST"
-    },
-    "342": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "344": {
-      "op": "DUP3"
-    },
-    "345": {
-      "op": "PUSH1",
-      "value": "0x1F"
-    },
-    "347": {
-      "op": "DUP4"
-    },
-    "348": {
-      "op": "ADD"
-    },
-    "349": {
-      "op": "SLT"
-    },
-    "350": {
-      "op": "PUSH2",
-      "value": "0x166"
-    },
-    "353": {
-      "op": "JUMPI"
-    },
-    "354": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "356": {
-      "op": "DUP1"
-    },
-    "357": {
       "op": "REVERT"
     },
-    "358": {
+    "342": {
       "op": "JUMPDEST"
     },
-    "359": {
+    "343": {
       "op": "DUP2"
     },
-    "360": {
+    "344": {
       "op": "CALLDATALOAD"
     },
-    "361": {
-      "op": "PUSH8",
-      "value": "0xFFFFFFFFFFFFFFFF"
+    "345": {
+      "op": "DUP2"
     },
-    "370": {
-      "op": "DUP1"
+    "346": {
+      "op": "DUP2"
     },
-    "371": {
-      "op": "DUP3"
-    },
-    "372": {
+    "347": {
       "op": "GT"
     },
-    "373": {
+    "348": {
       "op": "ISZERO"
     },
-    "374": {
+    "349": {
       "op": "PUSH2",
-      "value": "0x181"
+      "value": "0x168"
     },
-    "377": {
+    "352": {
       "op": "JUMPI"
     },
-    "378": {
+    "353": {
       "op": "PUSH2",
-      "value": "0x181"
+      "value": "0x168"
     },
-    "381": {
+    "356": {
       "op": "PUSH2",
-      "value": "0x13F"
+      "value": "0x102"
     },
-    "384": {
+    "359": {
       "jump": "i",
       "op": "JUMP"
     },
-    "385": {
+    "360": {
       "op": "JUMPDEST"
     },
-    "386": {
+    "361": {
       "op": "PUSH1",
       "value": "0x40"
     },
-    "388": {
+    "363": {
       "op": "MLOAD"
     },
-    "389": {
+    "364": {
       "op": "PUSH1",
       "value": "0x1F"
     },
-    "391": {
-      "op": "DUP4"
+    "366": {
+      "op": "DUP3"
     },
-    "392": {
+    "367": {
       "op": "ADD"
     },
-    "393": {
+    "368": {
       "op": "PUSH1",
       "value": "0x1F"
     },
-    "395": {
+    "370": {
       "op": "NOT"
     },
-    "396": {
+    "371": {
       "op": "SWAP1"
     },
-    "397": {
+    "372": {
       "op": "DUP2"
     },
-    "398": {
+    "373": {
       "op": "AND"
     },
-    "399": {
+    "374": {
       "op": "PUSH1",
       "value": "0x3F"
     },
-    "401": {
+    "376": {
       "op": "ADD"
     },
-    "402": {
+    "377": {
       "op": "AND"
     },
-    "403": {
+    "378": {
       "op": "DUP2"
     },
-    "404": {
+    "379": {
       "op": "ADD"
     },
-    "405": {
+    "380": {
       "op": "SWAP1"
     },
-    "406": {
-      "op": "DUP3"
-    },
-    "407": {
-      "op": "DUP3"
-    },
-    "408": {
-      "op": "GT"
-    },
-    "409": {
-      "op": "DUP2"
-    },
-    "410": {
+    "381": {
       "op": "DUP4"
     },
-    "411": {
+    "382": {
+      "op": "DUP3"
+    },
+    "383": {
+      "op": "GT"
+    },
+    "384": {
+      "op": "DUP2"
+    },
+    "385": {
+      "op": "DUP4"
+    },
+    "386": {
       "op": "LT"
     },
-    "412": {
+    "387": {
       "op": "OR"
     },
-    "413": {
+    "388": {
       "op": "ISZERO"
     },
-    "414": {
+    "389": {
       "op": "PUSH2",
-      "value": "0x1A9"
+      "value": "0x190"
     },
-    "417": {
+    "392": {
       "op": "JUMPI"
     },
-    "418": {
+    "393": {
+      "op": "PUSH2",
+      "value": "0x190"
+    },
+    "396": {
+      "op": "PUSH2",
+      "value": "0x102"
+    },
+    "399": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "400": {
+      "op": "JUMPDEST"
+    },
+    "401": {
+      "op": "DUP2"
+    },
+    "402": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "404": {
+      "op": "MSTORE"
+    },
+    "405": {
+      "op": "DUP3"
+    },
+    "406": {
+      "op": "DUP2"
+    },
+    "407": {
+      "op": "MSTORE"
+    },
+    "408": {
+      "op": "DUP8"
+    },
+    "409": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "411": {
+      "op": "DUP5"
+    },
+    "412": {
+      "op": "DUP8"
+    },
+    "413": {
+      "op": "ADD"
+    },
+    "414": {
+      "op": "ADD"
+    },
+    "415": {
+      "op": "GT"
+    },
+    "416": {
+      "op": "ISZERO"
+    },
+    "417": {
       "op": "PUSH2",
       "value": "0x1A9"
     },
+    "420": {
+      "op": "JUMPI"
+    },
     "421": {
-      "op": "PUSH2",
-      "value": "0x13F"
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "423": {
+      "op": "DUP1"
     },
     "424": {
-      "jump": "i",
-      "op": "JUMP"
+      "op": "REVERT"
     },
     "425": {
       "op": "JUMPDEST"
     },
     "426": {
-      "op": "DUP2"
+      "op": "DUP3"
     },
     "427": {
       "op": "PUSH1",
-      "value": "0x40"
+      "value": "0x20"
     },
     "429": {
-      "op": "MSTORE"
+      "op": "DUP7"
     },
     "430": {
-      "op": "DUP4"
+      "op": "ADD"
     },
     "431": {
-      "op": "DUP2"
-    },
-    "432": {
-      "op": "MSTORE"
+      "op": "PUSH1",
+      "value": "0x20"
     },
     "433": {
-      "op": "DUP7"
+      "op": "DUP4"
     },
     "434": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "436": {
-      "op": "DUP6"
-    },
-    "437": {
-      "op": "DUP9"
-    },
-    "438": {
       "op": "ADD"
     },
-    "439": {
-      "op": "ADD"
-    },
-    "440": {
-      "op": "GT"
-    },
-    "441": {
-      "op": "ISZERO"
-    },
-    "442": {
-      "op": "PUSH2",
-      "value": "0x1C2"
-    },
-    "445": {
-      "op": "JUMPI"
-    },
-    "446": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "448": {
-      "op": "DUP1"
-    },
-    "449": {
-      "op": "REVERT"
-    },
-    "450": {
-      "op": "JUMPDEST"
-    },
-    "451": {
-      "op": "DUP4"
-    },
-    "452": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "454": {
-      "op": "DUP8"
-    },
-    "455": {
-      "op": "ADD"
-    },
-    "456": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "458": {
-      "op": "DUP4"
-    },
-    "459": {
-      "op": "ADD"
-    },
-    "460": {
+    "435": {
       "op": "CALLDATACOPY"
     },
-    "461": {
+    "436": {
       "op": "PUSH1",
       "value": "0x0"
     },
-    "463": {
+    "438": {
+      "op": "SWAP3"
+    },
+    "439": {
+      "op": "DUP2"
+    },
+    "440": {
+      "op": "ADD"
+    },
+    "441": {
       "op": "PUSH1",
       "value": "0x20"
     },
-    "465": {
-      "op": "DUP6"
-    },
-    "466": {
-      "op": "DUP4"
-    },
-    "467": {
+    "443": {
       "op": "ADD"
     },
-    "468": {
-      "op": "ADD"
-    },
-    "469": {
-      "op": "MSTORE"
-    },
-    "470": {
-      "op": "DUP1"
-    },
-    "471": {
-      "op": "SWAP5"
-    },
-    "472": {
-      "op": "POP"
-    },
-    "473": {
-      "op": "POP"
-    },
-    "474": {
-      "op": "POP"
-    },
-    "475": {
-      "op": "POP"
-    },
-    "476": {
-      "op": "POP"
-    },
-    "477": {
+    "444": {
       "op": "SWAP3"
     },
-    "478": {
-      "op": "SWAP2"
-    },
-    "479": {
-      "op": "POP"
-    },
-    "480": {
-      "op": "POP"
-    },
-    "481": {
-      "jump": "o",
-      "op": "JUMP"
-    },
-    "482": {
-      "op": "JUMPDEST"
-    },
-    "483": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "485": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "487": {
-      "op": "DUP3"
-    },
-    "488": {
-      "op": "DUP5"
-    },
-    "489": {
-      "op": "SUB"
-    },
-    "490": {
-      "op": "SLT"
-    },
-    "491": {
-      "op": "ISZERO"
-    },
-    "492": {
-      "op": "PUSH2",
-      "value": "0x1F4"
-    },
-    "495": {
-      "op": "JUMPI"
-    },
-    "496": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "498": {
-      "op": "DUP1"
-    },
-    "499": {
-      "op": "REVERT"
-    },
-    "500": {
-      "op": "JUMPDEST"
-    },
-    "501": {
-      "op": "DUP2"
-    },
-    "502": {
-      "op": "CALLDATALOAD"
-    },
-    "503": {
-      "op": "PUSH8",
-      "value": "0xFFFFFFFFFFFFFFFF"
-    },
-    "512": {
-      "op": "DUP2"
-    },
-    "513": {
-      "op": "GT"
-    },
-    "514": {
-      "op": "ISZERO"
-    },
-    "515": {
-      "op": "PUSH2",
-      "value": "0x20B"
-    },
-    "518": {
-      "op": "JUMPI"
-    },
-    "519": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "521": {
-      "op": "DUP1"
-    },
-    "522": {
-      "op": "REVERT"
-    },
-    "523": {
-      "op": "JUMPDEST"
-    },
-    "524": {
-      "op": "PUSH2",
-      "value": "0x217"
-    },
-    "527": {
-      "op": "DUP5"
-    },
-    "528": {
-      "op": "DUP3"
-    },
-    "529": {
-      "op": "DUP6"
-    },
-    "530": {
-      "op": "ADD"
-    },
-    "531": {
-      "op": "PUSH2",
-      "value": "0x155"
-    },
-    "534": {
-      "jump": "i",
-      "op": "JUMP"
-    },
-    "535": {
-      "op": "JUMPDEST"
-    },
-    "536": {
-      "op": "SWAP5"
-    },
-    "537": {
-      "op": "SWAP4"
-    },
-    "538": {
-      "op": "POP"
-    },
-    "539": {
-      "op": "POP"
-    },
-    "540": {
-      "op": "POP"
-    },
-    "541": {
-      "op": "POP"
-    },
-    "542": {
-      "jump": "o",
-      "op": "JUMP"
-    },
-    "543": {
-      "op": "JUMPDEST"
-    },
-    "544": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "546": {
-      "op": "DUP1"
-    },
-    "547": {
-      "op": "PUSH1",
-      "value": "0x40"
-    },
-    "549": {
-      "op": "DUP4"
-    },
-    "550": {
-      "op": "DUP6"
-    },
-    "551": {
-      "op": "SUB"
-    },
-    "552": {
-      "op": "SLT"
-    },
-    "553": {
-      "op": "ISZERO"
-    },
-    "554": {
-      "op": "PUSH2",
-      "value": "0x232"
-    },
-    "557": {
-      "op": "JUMPI"
-    },
-    "558": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "560": {
-      "op": "DUP1"
-    },
-    "561": {
-      "op": "REVERT"
-    },
-    "562": {
-      "op": "JUMPDEST"
-    },
-    "563": {
-      "op": "DUP3"
-    },
-    "564": {
-      "op": "CALLDATALOAD"
-    },
-    "565": {
-      "op": "PUSH8",
-      "value": "0xFFFFFFFFFFFFFFFF"
-    },
-    "574": {
-      "op": "DUP2"
-    },
-    "575": {
-      "op": "GT"
-    },
-    "576": {
-      "op": "ISZERO"
-    },
-    "577": {
-      "op": "PUSH2",
-      "value": "0x249"
-    },
-    "580": {
-      "op": "JUMPI"
-    },
-    "581": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "583": {
-      "op": "DUP1"
-    },
-    "584": {
-      "op": "REVERT"
-    },
-    "585": {
-      "op": "JUMPDEST"
-    },
-    "586": {
-      "op": "PUSH2",
-      "value": "0x255"
-    },
-    "589": {
-      "op": "DUP6"
-    },
-    "590": {
-      "op": "DUP3"
-    },
-    "591": {
-      "op": "DUP7"
-    },
-    "592": {
-      "op": "ADD"
-    },
-    "593": {
-      "op": "PUSH2",
-      "value": "0x155"
-    },
-    "596": {
-      "jump": "i",
-      "op": "JUMP"
-    },
-    "597": {
-      "op": "JUMPDEST"
-    },
-    "598": {
-      "op": "SWAP3"
-    },
-    "599": {
-      "op": "POP"
-    },
-    "600": {
-      "op": "POP"
-    },
-    "601": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "603": {
-      "op": "DUP4"
-    },
-    "604": {
-      "op": "ADD"
-    },
-    "605": {
-      "op": "CALLDATALOAD"
-    },
-    "606": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "608": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "610": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "612": {
-      "op": "SHL"
-    },
-    "613": {
-      "op": "SUB"
-    },
-    "614": {
-      "op": "DUP2"
-    },
-    "615": {
-      "op": "AND"
-    },
-    "616": {
-      "op": "DUP2"
-    },
-    "617": {
-      "op": "EQ"
-    },
-    "618": {
-      "op": "PUSH2",
-      "value": "0x272"
-    },
-    "621": {
-      "op": "JUMPI"
-    },
-    "622": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "624": {
-      "op": "DUP1"
-    },
-    "625": {
-      "op": "REVERT"
-    },
-    "626": {
-      "op": "JUMPDEST"
-    },
-    "627": {
-      "op": "DUP1"
-    },
-    "628": {
-      "op": "SWAP2"
-    },
-    "629": {
-      "op": "POP"
-    },
-    "630": {
-      "op": "POP"
-    },
-    "631": {
-      "op": "SWAP3"
-    },
-    "632": {
-      "op": "POP"
-    },
-    "633": {
-      "op": "SWAP3"
-    },
-    "634": {
+    "445": {
       "op": "SWAP1"
     },
-    "635": {
-      "op": "POP"
-    },
-    "636": {
-      "jump": "o",
-      "op": "JUMP"
-    },
-    "637": {
-      "op": "JUMPDEST"
-    },
-    "638": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "640": {
-      "op": "DUP3"
-    },
-    "641": {
-      "op": "MLOAD"
-    },
-    "642": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "644": {
-      "op": "JUMPDEST"
-    },
-    "645": {
-      "op": "DUP2"
-    },
-    "646": {
-      "op": "DUP2"
-    },
-    "647": {
-      "op": "LT"
-    },
-    "648": {
-      "op": "ISZERO"
-    },
-    "649": {
-      "op": "PUSH2",
-      "value": "0x29E"
-    },
-    "652": {
-      "op": "JUMPI"
-    },
-    "653": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "655": {
-      "op": "DUP2"
-    },
-    "656": {
-      "op": "DUP7"
-    },
-    "657": {
-      "op": "ADD"
-    },
-    "658": {
-      "op": "DUP2"
-    },
-    "659": {
-      "op": "ADD"
-    },
-    "660": {
-      "op": "MLOAD"
-    },
-    "661": {
-      "op": "DUP6"
-    },
-    "662": {
-      "op": "DUP4"
-    },
-    "663": {
-      "op": "ADD"
-    },
-    "664": {
-      "op": "MSTORE"
-    },
-    "665": {
-      "op": "ADD"
-    },
-    "666": {
-      "op": "PUSH2",
-      "value": "0x284"
-    },
-    "669": {
-      "op": "JUMP"
-    },
-    "670": {
-      "op": "JUMPDEST"
-    },
-    "671": {
-      "op": "DUP2"
-    },
-    "672": {
-      "op": "DUP2"
-    },
-    "673": {
-      "op": "GT"
-    },
-    "674": {
-      "op": "ISZERO"
-    },
-    "675": {
-      "op": "PUSH2",
-      "value": "0x2AD"
-    },
-    "678": {
-      "op": "JUMPI"
-    },
-    "679": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "681": {
-      "op": "DUP3"
-    },
-    "682": {
-      "op": "DUP6"
-    },
-    "683": {
-      "op": "ADD"
-    },
-    "684": {
-      "op": "MSTORE"
-    },
-    "685": {
-      "op": "JUMPDEST"
-    },
-    "686": {
-      "op": "POP"
-    },
-    "687": {
-      "op": "SWAP2"
-    },
-    "688": {
-      "op": "SWAP1"
-    },
-    "689": {
-      "op": "SWAP2"
-    },
-    "690": {
-      "op": "ADD"
-    },
-    "691": {
+    "446": {
       "op": "SWAP3"
     },
-    "692": {
-      "op": "SWAP2"
+    "447": {
+      "op": "MSTORE"
     },
-    "693": {
+    "448": {
       "op": "POP"
     },
-    "694": {
+    "449": {
+      "op": "SWAP6"
+    },
+    "450": {
+      "op": "SWAP5"
+    },
+    "451": {
       "op": "POP"
     },
-    "695": {
+    "452": {
+      "op": "POP"
+    },
+    "453": {
+      "op": "POP"
+    },
+    "454": {
+      "op": "POP"
+    },
+    "455": {
+      "op": "POP"
+    },
+    "456": {
       "jump": "o",
       "op": "JUMP"
     }
   },
-  "sha1": "54c15a510c7e04ecf8129cbfd51f3e4ed162497a",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\ncontract DPublish {\n    mapping(string => address) public submitted_manuscripts;\n\n    /**\n    * Submit manuscript\n     */\n    function submit_manuscript(string memory idmanuscript, address submit_to) public payable{\n        submitted_manuscripts[idmanuscript] = submit_to; \n    }\n\n    function get_submitted_manuscript(string memory idmanuscript) public view returns (address){\n\t    return submitted_manuscripts[idmanuscript]; \n    } \n\n\n}\n",
-  "sourceMap": "57:438:30:-:0;;;;;;;;;;;;;;;;;;;",
+  "sha1": "7e62ba91d04a76a3816c35d90052b7ffec0d2219",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\nimport \"./PaperToken.sol\"; \n\ncontract DPublish {\n    // mapping(string => address) public submitted_manuscripts;\n    mapping(address => uint) private balances; \n\n    PaperToken public papers; \n\n    uint internal submission_fee = 100; \t\n\n    function setSubmissionFee(uint fee) internal {\n\t    submission_fee = fee; \n    } \n\n    function getBalance() public view returns (uint) { \n\t    return address(this).balance; \n    } \n\n    /**\n    * Submit manuscript\n     */\n\n    function submit_manuscript(string memory idmanuscript) public payable { \n\taddress author = msg.sender; \n        require(msg.value >= submission_fee, \"there is a submission fee\"); \n    }\n\n}\n",
+  "sourceMap": "86:628:36:-:0;;;286:3;255:34;;86:628;;;;;;;;;;;;;;;;",
   "sourcePath": "contracts/DPublish.sol",
   "type": "contract"
 }

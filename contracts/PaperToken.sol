@@ -21,7 +21,7 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
         _safeMint(to, tokenId);
     }
 
-    function mint(string memory idmanuscript) public {
+    function mint(address author, string memory idmanuscript) public {
 	require(!isSubmitted[idmanuscript], 
 		"Manuscript already submitted! Wait for a review."); 
 
@@ -30,7 +30,7 @@ contract PaperToken is ERC721, ERC721URIStorage, Ownable {
 	isSubmitted[idmanuscript] = true; 
 	submittedManuscripts[_id] = msg.sender; 
 	manuscriptsIdentifier[idmanuscript] = _id; 
-	_mint(msg.sender, _id); 
+	_mint(author, _id); 
     } 
 
     // The user can get a refund for extracting the paper 

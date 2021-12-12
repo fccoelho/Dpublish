@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
+import "./PaperToken.sol"; 
+
 contract DPublish {
-    mapping(string => address) public submitted_manuscripts;
- 
+    // mapping(string => address) public submitted_manuscripts;
+    mapping(address => uint) private balances; 
+
+    PaperToken public papers; 
+
     uint internal submission_fee = 100; 	
 
     function setSubmissionFee(uint fee) internal {
@@ -21,11 +26,6 @@ contract DPublish {
     function submit_manuscript(string memory idmanuscript) public payable { 
 	address author = msg.sender; 
         require(msg.value >= submission_fee, "there is a submission fee"); 
-        submitted_manuscripts[idmanuscript] = author; 
     }
-
-    function get_submitted_manuscript(string memory idmanuscript) public view returns (address){
-	    return submitted_manuscripts[idmanuscript]; 
-    } 
 
 }
