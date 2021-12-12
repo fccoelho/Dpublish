@@ -158,7 +158,39 @@ contract DPublish {
 	    // For each review, this functions verify (1) whether
 	    // the reviewer has the stake to review, (2) if the 
 	    // quantity of valid reviewers is appropriate according to some 
-	    // threshold and also (3) compute the ratings of the paper, 
-	    // using subsequently this information to decide to publish the document. 
-    } 
+	    // threshold and also (3) compute the ratings of the paper;  
+	    // it uses, subsequently this information to decide to publish the document. 
+
+	    address manuscriptToken = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	    ReviewList reviews = reviewsMetadata.reviews[manuscriptToken];  
+
+	    uint reviewsLength = reviews.reviews.length; 
+
+	    uint n = 0; 
+	    uint sumReviews = 0; 
+
+	    for(uint i = 0; i < reviewsLength; i++) {
+		    uint review = reviews.reviews[i]; 
+		    address reviewer = reviews.reviewers[i]; 
+
+		    bool isValidReviewer = checkReviewer(reviewer); 
+		    if (isValidReviewer) {
+			    n = n + 1; 
+			    sumReviews = sumReviews + review; 
+		    } 
+    	    } 
+
+	    if (n <= quantityReviewers) {
+		    emit("The document must be reviewed more!"); 
+		    return false; 
+	    } 
+	
+	    uint manuscriptReview = sumReviews/n; 
+	    if (manuscriptReview <= reviewRelease) {
+		    emit("The document doesn't has appropriate rating!"); 
+	   	    return false; 
+	    } 
+
+	    emit("The document will be relsead, author!"); 
+	    return true; 
 }
