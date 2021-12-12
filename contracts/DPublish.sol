@@ -10,6 +10,9 @@ contract DPublish {
     uint private submission_fee = 1000; 
     uint private review_fee = 99; 
     uint private rating_threshold = 9999; 
+    uint private quantityReviewers = 3; // Quantity of reviewer to release a manuscript 
+    uint private reviewRelease = 3; // Review, in a scale from 1 to 5, to release the manuscript 
+    uint private reviewerThreshold = 2; // Reviewer score to validate its review
 
     PaperTokens papersMetadata; 
     ReviewTokens reviewsMetadata; 
@@ -106,14 +109,14 @@ contract DPublish {
     } 	 
 
     // Function overflow 
-    function isReviewing(address reviewer, address review) private returns(bool) {
+    function isReviewing(address reviewer, address currReview) private returns(bool) {
 	    // Check whether `reviewer` is resposible for `review`. 
-	    address manuscriptToken = reviewsMetadata.papers[review]; 
+	    address manuscriptToken = reviewsMetadata.papers[currReview]; 
 	    address[] memory reviewerTokens = reviewsMetadata.reviewers[reviewer]; 
 
 	    for(uint i = 0; i < reviewerTokens.length; i++) {
 		    address reviewToken = reviewerTokens[i]; 
-		    if (reviewToken == review) 
+		    if (reviewToken == currReview) 
 			    return true; 
 	    } 
 
@@ -142,15 +145,15 @@ contract DPublish {
 	    return rating_threshold; 
     } 
 
-    function rateReview(address review, uint score) public {
-	     require(!isReviewing(msg.sender, review), 
+    function rateReview(address ratingReview, uint score) public {
+	     require(!isReviewing(msg.sender, ratingReview), 
 		     "You shouldn't rate your own reviews!"); 
 	     
 	     require(msg.sender.balance >= getRatingThreshold(), 
 			"There is a (stake) threshold for rating reviews!"); 
 		
-	     address reviewer = reviewsMetadata.reviewToReviewer[review];  
-	     reviewsMetadata.score[reviewer].push(score); 
+	     address reviewer = reviewsMetadata.reviewToReviewer[ratingReview]; 
+	     reviewsMetadata.scores[reviewer].push(score); 
     } 
     
     function releaseManuscript(string memory idmanuscript) public {
@@ -162,7 +165,7 @@ contract DPublish {
 	    // it uses, subsequently this information to decide to publish the document. 
 
 	    address manuscriptToken = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
-	    ReviewList reviews = reviewsMetadata.reviews[manuscriptToken];  
+	    ReviewsList memory reviews = reviewsMetadata.reviews[manuscriptToken];  
 
 	    uint reviewsLength = reviews.reviews.length; 
 
@@ -170,27 +173,50 @@ contract DPublish {
 	    uint sumReviews = 0; 
 
 	    for(uint i = 0; i < reviewsLength; i++) {
-		    uint review = reviews.reviews[i]; 
+		    uint reviewScore = reviews.reviews[i]; 
 		    address reviewer = reviews.reviewers[i]; 
 
 		    bool isValidReviewer = checkReviewer(reviewer); 
 		    if (isValidReviewer) {
 			    n = n + 1; 
-			    sumReviews = sumReviews + review; 
+			    sumReviews = sumReviews + reviewScore; 
 		    } 
     	    } 
 
 	    if (n <= quantityReviewers) {
-		    emit("The document must be reviewed more!"); 
-		    return false; 
+		    require(false, "The document must be reviewed more!"); 
+		    // return false; 
 	    } 
 	
 	    uint manuscriptReview = sumReviews/n; 
 	    if (manuscriptReview <= reviewRelease) {
-		    emit("The document doesn't has appropriate rating!"); 
-	   	    return false; 
+		    require(false, "The document doesn't has appropriate rating!"); 
+	   	    // return false; 
 	    } 
 
-	    emit("The document will be relsead, author!"); 
-	    return true; 
+	    require(true, "The document will be relsead, author!"); 
+	    // return true; 
+	} 
+	
+	function checkReviewer(address reviewer) public view returns(bool) {
+		uint[] memory scores = reviewsMetadata.scores[reviewer];
+		
+		uint n = 0; 
+		uint sumScores = 0; 
+	
+		for(uint i = 0; i < scores.length; i++) { 
+			sumScores = sumScores + scores[i]; 
+			n = n + 1; 
+		} 
+		
+		if (n == 0) 
+			return true; 
+
+		uint reviewerScore = sumScores/n; 
+		
+		if (reviewerScore <= reviewerThreshold) 
+			return false; 
+		else 
+			return true; 
+	} 
 }

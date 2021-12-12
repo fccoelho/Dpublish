@@ -14,7 +14,7 @@ struct ReviewTokens {
 	mapping (address => address) papers; // Map a review token to the paper 
 	mapping (address => address[]) reviewers; // Map a reviewer to a set of review tokens  
       	mapping (address => ReviewsList) reviews; // Map a paper to a set of (reviewers, reviews)  
-	mapping (address => uint[]) score; // Map a reviewer to its current score  
+	mapping (address => uint[]) scores; // Map a reviewer to its current score  
 	mapping (address => address) reviewToReviewer; // Map review to reviewer 
 } 
 
