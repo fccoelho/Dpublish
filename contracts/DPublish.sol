@@ -153,5 +153,12 @@ contract DPublish {
 	     reviewsMetadata.score[reviewer].push(score); 
     } 
     
-      
+    function releaseManuscript(string memory idmanuscript) public {
+	    // Release the manuscript. 
+	    // For each review, this functions verify (1) whether
+	    // the reviewer has the stake to review, (2) if the 
+	    // quantity of valid reviewers is appropriate according to some 
+	    // threshold and also (3) compute the ratings of the paper, 
+	    // using subsequently this information to decide to publish the document. 
+    } 
 }
