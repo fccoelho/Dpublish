@@ -8,10 +8,11 @@ import "@openzeppelin/contracts/token/ERC777/ERC777.sol";
 
 contract DPubToken is ERC777 {
     constructor(
-    	uint256 initialSupply, 
-    	address[] memory defaultOperators 
-    ) ERC777("DPubToken", "DPTK", defaultOperators) {
-        _mint(msg.sender, 1000000 * 10 ** decimals(), "", "");
+    	uint256 initialSupply  
+    ) ERC777("DPubToken", "DPTK", new address[](0)) { 
+        _mint(msg.sender, initialSupply, "", "");	
     }
+
+    
 
 }
