@@ -8,9 +8,33 @@
           "type": "string"
         }
       ],
+      "name": "get_submitted_manuscript",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "idmanuscript",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "submit_to",
+          "type": "address"
+        }
+      ],
       "name": "submit_manuscript",
       "outputs": [],
-      "stateMutability": "view",
+      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -34,16 +58,16 @@
     }
   ],
   "allSourcePaths": {
-    "36": "contracts/DPublish.sol"
+    "30": "contracts/DPublish.sol"
   },
   "ast": {
     "absolutePath": "contracts/DPublish.sol",
     "exportedSymbols": {
       "DPublish": [
-        346
+        362
       ]
     },
-    "id": 347,
+    "id": 363,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
@@ -56,7 +80,7 @@
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:36"
+        "src": "32:23:30"
       },
       {
         "abstract": false,
@@ -65,12 +89,12 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 346,
+        "id": 362,
         "linearizedBaseContracts": [
-          346
+          362
         ],
         "name": "DPublish",
-        "nameLocation": "66:8:36",
+        "nameLocation": "66:8:30",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -79,10 +103,10 @@
             "id": 334,
             "mutability": "mutable",
             "name": "submitted_manuscripts",
-            "nameLocation": "115:21:36",
+            "nameLocation": "115:21:30",
             "nodeType": "VariableDeclaration",
-            "scope": 346,
-            "src": "81:55:36",
+            "scope": 362,
+            "src": "81:55:30",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -95,14 +119,14 @@
                 "id": 331,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
-                "src": "89:6:36",
+                "src": "89:6:30",
                 "typeDescriptions": {
                   "typeIdentifier": "t_string_storage_ptr",
                   "typeString": "string"
                 }
               },
               "nodeType": "Mapping",
-              "src": "81:26:36",
+              "src": "81:26:30",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
                 "typeString": "mapping(string => address)"
@@ -111,7 +135,7 @@
                 "id": 332,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "99:7:36",
+                "src": "99:7:30",
                 "stateMutability": "nonpayable",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
@@ -123,70 +147,96 @@
           },
           {
             "body": {
-              "id": 344,
+              "id": 348,
               "nodeType": "Block",
-              "src": "249:53:36",
+              "src": "271:65:30",
               "statements": [
                 {
                   "expression": {
-                    "baseExpression": {
-                      "id": 340,
-                      "name": "submitted_manuscripts",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 334,
-                      "src": "259:21:36",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
-                        "typeString": "mapping(string memory => address)"
-                      }
-                    },
-                    "id": 342,
-                    "indexExpression": {
-                      "id": 341,
-                      "name": "idmanuscript",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 337,
-                      "src": "281:12:36",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_memory_ptr",
-                        "typeString": "string memory"
-                      }
-                    },
+                    "id": 346,
                     "isConstant": false,
-                    "isLValue": true,
+                    "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
-                    "nodeType": "IndexAccess",
-                    "src": "259:35:36",
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 342,
+                        "name": "submitted_manuscripts",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 334,
+                        "src": "281:21:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
+                          "typeString": "mapping(string memory => address)"
+                        }
+                      },
+                      "id": 344,
+                      "indexExpression": {
+                        "id": 343,
+                        "name": "idmanuscript",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 337,
+                        "src": "303:12:30",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "281:35:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 345,
+                      "name": "submit_to",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 339,
+                      "src": "319:9:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "281:47:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 343,
+                  "id": 347,
                   "nodeType": "ExpressionStatement",
-                  "src": "259:35:36"
+                  "src": "281:47:30"
                 }
               ]
             },
             "documentation": {
               "id": 335,
               "nodeType": "StructuredDocumentation",
-              "src": "143:35:36",
+              "src": "143:35:30",
               "text": " Submit manuscript"
             },
-            "functionSelector": "cdeca252",
-            "id": 345,
+            "functionSelector": "694549f6",
+            "id": 349,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "submit_manuscript",
-            "nameLocation": "192:17:36",
+            "nameLocation": "192:17:30",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 338,
+              "id": 340,
               "nodeType": "ParameterList",
               "parameters": [
                 {
@@ -194,10 +244,10 @@
                   "id": 337,
                   "mutability": "mutable",
                   "name": "idmanuscript",
-                  "nameLocation": "224:12:36",
+                  "nameLocation": "224:12:30",
                   "nodeType": "VariableDeclaration",
-                  "scope": 345,
-                  "src": "210:26:36",
+                  "scope": 349,
+                  "src": "210:26:30",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -208,7 +258,140 @@
                     "id": 336,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "210:6:36",
+                    "src": "210:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 339,
+                  "mutability": "mutable",
+                  "name": "submit_to",
+                  "nameLocation": "246:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 349,
+                  "src": "238:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 338,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "209:47:30"
+            },
+            "returnParameters": {
+              "id": 341,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "271:0:30"
+            },
+            "scope": 362,
+            "src": "183:153:30",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 360,
+              "nodeType": "Block",
+              "src": "433:57:30",
+              "statements": [
+                {
+                  "expression": {
+                    "baseExpression": {
+                      "id": 356,
+                      "name": "submitted_manuscripts",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 334,
+                      "src": "447:21:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_address_$",
+                        "typeString": "mapping(string memory => address)"
+                      }
+                    },
+                    "id": 358,
+                    "indexExpression": {
+                      "id": 357,
+                      "name": "idmanuscript",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 351,
+                      "src": "469:12:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "447:35:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 355,
+                  "id": 359,
+                  "nodeType": "Return",
+                  "src": "440:42:30"
+                }
+              ]
+            },
+            "functionSelector": "25c6b879",
+            "id": 361,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get_submitted_manuscript",
+            "nameLocation": "351:24:30",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 352,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 351,
+                  "mutability": "mutable",
+                  "name": "idmanuscript",
+                  "nameLocation": "390:12:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 361,
+                  "src": "376:26:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 350,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "376:6:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -217,30 +400,59 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "209:28:36"
+              "src": "375:28:30"
             },
             "returnParameters": {
-              "id": 339,
+              "id": 355,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "249:0:36"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 354,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 361,
+                  "src": "425:7:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 353,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "425:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "424:9:30"
             },
-            "scope": 346,
-            "src": "183:119:36",
+            "scope": 362,
+            "src": "342:148:30",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 347,
-        "src": "57:249:36",
+        "scope": 363,
+        "src": "57:438:30",
         "usedErrors": []
       }
     ],
-    "src": "32:275:36"
+    "src": "32:464:30"
   },
-  "bytecode": "608060405234801561001057600080fd5b506101ec806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063cdeca2521461003b578063f46f4fe514610050575b600080fd5b61004e6100493660046100ca565b6100a0565b005b61008461005e3660046100ca565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b6000816040516100b0919061017b565b5250565b634e487b7160e01b600052604160045260246000fd5b6000602082840312156100dc57600080fd5b813567ffffffffffffffff808211156100f457600080fd5b818401915084601f83011261010857600080fd5b81358181111561011a5761011a6100b4565b604051601f8201601f19908116603f01168101908382118183101715610142576101426100b4565b8160405282815287602084870101111561015b57600080fd5b826020860160208301376000928101602001929092525095945050505050565b6000825160005b8181101561019c5760208186018101518583015201610182565b818111156101ab576000828501525b50919091019291505056fea2646970667358221220b79a6a5731930d2a5fae39e60927f2ad30b5b28e5511e7978b33b454cc5a90c364736f6c634300080a0033",
-  "bytecodeSha1": "c899d54a05115f2bb4fb531bab6d032937875c88",
+  "bytecode": "608060405234801561001057600080fd5b506102ee806100206000396000f3fe6080604052600436106100345760003560e01c806325c6b87914610039578063694549f614610075578063f46f4fe51461008a575b600080fd5b34801561004557600080fd5b506100596100543660046101e2565b6100cb565b6040516001600160a01b03909116815260200160405180910390f35b61008861008336600461021f565b6100fb565b005b34801561009657600080fd5b506100596100a53660046101e2565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b600080826040516100dc919061027d565b908152604051908190036020019020546001600160a01b031692915050565b8060008360405161010c919061027d565b90815260405190819003602001902080546001600160a01b03929092166001600160a01b03199092169190911790555050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016657600080fd5b813567ffffffffffffffff808211156101815761018161013f565b604051601f8301601f19908116603f011681019082821181831017156101a9576101a961013f565b816040528381528660208588010111156101c257600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156101f457600080fd5b813567ffffffffffffffff81111561020b57600080fd5b61021784828501610155565b949350505050565b6000806040838503121561023257600080fd5b823567ffffffffffffffff81111561024957600080fd5b61025585828601610155565b92505060208301356001600160a01b038116811461027257600080fd5b809150509250929050565b6000825160005b8181101561029e5760208186018101518583015201610284565b818111156102ad576000828501525b50919091019291505056fea2646970667358221220ce2f1e53a0c6f4edf423d4457c6aef76fde5aa62785de241477a72c0fb554e6764736f6c634300080a0033",
+  "bytecodeSha1": "60af79487fadca8b6303d9ade697dc07d7a218dd",
   "compiler": {
     "evm_version": "istanbul",
     "optimizer": {
@@ -252,27 +464,33 @@
   "contractName": "DPublish",
   "coverageMap": {
     "branches": {
-      "36": {}
+      "30": {}
     },
     "statements": {
-      "36": {
-        "DPublish.submit_manuscript": {
+      "30": {
+        "DPublish.get_submitted_manuscript": {
           "0": [
-            259,
-            294
+            440,
+            482
+          ]
+        },
+        "DPublish.submit_manuscript": {
+          "1": [
+            281,
+            328
           ]
         }
       }
     }
   },
   "dependencies": [],
-  "deployedBytecode": "608060405234801561001057600080fd5b50600436106100365760003560e01c8063cdeca2521461003b578063f46f4fe514610050575b600080fd5b61004e6100493660046100ca565b6100a0565b005b61008461005e3660046100ca565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b6040516001600160a01b03909116815260200160405180910390f35b6000816040516100b0919061017b565b5250565b634e487b7160e01b600052604160045260246000fd5b6000602082840312156100dc57600080fd5b813567ffffffffffffffff808211156100f457600080fd5b818401915084601f83011261010857600080fd5b81358181111561011a5761011a6100b4565b604051601f8201601f19908116603f01168101908382118183101715610142576101426100b4565b8160405282815287602084870101111561015b57600080fd5b826020860160208301376000928101602001929092525095945050505050565b6000825160005b8181101561019c5760208186018101518583015201610182565b818111156101ab576000828501525b50919091019291505056fea2646970667358221220b79a6a5731930d2a5fae39e60927f2ad30b5b28e5511e7978b33b454cc5a90c364736f6c634300080a0033",
-  "deployedSourceMap": "57:249:36:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;183:119;;;;;;:::i;:::-;;:::i;:::-;;81:55;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;81:55:36;;;;;;-1:-1:-1;;;;;1237:32:42;;;1219:51;;1207:2;1192:18;81:55:36;;;;;;;183:119;259:21;281:12;259:35;;;;;;:::i;:::-;;-1:-1:-1;183:119:36:o;14:127:42:-;75:10;70:3;66:20;63:1;56:31;106:4;103:1;96:15;130:4;127:1;120:15;146:922;215:6;268:2;256:9;247:7;243:23;239:32;236:52;;;284:1;281;274:12;236:52;324:9;311:23;353:18;394:2;386:6;383:14;380:34;;;410:1;407;400:12;380:34;448:6;437:9;433:22;423:32;;493:7;486:4;482:2;478:13;474:27;464:55;;515:1;512;505:12;464:55;551:2;538:16;573:2;569;566:10;563:36;;;579:18;;:::i;:::-;654:2;648:9;622:2;708:13;;-1:-1:-1;;704:22:42;;;728:2;700:31;696:40;684:53;;;752:18;;;772:22;;;749:46;746:72;;;798:18;;:::i;:::-;838:10;834:2;827:22;873:2;865:6;858:18;913:7;908:2;903;899;895:11;891:20;888:33;885:53;;;934:1;931;924:12;885:53;990:2;985;981;977:11;972:2;964:6;960:15;947:46;1035:1;1013:15;;;1030:2;1009:24;1002:35;;;;-1:-1:-1;1017:6:42;146:922;-1:-1:-1;;;;;146:922:42:o;1281:428::-;1412:3;1450:6;1444:13;1475:1;1485:129;1499:6;1496:1;1493:13;1485:129;;;1597:4;1581:14;;;1577:25;;1571:32;1558:11;;;1551:53;1514:12;1485:129;;;1632:6;1629:1;1626:13;1623:48;;;1667:1;1658:6;1653:3;1649:16;1642:27;1623:48;-1:-1:-1;1687:16:42;;;;;1281:428;-1:-1:-1;;1281:428:42:o",
+  "deployedBytecode": "6080604052600436106100345760003560e01c806325c6b87914610039578063694549f614610075578063f46f4fe51461008a575b600080fd5b34801561004557600080fd5b506100596100543660046101e2565b6100cb565b6040516001600160a01b03909116815260200160405180910390f35b61008861008336600461021f565b6100fb565b005b34801561009657600080fd5b506100596100a53660046101e2565b80516020818301810180516000825292820191909301209152546001600160a01b031681565b600080826040516100dc919061027d565b908152604051908190036020019020546001600160a01b031692915050565b8060008360405161010c919061027d565b90815260405190819003602001902080546001600160a01b03929092166001600160a01b03199092169190911790555050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261016657600080fd5b813567ffffffffffffffff808211156101815761018161013f565b604051601f8301601f19908116603f011681019082821181831017156101a9576101a961013f565b816040528381528660208588010111156101c257600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156101f457600080fd5b813567ffffffffffffffff81111561020b57600080fd5b61021784828501610155565b949350505050565b6000806040838503121561023257600080fd5b823567ffffffffffffffff81111561024957600080fd5b61025585828601610155565b92505060208301356001600160a01b038116811461027257600080fd5b809150509250929050565b6000825160005b8181101561029e5760208186018101518583015201610284565b818111156102ad576000828501525b50919091019291505056fea2646970667358221220ce2f1e53a0c6f4edf423d4457c6aef76fde5aa62785de241477a72c0fb554e6764736f6c634300080a0033",
+  "deployedSourceMap": "57:438:30:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;342:148;;;;;;;;;;-1:-1:-1;342:148:30;;;;;:::i;:::-;;:::i;:::-;;;-1:-1:-1;;;;;1361:32:33;;;1343:51;;1331:2;1316:18;342:148:30;;;;;;;183:153;;;;;;:::i;:::-;;:::i;:::-;;81:55;;;;;;;;;;-1:-1:-1;81:55:30;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;81:55:30;;;342:148;425:7;447:21;469:12;447:35;;;;;;:::i;:::-;;;;;;;;;;;;;;;-1:-1:-1;;;;;447:35:30;;342:148;-1:-1:-1;;342:148:30:o;183:153::-;319:9;281:21;303:12;281:35;;;;;;:::i;:::-;;;;;;;;;;;;;;:47;;-1:-1:-1;;;;;281:47:30;;;;-1:-1:-1;;;;;;281:47:30;;;;;;;;;-1:-1:-1;;183:153:30:o;14:127:33:-;75:10;70:3;66:20;63:1;56:31;106:4;103:1;96:15;130:4;127:1;120:15;146:719;189:5;242:3;235:4;227:6;223:17;219:27;209:55;;260:1;257;250:12;209:55;296:6;283:20;322:18;359:2;355;352:10;349:36;;;365:18;;:::i;:::-;440:2;434:9;408:2;494:13;;-1:-1:-1;;490:22:33;;;514:2;486:31;482:40;470:53;;;538:18;;;558:22;;;535:46;532:72;;;584:18;;:::i;:::-;624:10;620:2;613:22;659:2;651:6;644:18;705:3;698:4;693:2;685:6;681:15;677:26;674:35;671:55;;;722:1;719;712:12;671:55;786:2;779:4;771:6;767:17;760:4;752:6;748:17;735:54;833:1;826:4;821:2;813:6;809:15;805:26;798:37;853:6;844:15;;;;;;146:719;;;;:::o;870:322::-;939:6;992:2;980:9;971:7;967:23;963:32;960:52;;;1008:1;1005;998:12;960:52;1048:9;1035:23;1081:18;1073:6;1070:30;1067:50;;;1113:1;1110;1103:12;1067:50;1136;1178:7;1169:6;1158:9;1154:22;1136:50;:::i;:::-;1126:60;870:322;-1:-1:-1;;;;870:322:33:o;1405:496::-;1483:6;1491;1544:2;1532:9;1523:7;1519:23;1515:32;1512:52;;;1560:1;1557;1550:12;1512:52;1600:9;1587:23;1633:18;1625:6;1622:30;1619:50;;;1665:1;1662;1655:12;1619:50;1688;1730:7;1721:6;1710:9;1706:22;1688:50;:::i;:::-;1678:60;-1:-1:-1;;1788:2:33;1773:18;;1760:32;-1:-1:-1;;;;;1821:31:33;;1811:42;;1801:70;;1867:1;1864;1857:12;1801:70;1890:5;1880:15;;;1405:496;;;;;:::o;1906:428::-;2037:3;2075:6;2069:13;2100:1;2110:129;2124:6;2121:1;2118:13;2110:129;;;2222:4;2206:14;;;2202:25;;2196:32;2183:11;;;2176:53;2139:12;2110:129;;;2257:6;2254:1;2251:13;2248:48;;;2292:1;2283:6;2278:3;2274:16;2267:27;2248:48;-1:-1:-1;2312:16:33;;;;;1906:428;-1:-1:-1;;1906:428:33:o",
   "language": "Solidity",
   "natspec": {
     "kind": "dev",
     "methods": {
-      "submit_manuscript(string)": {
+      "submit_manuscript(string,address)": {
         "notice": "Submit manuscript"
       }
     },
@@ -280,886 +498,834 @@
   },
   "offset": [
     57,
-    306
+    495
   ],
-  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x36 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0xCDECA252 EQ PUSH2 0x3B JUMPI DUP1 PUSH4 0xF46F4FE5 EQ PUSH2 0x50 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4E PUSH2 0x49 CALLDATASIZE PUSH1 0x4 PUSH2 0xCA JUMP JUMPDEST PUSH2 0xA0 JUMP JUMPDEST STOP JUMPDEST PUSH2 0x84 PUSH2 0x5E CALLDATASIZE PUSH1 0x4 PUSH2 0xCA JUMP JUMPDEST DUP1 MLOAD PUSH1 0x20 DUP2 DUP4 ADD DUP2 ADD DUP1 MLOAD PUSH1 0x0 DUP3 MSTORE SWAP3 DUP3 ADD SWAP2 SWAP1 SWAP4 ADD KECCAK256 SWAP2 MSTORE SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND DUP2 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP2 AND DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH1 0x0 DUP2 PUSH1 0x40 MLOAD PUSH2 0xB0 SWAP2 SWAP1 PUSH2 0x17B JUMP JUMPDEST MSTORE POP JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0xDC JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP3 GT ISZERO PUSH2 0xF4 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 DUP5 ADD SWAP2 POP DUP5 PUSH1 0x1F DUP4 ADD SLT PUSH2 0x108 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD DUP2 DUP2 GT ISZERO PUSH2 0x11A JUMPI PUSH2 0x11A PUSH2 0xB4 JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1F DUP3 ADD PUSH1 0x1F NOT SWAP1 DUP2 AND PUSH1 0x3F ADD AND DUP2 ADD SWAP1 DUP4 DUP3 GT DUP2 DUP4 LT OR ISZERO PUSH2 0x142 JUMPI PUSH2 0x142 PUSH2 0xB4 JUMP JUMPDEST DUP2 PUSH1 0x40 MSTORE DUP3 DUP2 MSTORE DUP8 PUSH1 0x20 DUP5 DUP8 ADD ADD GT ISZERO PUSH2 0x15B JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 PUSH1 0x20 DUP7 ADD PUSH1 0x20 DUP4 ADD CALLDATACOPY PUSH1 0x0 SWAP3 DUP2 ADD PUSH1 0x20 ADD SWAP3 SWAP1 SWAP3 MSTORE POP SWAP6 SWAP5 POP POP POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP3 MLOAD PUSH1 0x0 JUMPDEST DUP2 DUP2 LT ISZERO PUSH2 0x19C JUMPI PUSH1 0x20 DUP2 DUP7 ADD DUP2 ADD MLOAD DUP6 DUP4 ADD MSTORE ADD PUSH2 0x182 JUMP JUMPDEST DUP2 DUP2 GT ISZERO PUSH2 0x1AB JUMPI PUSH1 0x0 DUP3 DUP6 ADD MSTORE JUMPDEST POP SWAP2 SWAP1 SWAP2 ADD SWAP3 SWAP2 POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xB7 SWAP11 PUSH11 0x5731930D2A5FAE39E60927 CALLCODE 0xAD ADDRESS 0xB5 0xB2 DUP15 SSTORE GT 0xE7 SWAP8 DUP12 CALLER 0xB4 SLOAD 0xCC GAS SWAP1 0xC3 PUSH5 0x736F6C6343 STOP ADDMOD EXP STOP CALLER ",
+  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x4 CALLDATASIZE LT PUSH2 0x34 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x25C6B879 EQ PUSH2 0x39 JUMPI DUP1 PUSH4 0x694549F6 EQ PUSH2 0x75 JUMPI DUP1 PUSH4 0xF46F4FE5 EQ PUSH2 0x8A JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x45 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x59 PUSH2 0x54 CALLDATASIZE PUSH1 0x4 PUSH2 0x1E2 JUMP JUMPDEST PUSH2 0xCB JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP2 AND DUP2 MSTORE PUSH1 0x20 ADD PUSH1 0x40 MLOAD DUP1 SWAP2 SUB SWAP1 RETURN JUMPDEST PUSH2 0x88 PUSH2 0x83 CALLDATASIZE PUSH1 0x4 PUSH2 0x21F JUMP JUMPDEST PUSH2 0xFB JUMP JUMPDEST STOP JUMPDEST CALLVALUE DUP1 ISZERO PUSH2 0x96 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x59 PUSH2 0xA5 CALLDATASIZE PUSH1 0x4 PUSH2 0x1E2 JUMP JUMPDEST DUP1 MLOAD PUSH1 0x20 DUP2 DUP4 ADD DUP2 ADD DUP1 MLOAD PUSH1 0x0 DUP3 MSTORE SWAP3 DUP3 ADD SWAP2 SWAP1 SWAP4 ADD KECCAK256 SWAP2 MSTORE SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND DUP2 JUMP JUMPDEST PUSH1 0x0 DUP1 DUP3 PUSH1 0x40 MLOAD PUSH2 0xDC SWAP2 SWAP1 PUSH2 0x27D JUMP JUMPDEST SWAP1 DUP2 MSTORE PUSH1 0x40 MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 KECCAK256 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND SWAP3 SWAP2 POP POP JUMP JUMPDEST DUP1 PUSH1 0x0 DUP4 PUSH1 0x40 MLOAD PUSH2 0x10C SWAP2 SWAP1 PUSH2 0x27D JUMP JUMPDEST SWAP1 DUP2 MSTORE PUSH1 0x40 MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 KECCAK256 DUP1 SLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP3 SWAP1 SWAP3 AND PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB NOT SWAP1 SWAP3 AND SWAP2 SWAP1 SWAP2 OR SWAP1 SSTORE POP POP JUMP JUMPDEST PUSH4 0x4E487B71 PUSH1 0xE0 SHL PUSH1 0x0 MSTORE PUSH1 0x41 PUSH1 0x4 MSTORE PUSH1 0x24 PUSH1 0x0 REVERT JUMPDEST PUSH1 0x0 DUP3 PUSH1 0x1F DUP4 ADD SLT PUSH2 0x166 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP1 DUP3 GT ISZERO PUSH2 0x181 JUMPI PUSH2 0x181 PUSH2 0x13F JUMP JUMPDEST PUSH1 0x40 MLOAD PUSH1 0x1F DUP4 ADD PUSH1 0x1F NOT SWAP1 DUP2 AND PUSH1 0x3F ADD AND DUP2 ADD SWAP1 DUP3 DUP3 GT DUP2 DUP4 LT OR ISZERO PUSH2 0x1A9 JUMPI PUSH2 0x1A9 PUSH2 0x13F JUMP JUMPDEST DUP2 PUSH1 0x40 MSTORE DUP4 DUP2 MSTORE DUP7 PUSH1 0x20 DUP6 DUP9 ADD ADD GT ISZERO PUSH2 0x1C2 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP4 PUSH1 0x20 DUP8 ADD PUSH1 0x20 DUP4 ADD CALLDATACOPY PUSH1 0x0 PUSH1 0x20 DUP6 DUP4 ADD ADD MSTORE DUP1 SWAP5 POP POP POP POP POP SWAP3 SWAP2 POP POP JUMP JUMPDEST PUSH1 0x0 PUSH1 0x20 DUP3 DUP5 SUB SLT ISZERO PUSH2 0x1F4 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x20B JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x217 DUP5 DUP3 DUP6 ADD PUSH2 0x155 JUMP JUMPDEST SWAP5 SWAP4 POP POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 PUSH1 0x40 DUP4 DUP6 SUB SLT ISZERO PUSH2 0x232 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP3 CALLDATALOAD PUSH8 0xFFFFFFFFFFFFFFFF DUP2 GT ISZERO PUSH2 0x249 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x255 DUP6 DUP3 DUP7 ADD PUSH2 0x155 JUMP JUMPDEST SWAP3 POP POP PUSH1 0x20 DUP4 ADD CALLDATALOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB DUP2 AND DUP2 EQ PUSH2 0x272 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP1 SWAP2 POP POP SWAP3 POP SWAP3 SWAP1 POP JUMP JUMPDEST PUSH1 0x0 DUP3 MLOAD PUSH1 0x0 JUMPDEST DUP2 DUP2 LT ISZERO PUSH2 0x29E JUMPI PUSH1 0x20 DUP2 DUP7 ADD DUP2 ADD MLOAD DUP6 DUP4 ADD MSTORE ADD PUSH2 0x284 JUMP JUMPDEST DUP2 DUP2 GT ISZERO PUSH2 0x2AD JUMPI PUSH1 0x0 DUP3 DUP6 ADD MSTORE JUMPDEST POP SWAP2 SWAP1 SWAP2 ADD SWAP3 SWAP2 POP POP JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xCE 0x2F 0x1E MSTORE8 LOG0 0xC6 DELEGATECALL 0xED DELEGATECALL 0x23 0xD4 GASLIMIT PUSH29 0x6AEF76FDE5AA62785DE241477A72C0FB554E6764736F6C634300080A00 CALLER ",
   "pcMap": {
     "0": {
       "offset": [
         57,
-        306
+        495
       ],
       "op": "PUSH1",
-      "path": "36",
+      "path": "30",
       "value": "0x80"
     },
     "2": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "PUSH1",
-      "path": "36",
+      "path": "30",
       "value": "0x40"
     },
     "4": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "MSTORE",
-      "path": "36"
+      "path": "30"
     },
     "5": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "CALLVALUE",
-      "path": "36"
-    },
-    "6": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "DUP1",
-      "path": "36"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x4"
     },
     "7": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "ISZERO",
-      "path": "36"
+      "op": "CALLDATASIZE",
+      "path": "30"
     },
     "8": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x10"
+      "op": "LT",
+      "path": "30"
     },
-    "11": {
+    "9": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "JUMPI",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x34"
     },
     "12": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
+      ],
+      "op": "JUMPI",
+      "path": "30"
+    },
+    "13": {
+      "fn": null,
+      "offset": [
+        57,
+        495
       ],
       "op": "PUSH1",
-      "path": "36",
+      "path": "30",
       "value": "0x0"
     },
-    "14": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "DUP1",
-      "path": "36"
-    },
     "15": {
-      "dev": "Cannot send ether to nonpayable function",
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "REVERT",
-      "path": "36"
+      "op": "CALLDATALOAD",
+      "path": "30"
     },
     "16": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "JUMPDEST",
-      "path": "36"
-    },
-    "17": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "POP",
-      "path": "36"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0xE0"
     },
     "18": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x4"
+      "op": "SHR",
+      "path": "30"
+    },
+    "19": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "DUP1",
+      "path": "30"
     },
     "20": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "CALLDATASIZE",
-      "path": "36"
-    },
-    "21": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "LT",
-      "path": "36"
-    },
-    "22": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x36"
+      "op": "PUSH4",
+      "path": "30",
+      "value": "0x25C6B879"
     },
     "25": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "JUMPI",
-      "path": "36"
+      "op": "EQ",
+      "path": "30"
     },
     "26": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x0"
-    },
-    "28": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "CALLDATALOAD",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x39"
     },
     "29": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0xE0"
+      "op": "JUMPI",
+      "path": "30"
+    },
+    "30": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "DUP1",
+      "path": "30"
     },
     "31": {
       "fn": null,
       "offset": [
         57,
-        306
-      ],
-      "op": "SHR",
-      "path": "36"
-    },
-    "32": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "DUP1",
-      "path": "36"
-    },
-    "33": {
-      "fn": null,
-      "offset": [
-        57,
-        306
+        495
       ],
       "op": "PUSH4",
-      "path": "36",
-      "value": "0xCDECA252"
+      "path": "30",
+      "value": "0x694549F6"
     },
-    "38": {
+    "36": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "EQ",
-      "path": "36"
+      "path": "30"
     },
-    "39": {
+    "37": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "PUSH2",
-      "path": "36",
-      "value": "0x3B"
+      "path": "30",
+      "value": "0x75"
+    },
+    "40": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "JUMPI",
+      "path": "30"
+    },
+    "41": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "DUP1",
+      "path": "30"
     },
     "42": {
       "fn": null,
       "offset": [
         57,
-        306
-      ],
-      "op": "JUMPI",
-      "path": "36"
-    },
-    "43": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "DUP1",
-      "path": "36"
-    },
-    "44": {
-      "fn": null,
-      "offset": [
-        57,
-        306
+        495
       ],
       "op": "PUSH4",
-      "path": "36",
+      "path": "30",
       "value": "0xF46F4FE5"
     },
-    "49": {
+    "47": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "EQ",
-      "path": "36"
+      "path": "30"
     },
-    "50": {
+    "48": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "PUSH2",
-      "path": "36",
-      "value": "0x50"
+      "path": "30",
+      "value": "0x8A"
+    },
+    "51": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "JUMPI",
+      "path": "30"
+    },
+    "52": {
+      "fn": null,
+      "offset": [
+        57,
+        495
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
     },
     "53": {
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
-      "op": "JUMPI",
-      "path": "36"
-    },
-    "54": {
-      "fn": null,
-      "offset": [
-        57,
-        306
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x0"
     },
     "55": {
       "fn": null,
       "offset": [
         57,
-        306
-      ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x0"
-    },
-    "57": {
-      "fn": null,
-      "offset": [
-        57,
-        306
+        495
       ],
       "op": "DUP1",
-      "path": "36"
+      "path": "30"
     },
-    "58": {
+    "56": {
       "first_revert": true,
       "fn": null,
       "offset": [
         57,
-        306
+        495
       ],
       "op": "REVERT",
-      "path": "36"
+      "path": "30"
+    },
+    "57": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "58": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "CALLVALUE",
+      "path": "30"
     },
     "59": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        183,
-        302
+        342,
+        490
       ],
-      "op": "JUMPDEST",
-      "path": "36"
+      "op": "DUP1",
+      "path": "30"
     },
     "60": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        183,
-        302
+        342,
+        490
+      ],
+      "op": "ISZERO",
+      "path": "30"
+    },
+    "61": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
       ],
       "op": "PUSH2",
-      "path": "36",
-      "value": "0x4E"
+      "path": "30",
+      "value": "0x45"
     },
-    "63": {
-      "fn": "DPublish.submit_manuscript",
+    "64": {
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        183,
-        302
+        342,
+        490
       ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x49"
+      "op": "JUMPI",
+      "path": "30"
     },
-    "66": {
-      "fn": "DPublish.submit_manuscript",
+    "65": {
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        183,
-        302
-      ],
-      "op": "CALLDATASIZE",
-      "path": "36"
-    },
-    "67": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
+        342,
+        490
       ],
       "op": "PUSH1",
-      "path": "36",
-      "value": "0x4"
-    },
-    "69": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0xCA"
-    },
-    "72": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "JUMP",
-      "path": "36"
-    },
-    "73": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
-    },
-    "74": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0xA0"
-    },
-    "77": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "JUMP",
-      "path": "36"
-    },
-    "78": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
-    },
-    "79": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "STOP",
-      "path": "36"
-    },
-    "80": {
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
-    },
-    "81": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x84"
-    },
-    "84": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x5E"
-    },
-    "87": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "CALLDATASIZE",
-      "path": "36"
-    },
-    "88": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x4"
-    },
-    "90": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0xCA"
-    },
-    "93": {
-      "fn": "DPublish.submit_manuscript",
-      "jump": "i",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMP",
-      "path": "36"
-    },
-    "94": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
-    },
-    "95": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP1",
-      "path": "36"
-    },
-    "96": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MLOAD",
-      "path": "36"
-    },
-    "97": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x20"
-    },
-    "99": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP2",
-      "path": "36"
-    },
-    "100": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP4",
-      "path": "36"
-    },
-    "101": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "ADD",
-      "path": "36"
-    },
-    "102": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP2",
-      "path": "36"
-    },
-    "103": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "ADD",
-      "path": "36"
-    },
-    "104": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "DUP1",
-      "path": "36"
-    },
-    "105": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MLOAD",
-      "path": "36"
-    },
-    "106": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH1",
-      "path": "36",
+      "path": "30",
       "value": "0x0"
     },
-    "108": {
-      "fn": "DPublish.submit_manuscript",
+    "67": {
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "DUP3",
-      "path": "36"
+      "op": "DUP1",
+      "path": "30"
+    },
+    "68": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "REVERT",
+      "path": "30"
+    },
+    "69": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "70": {
+      "op": "POP"
+    },
+    "71": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x59"
+    },
+    "74": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x54"
+    },
+    "77": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "CALLDATASIZE",
+      "path": "30"
+    },
+    "78": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x4"
+    },
+    "80": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x1E2"
+    },
+    "83": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "jump": "i",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMP",
+      "path": "30"
+    },
+    "84": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "85": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0xCB"
+    },
+    "88": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "jump": "i",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMP",
+      "path": "30"
+    },
+    "89": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "90": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x40"
+    },
+    "92": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "MLOAD",
+      "path": "30"
+    },
+    "93": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "95": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "97": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "99": {
+      "op": "SHL"
+    },
+    "100": {
+      "op": "SUB"
+    },
+    "101": {
+      "op": "SWAP1"
+    },
+    "102": {
+      "op": "SWAP2"
+    },
+    "103": {
+      "op": "AND"
+    },
+    "104": {
+      "op": "DUP2"
+    },
+    "105": {
+      "op": "MSTORE"
+    },
+    "106": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "108": {
+      "op": "ADD"
     },
     "109": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "MSTORE",
-      "path": "36"
-    },
-    "110": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SWAP3",
-      "path": "36"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x40"
     },
     "111": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "DUP3",
-      "path": "36"
+      "op": "MLOAD",
+      "path": "30"
     },
     "112": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "ADD",
-      "path": "36"
+      "op": "DUP1",
+      "path": "30"
     },
     "113": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
       "op": "SWAP2",
-      "path": "36"
+      "path": "30"
     },
     "114": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "SWAP1",
-      "path": "36"
+      "op": "SUB",
+      "path": "30"
     },
     "115": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "SWAP4",
-      "path": "36"
+      "op": "SWAP1",
+      "path": "30"
     },
     "116": {
-      "fn": "DPublish.submit_manuscript",
+      "fn": "DPublish.get_submitted_manuscript",
       "offset": [
-        81,
-        136
+        342,
+        490
       ],
-      "op": "ADD",
-      "path": "36"
+      "op": "RETURN",
+      "path": "30"
     },
     "117": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        183,
+        336
       ],
-      "op": "KECCAK256",
-      "path": "36"
+      "op": "JUMPDEST",
+      "path": "30"
     },
     "118": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        183,
+        336
       ],
-      "op": "SWAP2",
-      "path": "36"
-    },
-    "119": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MSTORE",
-      "path": "36"
-    },
-    "120": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SLOAD",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x88"
     },
     "121": {
-      "op": "PUSH1",
-      "value": "0x1"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x83"
     },
-    "123": {
-      "op": "PUSH1",
-      "value": "0x1"
+    "124": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "CALLDATASIZE",
+      "path": "30"
     },
     "125": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
       "op": "PUSH1",
-      "value": "0xA0"
+      "path": "30",
+      "value": "0x4"
     },
     "127": {
-      "op": "SHL"
-    },
-    "128": {
-      "op": "SUB"
-    },
-    "129": {
+      "fn": "DPublish.submit_manuscript",
       "offset": [
-        81,
-        136
+        183,
+        336
       ],
-      "op": "AND",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x21F"
     },
     "130": {
       "fn": "DPublish.submit_manuscript",
+      "jump": "i",
       "offset": [
-        81,
-        136
+        183,
+        336
       ],
-      "op": "DUP2",
-      "path": "36"
+      "op": "JUMP",
+      "path": "30"
     },
     "131": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
+        183,
+        336
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "132": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0xFB"
+    },
+    "135": {
+      "fn": "DPublish.submit_manuscript",
+      "jump": "i",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "JUMP",
+      "path": "30"
+    },
+    "136": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "137": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "STOP",
+      "path": "30"
+    },
+    "138": {
+      "offset": [
         81,
         136
       ],
-      "op": "JUMP",
-      "path": "36"
+      "op": "JUMPDEST",
+      "path": "30"
     },
-    "132": {
+    "139": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "CALLVALUE",
+      "path": "30"
+    },
+    "140": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "DUP1",
+      "path": "30"
+    },
+    "141": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "ISZERO",
+      "path": "30"
+    },
+    "142": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x96"
+    },
+    "145": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "JUMPI",
+      "path": "30"
+    },
+    "146": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x0"
+    },
+    "148": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "DUP1",
+      "path": "30"
+    },
+    "149": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "REVERT",
+      "path": "30"
+    },
+    "150": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
         81,
         136
       ],
       "op": "JUMPDEST",
-      "path": "36"
-    },
-    "133": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x40"
-    },
-    "135": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MLOAD",
-      "path": "36"
-    },
-    "136": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "138": {
-      "op": "PUSH1",
-      "value": "0x1"
-    },
-    "140": {
-      "op": "PUSH1",
-      "value": "0xA0"
-    },
-    "142": {
-      "op": "SHL"
-    },
-    "143": {
-      "op": "SUB"
-    },
-    "144": {
-      "op": "SWAP1"
-    },
-    "145": {
-      "op": "SWAP2"
-    },
-    "146": {
-      "op": "AND"
-    },
-    "147": {
-      "op": "DUP2"
-    },
-    "148": {
-      "op": "MSTORE"
-    },
-    "149": {
-      "op": "PUSH1",
-      "value": "0x20"
+      "path": "30"
     },
     "151": {
-      "op": "ADD"
+      "op": "POP"
     },
     "152": {
       "offset": [
         81,
         136
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x40"
-    },
-    "154": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "MLOAD",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x59"
     },
     "155": {
       "fn": "DPublish.submit_manuscript",
@@ -1167,26 +1333,9 @@
         81,
         136
       ],
-      "op": "DUP1",
-      "path": "36"
-    },
-    "156": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SWAP2",
-      "path": "36"
-    },
-    "157": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        81,
-        136
-      ],
-      "op": "SUB",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0xA5"
     },
     "158": {
       "fn": "DPublish.submit_manuscript",
@@ -1194,8 +1343,8 @@
         81,
         136
       ],
-      "op": "SWAP1",
-      "path": "36"
+      "op": "CALLDATASIZE",
+      "path": "30"
     },
     "159": {
       "fn": "DPublish.submit_manuscript",
@@ -1203,765 +1352,1916 @@
         81,
         136
       ],
-      "op": "RETURN",
-      "path": "36"
-    },
-    "160": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        183,
-        302
-      ],
-      "op": "JUMPDEST",
-      "path": "36"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x4"
     },
     "161": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        280
+        81,
+        136
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "statement": 0,
-      "value": "0x0"
-    },
-    "163": {
-      "fn": "DPublish.submit_manuscript",
-      "offset": [
-        281,
-        293
-      ],
-      "op": "DUP2",
-      "path": "36"
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x1E2"
     },
     "164": {
       "fn": "DPublish.submit_manuscript",
+      "jump": "i",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "PUSH1",
-      "path": "36",
-      "value": "0x40"
+      "op": "JUMP",
+      "path": "30"
+    },
+    "165": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
     },
     "166": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "MLOAD",
-      "path": "36"
+      "op": "DUP1",
+      "path": "30"
     },
     "167": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0xB0"
+      "op": "MLOAD",
+      "path": "30"
+    },
+    "168": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x20"
     },
     "170": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "SWAP2",
-      "path": "36"
+      "op": "DUP2",
+      "path": "30"
     },
     "171": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "SWAP1",
-      "path": "36"
+      "op": "DUP4",
+      "path": "30"
     },
     "172": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "PUSH2",
-      "path": "36",
-      "value": "0x17B"
+      "op": "ADD",
+      "path": "30"
+    },
+    "173": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "DUP2",
+      "path": "30"
+    },
+    "174": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "ADD",
+      "path": "30"
     },
     "175": {
       "fn": "DPublish.submit_manuscript",
-      "jump": "i",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "JUMP",
-      "path": "36"
+      "op": "DUP1",
+      "path": "30"
     },
     "176": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "JUMPDEST",
-      "path": "36"
+      "op": "MLOAD",
+      "path": "30"
     },
     "177": {
       "fn": "DPublish.submit_manuscript",
       "offset": [
-        259,
-        294
+        81,
+        136
       ],
-      "op": "MSTORE",
-      "path": "36"
-    },
-    "178": {
-      "op": "POP"
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x0"
     },
     "179": {
       "fn": "DPublish.submit_manuscript",
-      "jump": "o",
       "offset": [
-        183,
-        302
+        81,
+        136
       ],
-      "op": "JUMP",
-      "path": "36"
+      "op": "DUP3",
+      "path": "30"
     },
     "180": {
-      "op": "JUMPDEST"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "MSTORE",
+      "path": "30"
     },
     "181": {
-      "op": "PUSH4",
-      "value": "0x4E487B71"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SWAP3",
+      "path": "30"
+    },
+    "182": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "DUP3",
+      "path": "30"
+    },
+    "183": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "ADD",
+      "path": "30"
+    },
+    "184": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SWAP2",
+      "path": "30"
+    },
+    "185": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "186": {
-      "op": "PUSH1",
-      "value": "0xE0"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SWAP4",
+      "path": "30"
+    },
+    "187": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "ADD",
+      "path": "30"
     },
     "188": {
-      "op": "SHL"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "KECCAK256",
+      "path": "30"
     },
     "189": {
-      "op": "PUSH1",
-      "value": "0x0"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SWAP2",
+      "path": "30"
+    },
+    "190": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "MSTORE",
+      "path": "30"
     },
     "191": {
-      "op": "MSTORE"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "SLOAD",
+      "path": "30"
     },
     "192": {
       "op": "PUSH1",
-      "value": "0x41"
+      "value": "0x1"
     },
     "194": {
       "op": "PUSH1",
-      "value": "0x4"
+      "value": "0x1"
     },
     "196": {
-      "op": "MSTORE"
-    },
-    "197": {
       "op": "PUSH1",
-      "value": "0x24"
+      "value": "0xA0"
+    },
+    "198": {
+      "op": "SHL"
     },
     "199": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "201": {
-      "op": "REVERT"
-    },
-    "202": {
-      "op": "JUMPDEST"
-    },
-    "203": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "205": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "207": {
-      "op": "DUP3"
-    },
-    "208": {
-      "op": "DUP5"
-    },
-    "209": {
       "op": "SUB"
     },
+    "200": {
+      "offset": [
+        81,
+        136
+      ],
+      "op": "AND",
+      "path": "30"
+    },
+    "201": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "DUP2",
+      "path": "30"
+    },
+    "202": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        81,
+        136
+      ],
+      "op": "JUMP",
+      "path": "30"
+    },
+    "203": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "204": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        425,
+        432
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x0"
+    },
+    "206": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        468
+      ],
+      "op": "DUP1",
+      "path": "30",
+      "statement": 0
+    },
+    "207": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        469,
+        481
+      ],
+      "op": "DUP3",
+      "path": "30"
+    },
+    "208": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x40"
+    },
     "210": {
-      "op": "SLT"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "MLOAD",
+      "path": "30"
     },
     "211": {
-      "op": "ISZERO"
-    },
-    "212": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
       "op": "PUSH2",
+      "path": "30",
       "value": "0xDC"
     },
+    "214": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP2",
+      "path": "30"
+    },
     "215": {
-      "op": "JUMPI"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "216": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "218": {
-      "op": "DUP1"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x27D"
     },
     "219": {
-      "op": "REVERT"
+      "fn": "DPublish.get_submitted_manuscript",
+      "jump": "i",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "JUMP",
+      "path": "30"
     },
     "220": {
-      "op": "JUMPDEST"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
     },
     "221": {
-      "op": "DUP2"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "222": {
-      "op": "CALLDATALOAD"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "DUP2",
+      "path": "30"
     },
     "223": {
-      "op": "PUSH8",
-      "value": "0xFFFFFFFFFFFFFFFF"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "MSTORE",
+      "path": "30"
     },
-    "232": {
-      "op": "DUP1"
+    "224": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x40"
+    },
+    "226": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "MLOAD",
+      "path": "30"
+    },
+    "227": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "228": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "DUP2",
+      "path": "30"
+    },
+    "229": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "230": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SUB",
+      "path": "30"
+    },
+    "231": {
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x20"
     },
     "233": {
-      "op": "DUP3"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "ADD",
+      "path": "30"
     },
     "234": {
-      "op": "GT"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "235": {
-      "op": "ISZERO"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "KECCAK256",
+      "path": "30"
     },
     "236": {
-      "op": "PUSH2",
-      "value": "0xF4"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SLOAD",
+      "path": "30"
+    },
+    "237": {
+      "op": "PUSH1",
+      "value": "0x1"
     },
     "239": {
-      "op": "JUMPI"
-    },
-    "240": {
       "op": "PUSH1",
-      "value": "0x0"
+      "value": "0x1"
     },
-    "242": {
-      "op": "DUP1"
+    "241": {
+      "op": "PUSH1",
+      "value": "0xA0"
     },
     "243": {
-      "op": "REVERT"
+      "op": "SHL"
     },
     "244": {
-      "op": "JUMPDEST"
+      "op": "SUB"
     },
     "245": {
-      "op": "DUP2"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "AND",
+      "path": "30"
     },
     "246": {
-      "op": "DUP5"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        447,
+        482
+      ],
+      "op": "SWAP3",
+      "path": "30"
     },
     "247": {
-      "op": "ADD"
+      "fn": "DPublish.get_submitted_manuscript",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "SWAP2",
+      "path": "30"
     },
     "248": {
-      "op": "SWAP2"
+      "op": "POP"
     },
     "249": {
       "op": "POP"
     },
     "250": {
-      "op": "DUP5"
+      "fn": "DPublish.get_submitted_manuscript",
+      "jump": "o",
+      "offset": [
+        342,
+        490
+      ],
+      "op": "JUMP",
+      "path": "30"
     },
     "251": {
-      "op": "PUSH1",
-      "value": "0x1F"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "252": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        319,
+        328
+      ],
+      "op": "DUP1",
+      "path": "30",
+      "statement": 1
     },
     "253": {
-      "op": "DUP4"
-    },
-    "254": {
-      "op": "ADD"
-    },
-    "255": {
-      "op": "SLT"
-    },
-    "256": {
-      "op": "PUSH2",
-      "value": "0x108"
-    },
-    "259": {
-      "op": "JUMPI"
-    },
-    "260": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        302
+      ],
       "op": "PUSH1",
+      "path": "30",
       "value": "0x0"
     },
-    "262": {
-      "op": "DUP1"
+    "255": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        303,
+        315
+      ],
+      "op": "DUP4",
+      "path": "30"
     },
-    "263": {
-      "op": "REVERT"
-    },
-    "264": {
-      "op": "JUMPDEST"
-    },
-    "265": {
-      "op": "DUP2"
-    },
-    "266": {
-      "op": "CALLDATALOAD"
-    },
-    "267": {
-      "op": "DUP2"
-    },
-    "268": {
-      "op": "DUP2"
-    },
-    "269": {
-      "op": "GT"
-    },
-    "270": {
-      "op": "ISZERO"
-    },
-    "271": {
-      "op": "PUSH2",
-      "value": "0x11A"
-    },
-    "274": {
-      "op": "JUMPI"
-    },
-    "275": {
-      "op": "PUSH2",
-      "value": "0x11A"
-    },
-    "278": {
-      "op": "PUSH2",
-      "value": "0xB4"
-    },
-    "281": {
-      "jump": "i",
-      "op": "JUMP"
-    },
-    "282": {
-      "op": "JUMPDEST"
-    },
-    "283": {
+    "256": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
       "op": "PUSH1",
+      "path": "30",
       "value": "0x40"
     },
+    "258": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "MLOAD",
+      "path": "30"
+    },
+    "259": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x10C"
+    },
+    "262": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP2",
+      "path": "30"
+    },
+    "263": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "264": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "PUSH2",
+      "path": "30",
+      "value": "0x27D"
+    },
+    "267": {
+      "fn": "DPublish.submit_manuscript",
+      "jump": "i",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "JUMP",
+      "path": "30"
+    },
+    "268": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "JUMPDEST",
+      "path": "30"
+    },
+    "269": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "270": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "DUP2",
+      "path": "30"
+    },
+    "271": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "MSTORE",
+      "path": "30"
+    },
+    "272": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x40"
+    },
+    "274": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "MLOAD",
+      "path": "30"
+    },
+    "275": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "276": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "DUP2",
+      "path": "30"
+    },
+    "277": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "278": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SUB",
+      "path": "30"
+    },
+    "279": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "PUSH1",
+      "path": "30",
+      "value": "0x20"
+    },
+    "281": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "ADD",
+      "path": "30"
+    },
+    "282": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "283": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        316
+      ],
+      "op": "KECCAK256",
+      "path": "30"
+    },
+    "284": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "DUP1",
+      "path": "30"
+    },
     "285": {
-      "op": "MLOAD"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SLOAD",
+      "path": "30"
     },
     "286": {
       "op": "PUSH1",
-      "value": "0x1F"
+      "value": "0x1"
     },
     "288": {
-      "op": "DUP3"
-    },
-    "289": {
-      "op": "ADD"
+      "op": "PUSH1",
+      "value": "0x1"
     },
     "290": {
       "op": "PUSH1",
-      "value": "0x1F"
+      "value": "0xA0"
     },
     "292": {
-      "op": "NOT"
+      "op": "SHL"
     },
     "293": {
-      "op": "SWAP1"
+      "op": "SUB"
     },
     "294": {
-      "op": "DUP2"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP3",
+      "path": "30"
     },
     "295": {
-      "op": "AND"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "296": {
-      "op": "PUSH1",
-      "value": "0x3F"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP3",
+      "path": "30"
+    },
+    "297": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "AND",
+      "path": "30"
     },
     "298": {
-      "op": "ADD"
-    },
-    "299": {
-      "op": "AND"
+      "op": "PUSH1",
+      "value": "0x1"
     },
     "300": {
-      "op": "DUP2"
-    },
-    "301": {
-      "op": "ADD"
+      "op": "PUSH1",
+      "value": "0x1"
     },
     "302": {
-      "op": "SWAP1"
-    },
-    "303": {
-      "op": "DUP4"
+      "op": "PUSH1",
+      "value": "0xA0"
     },
     "304": {
-      "op": "DUP3"
+      "op": "SHL"
     },
     "305": {
-      "op": "GT"
+      "op": "SUB"
     },
     "306": {
-      "op": "DUP2"
+      "op": "NOT"
     },
     "307": {
-      "op": "DUP4"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "308": {
-      "op": "LT"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP3",
+      "path": "30"
     },
     "309": {
-      "op": "OR"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "AND",
+      "path": "30"
     },
     "310": {
-      "op": "ISZERO"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP2",
+      "path": "30"
     },
     "311": {
-      "op": "PUSH2",
-      "value": "0x142"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP1",
+      "path": "30"
+    },
+    "312": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP2",
+      "path": "30"
+    },
+    "313": {
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "OR",
+      "path": "30"
     },
     "314": {
-      "op": "JUMPI"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SWAP1",
+      "path": "30"
     },
     "315": {
-      "op": "PUSH2",
-      "value": "0x142"
+      "fn": "DPublish.submit_manuscript",
+      "offset": [
+        281,
+        328
+      ],
+      "op": "SSTORE",
+      "path": "30"
+    },
+    "316": {
+      "op": "POP"
+    },
+    "317": {
+      "op": "POP"
     },
     "318": {
-      "op": "PUSH2",
-      "value": "0xB4"
+      "fn": "DPublish.submit_manuscript",
+      "jump": "o",
+      "offset": [
+        183,
+        336
+      ],
+      "op": "JUMP",
+      "path": "30"
     },
-    "321": {
-      "jump": "i",
-      "op": "JUMP"
-    },
-    "322": {
+    "319": {
       "op": "JUMPDEST"
     },
-    "323": {
-      "op": "DUP2"
+    "320": {
+      "op": "PUSH4",
+      "value": "0x4E487B71"
     },
-    "324": {
+    "325": {
       "op": "PUSH1",
-      "value": "0x40"
-    },
-    "326": {
-      "op": "MSTORE"
+      "value": "0xE0"
     },
     "327": {
-      "op": "DUP3"
+      "op": "SHL"
     },
     "328": {
-      "op": "DUP2"
-    },
-    "329": {
-      "op": "MSTORE"
+      "op": "PUSH1",
+      "value": "0x0"
     },
     "330": {
-      "op": "DUP8"
+      "op": "MSTORE"
     },
     "331": {
       "op": "PUSH1",
-      "value": "0x20"
+      "value": "0x41"
     },
     "333": {
-      "op": "DUP5"
-    },
-    "334": {
-      "op": "DUP8"
+      "op": "PUSH1",
+      "value": "0x4"
     },
     "335": {
-      "op": "ADD"
-    },
-    "336": {
-      "op": "ADD"
-    },
-    "337": {
-      "op": "GT"
-    },
-    "338": {
-      "op": "ISZERO"
-    },
-    "339": {
-      "op": "PUSH2",
-      "value": "0x15B"
-    },
-    "342": {
-      "op": "JUMPI"
-    },
-    "343": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "345": {
-      "op": "DUP1"
-    },
-    "346": {
-      "op": "REVERT"
-    },
-    "347": {
-      "op": "JUMPDEST"
-    },
-    "348": {
-      "op": "DUP3"
-    },
-    "349": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "351": {
-      "op": "DUP7"
-    },
-    "352": {
-      "op": "ADD"
-    },
-    "353": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "355": {
-      "op": "DUP4"
-    },
-    "356": {
-      "op": "ADD"
-    },
-    "357": {
-      "op": "CALLDATACOPY"
-    },
-    "358": {
-      "op": "PUSH1",
-      "value": "0x0"
-    },
-    "360": {
-      "op": "SWAP3"
-    },
-    "361": {
-      "op": "DUP2"
-    },
-    "362": {
-      "op": "ADD"
-    },
-    "363": {
-      "op": "PUSH1",
-      "value": "0x20"
-    },
-    "365": {
-      "op": "ADD"
-    },
-    "366": {
-      "op": "SWAP3"
-    },
-    "367": {
-      "op": "SWAP1"
-    },
-    "368": {
-      "op": "SWAP3"
-    },
-    "369": {
       "op": "MSTORE"
     },
-    "370": {
-      "op": "POP"
+    "336": {
+      "op": "PUSH1",
+      "value": "0x24"
     },
-    "371": {
-      "op": "SWAP6"
-    },
-    "372": {
-      "op": "SWAP5"
-    },
-    "373": {
-      "op": "POP"
-    },
-    "374": {
-      "op": "POP"
-    },
-    "375": {
-      "op": "POP"
-    },
-    "376": {
-      "op": "POP"
-    },
-    "377": {
-      "op": "POP"
-    },
-    "378": {
-      "jump": "o",
-      "op": "JUMP"
-    },
-    "379": {
-      "op": "JUMPDEST"
-    },
-    "380": {
+    "338": {
       "op": "PUSH1",
       "value": "0x0"
     },
-    "382": {
+    "340": {
+      "op": "REVERT"
+    },
+    "341": {
+      "op": "JUMPDEST"
+    },
+    "342": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "344": {
       "op": "DUP3"
     },
-    "383": {
-      "op": "MLOAD"
+    "345": {
+      "op": "PUSH1",
+      "value": "0x1F"
     },
-    "384": {
+    "347": {
+      "op": "DUP4"
+    },
+    "348": {
+      "op": "ADD"
+    },
+    "349": {
+      "op": "SLT"
+    },
+    "350": {
+      "op": "PUSH2",
+      "value": "0x166"
+    },
+    "353": {
+      "op": "JUMPI"
+    },
+    "354": {
       "op": "PUSH1",
       "value": "0x0"
     },
-    "386": {
+    "356": {
+      "op": "DUP1"
+    },
+    "357": {
+      "op": "REVERT"
+    },
+    "358": {
       "op": "JUMPDEST"
     },
-    "387": {
+    "359": {
       "op": "DUP2"
     },
-    "388": {
-      "op": "DUP2"
+    "360": {
+      "op": "CALLDATALOAD"
     },
-    "389": {
-      "op": "LT"
+    "361": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
     },
-    "390": {
+    "370": {
+      "op": "DUP1"
+    },
+    "371": {
+      "op": "DUP3"
+    },
+    "372": {
+      "op": "GT"
+    },
+    "373": {
       "op": "ISZERO"
     },
-    "391": {
+    "374": {
       "op": "PUSH2",
-      "value": "0x19C"
+      "value": "0x181"
     },
-    "394": {
+    "377": {
       "op": "JUMPI"
     },
-    "395": {
+    "378": {
+      "op": "PUSH2",
+      "value": "0x181"
+    },
+    "381": {
+      "op": "PUSH2",
+      "value": "0x13F"
+    },
+    "384": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "385": {
+      "op": "JUMPDEST"
+    },
+    "386": {
       "op": "PUSH1",
-      "value": "0x20"
+      "value": "0x40"
+    },
+    "388": {
+      "op": "MLOAD"
+    },
+    "389": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "391": {
+      "op": "DUP4"
+    },
+    "392": {
+      "op": "ADD"
+    },
+    "393": {
+      "op": "PUSH1",
+      "value": "0x1F"
+    },
+    "395": {
+      "op": "NOT"
+    },
+    "396": {
+      "op": "SWAP1"
     },
     "397": {
       "op": "DUP2"
     },
     "398": {
-      "op": "DUP7"
+      "op": "AND"
     },
     "399": {
-      "op": "ADD"
-    },
-    "400": {
-      "op": "DUP2"
+      "op": "PUSH1",
+      "value": "0x3F"
     },
     "401": {
       "op": "ADD"
     },
     "402": {
-      "op": "MLOAD"
+      "op": "AND"
     },
     "403": {
-      "op": "DUP6"
+      "op": "DUP2"
     },
     "404": {
-      "op": "DUP4"
+      "op": "ADD"
     },
     "405": {
-      "op": "ADD"
+      "op": "SWAP1"
     },
     "406": {
-      "op": "MSTORE"
+      "op": "DUP3"
     },
     "407": {
-      "op": "ADD"
+      "op": "DUP3"
     },
     "408": {
-      "op": "PUSH2",
-      "value": "0x182"
-    },
-    "411": {
-      "op": "JUMP"
-    },
-    "412": {
-      "op": "JUMPDEST"
-    },
-    "413": {
-      "op": "DUP2"
-    },
-    "414": {
-      "op": "DUP2"
-    },
-    "415": {
       "op": "GT"
     },
-    "416": {
+    "409": {
+      "op": "DUP2"
+    },
+    "410": {
+      "op": "DUP4"
+    },
+    "411": {
+      "op": "LT"
+    },
+    "412": {
+      "op": "OR"
+    },
+    "413": {
       "op": "ISZERO"
     },
-    "417": {
+    "414": {
       "op": "PUSH2",
-      "value": "0x1AB"
+      "value": "0x1A9"
     },
-    "420": {
+    "417": {
       "op": "JUMPI"
     },
+    "418": {
+      "op": "PUSH2",
+      "value": "0x1A9"
+    },
     "421": {
+      "op": "PUSH2",
+      "value": "0x13F"
+    },
+    "424": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "425": {
+      "op": "JUMPDEST"
+    },
+    "426": {
+      "op": "DUP2"
+    },
+    "427": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "429": {
+      "op": "MSTORE"
+    },
+    "430": {
+      "op": "DUP4"
+    },
+    "431": {
+      "op": "DUP2"
+    },
+    "432": {
+      "op": "MSTORE"
+    },
+    "433": {
+      "op": "DUP7"
+    },
+    "434": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "436": {
+      "op": "DUP6"
+    },
+    "437": {
+      "op": "DUP9"
+    },
+    "438": {
+      "op": "ADD"
+    },
+    "439": {
+      "op": "ADD"
+    },
+    "440": {
+      "op": "GT"
+    },
+    "441": {
+      "op": "ISZERO"
+    },
+    "442": {
+      "op": "PUSH2",
+      "value": "0x1C2"
+    },
+    "445": {
+      "op": "JUMPI"
+    },
+    "446": {
       "op": "PUSH1",
       "value": "0x0"
     },
-    "423": {
-      "op": "DUP3"
+    "448": {
+      "op": "DUP1"
     },
-    "424": {
-      "op": "DUP6"
+    "449": {
+      "op": "REVERT"
     },
-    "425": {
-      "op": "ADD"
-    },
-    "426": {
-      "op": "MSTORE"
-    },
-    "427": {
+    "450": {
       "op": "JUMPDEST"
     },
-    "428": {
-      "op": "POP"
+    "451": {
+      "op": "DUP4"
     },
-    "429": {
-      "op": "SWAP2"
+    "452": {
+      "op": "PUSH1",
+      "value": "0x20"
     },
-    "430": {
-      "op": "SWAP1"
+    "454": {
+      "op": "DUP8"
     },
-    "431": {
-      "op": "SWAP2"
-    },
-    "432": {
+    "455": {
       "op": "ADD"
     },
-    "433": {
+    "456": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "458": {
+      "op": "DUP4"
+    },
+    "459": {
+      "op": "ADD"
+    },
+    "460": {
+      "op": "CALLDATACOPY"
+    },
+    "461": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "463": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "465": {
+      "op": "DUP6"
+    },
+    "466": {
+      "op": "DUP4"
+    },
+    "467": {
+      "op": "ADD"
+    },
+    "468": {
+      "op": "ADD"
+    },
+    "469": {
+      "op": "MSTORE"
+    },
+    "470": {
+      "op": "DUP1"
+    },
+    "471": {
+      "op": "SWAP5"
+    },
+    "472": {
+      "op": "POP"
+    },
+    "473": {
+      "op": "POP"
+    },
+    "474": {
+      "op": "POP"
+    },
+    "475": {
+      "op": "POP"
+    },
+    "476": {
+      "op": "POP"
+    },
+    "477": {
       "op": "SWAP3"
     },
-    "434": {
+    "478": {
       "op": "SWAP2"
     },
-    "435": {
+    "479": {
       "op": "POP"
     },
-    "436": {
+    "480": {
       "op": "POP"
     },
-    "437": {
+    "481": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "482": {
+      "op": "JUMPDEST"
+    },
+    "483": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "485": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "487": {
+      "op": "DUP3"
+    },
+    "488": {
+      "op": "DUP5"
+    },
+    "489": {
+      "op": "SUB"
+    },
+    "490": {
+      "op": "SLT"
+    },
+    "491": {
+      "op": "ISZERO"
+    },
+    "492": {
+      "op": "PUSH2",
+      "value": "0x1F4"
+    },
+    "495": {
+      "op": "JUMPI"
+    },
+    "496": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "498": {
+      "op": "DUP1"
+    },
+    "499": {
+      "op": "REVERT"
+    },
+    "500": {
+      "op": "JUMPDEST"
+    },
+    "501": {
+      "op": "DUP2"
+    },
+    "502": {
+      "op": "CALLDATALOAD"
+    },
+    "503": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "512": {
+      "op": "DUP2"
+    },
+    "513": {
+      "op": "GT"
+    },
+    "514": {
+      "op": "ISZERO"
+    },
+    "515": {
+      "op": "PUSH2",
+      "value": "0x20B"
+    },
+    "518": {
+      "op": "JUMPI"
+    },
+    "519": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "521": {
+      "op": "DUP1"
+    },
+    "522": {
+      "op": "REVERT"
+    },
+    "523": {
+      "op": "JUMPDEST"
+    },
+    "524": {
+      "op": "PUSH2",
+      "value": "0x217"
+    },
+    "527": {
+      "op": "DUP5"
+    },
+    "528": {
+      "op": "DUP3"
+    },
+    "529": {
+      "op": "DUP6"
+    },
+    "530": {
+      "op": "ADD"
+    },
+    "531": {
+      "op": "PUSH2",
+      "value": "0x155"
+    },
+    "534": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "535": {
+      "op": "JUMPDEST"
+    },
+    "536": {
+      "op": "SWAP5"
+    },
+    "537": {
+      "op": "SWAP4"
+    },
+    "538": {
+      "op": "POP"
+    },
+    "539": {
+      "op": "POP"
+    },
+    "540": {
+      "op": "POP"
+    },
+    "541": {
+      "op": "POP"
+    },
+    "542": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "543": {
+      "op": "JUMPDEST"
+    },
+    "544": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "546": {
+      "op": "DUP1"
+    },
+    "547": {
+      "op": "PUSH1",
+      "value": "0x40"
+    },
+    "549": {
+      "op": "DUP4"
+    },
+    "550": {
+      "op": "DUP6"
+    },
+    "551": {
+      "op": "SUB"
+    },
+    "552": {
+      "op": "SLT"
+    },
+    "553": {
+      "op": "ISZERO"
+    },
+    "554": {
+      "op": "PUSH2",
+      "value": "0x232"
+    },
+    "557": {
+      "op": "JUMPI"
+    },
+    "558": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "560": {
+      "op": "DUP1"
+    },
+    "561": {
+      "op": "REVERT"
+    },
+    "562": {
+      "op": "JUMPDEST"
+    },
+    "563": {
+      "op": "DUP3"
+    },
+    "564": {
+      "op": "CALLDATALOAD"
+    },
+    "565": {
+      "op": "PUSH8",
+      "value": "0xFFFFFFFFFFFFFFFF"
+    },
+    "574": {
+      "op": "DUP2"
+    },
+    "575": {
+      "op": "GT"
+    },
+    "576": {
+      "op": "ISZERO"
+    },
+    "577": {
+      "op": "PUSH2",
+      "value": "0x249"
+    },
+    "580": {
+      "op": "JUMPI"
+    },
+    "581": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "583": {
+      "op": "DUP1"
+    },
+    "584": {
+      "op": "REVERT"
+    },
+    "585": {
+      "op": "JUMPDEST"
+    },
+    "586": {
+      "op": "PUSH2",
+      "value": "0x255"
+    },
+    "589": {
+      "op": "DUP6"
+    },
+    "590": {
+      "op": "DUP3"
+    },
+    "591": {
+      "op": "DUP7"
+    },
+    "592": {
+      "op": "ADD"
+    },
+    "593": {
+      "op": "PUSH2",
+      "value": "0x155"
+    },
+    "596": {
+      "jump": "i",
+      "op": "JUMP"
+    },
+    "597": {
+      "op": "JUMPDEST"
+    },
+    "598": {
+      "op": "SWAP3"
+    },
+    "599": {
+      "op": "POP"
+    },
+    "600": {
+      "op": "POP"
+    },
+    "601": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "603": {
+      "op": "DUP4"
+    },
+    "604": {
+      "op": "ADD"
+    },
+    "605": {
+      "op": "CALLDATALOAD"
+    },
+    "606": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "608": {
+      "op": "PUSH1",
+      "value": "0x1"
+    },
+    "610": {
+      "op": "PUSH1",
+      "value": "0xA0"
+    },
+    "612": {
+      "op": "SHL"
+    },
+    "613": {
+      "op": "SUB"
+    },
+    "614": {
+      "op": "DUP2"
+    },
+    "615": {
+      "op": "AND"
+    },
+    "616": {
+      "op": "DUP2"
+    },
+    "617": {
+      "op": "EQ"
+    },
+    "618": {
+      "op": "PUSH2",
+      "value": "0x272"
+    },
+    "621": {
+      "op": "JUMPI"
+    },
+    "622": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "624": {
+      "op": "DUP1"
+    },
+    "625": {
+      "op": "REVERT"
+    },
+    "626": {
+      "op": "JUMPDEST"
+    },
+    "627": {
+      "op": "DUP1"
+    },
+    "628": {
+      "op": "SWAP2"
+    },
+    "629": {
+      "op": "POP"
+    },
+    "630": {
+      "op": "POP"
+    },
+    "631": {
+      "op": "SWAP3"
+    },
+    "632": {
+      "op": "POP"
+    },
+    "633": {
+      "op": "SWAP3"
+    },
+    "634": {
+      "op": "SWAP1"
+    },
+    "635": {
+      "op": "POP"
+    },
+    "636": {
+      "jump": "o",
+      "op": "JUMP"
+    },
+    "637": {
+      "op": "JUMPDEST"
+    },
+    "638": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "640": {
+      "op": "DUP3"
+    },
+    "641": {
+      "op": "MLOAD"
+    },
+    "642": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "644": {
+      "op": "JUMPDEST"
+    },
+    "645": {
+      "op": "DUP2"
+    },
+    "646": {
+      "op": "DUP2"
+    },
+    "647": {
+      "op": "LT"
+    },
+    "648": {
+      "op": "ISZERO"
+    },
+    "649": {
+      "op": "PUSH2",
+      "value": "0x29E"
+    },
+    "652": {
+      "op": "JUMPI"
+    },
+    "653": {
+      "op": "PUSH1",
+      "value": "0x20"
+    },
+    "655": {
+      "op": "DUP2"
+    },
+    "656": {
+      "op": "DUP7"
+    },
+    "657": {
+      "op": "ADD"
+    },
+    "658": {
+      "op": "DUP2"
+    },
+    "659": {
+      "op": "ADD"
+    },
+    "660": {
+      "op": "MLOAD"
+    },
+    "661": {
+      "op": "DUP6"
+    },
+    "662": {
+      "op": "DUP4"
+    },
+    "663": {
+      "op": "ADD"
+    },
+    "664": {
+      "op": "MSTORE"
+    },
+    "665": {
+      "op": "ADD"
+    },
+    "666": {
+      "op": "PUSH2",
+      "value": "0x284"
+    },
+    "669": {
+      "op": "JUMP"
+    },
+    "670": {
+      "op": "JUMPDEST"
+    },
+    "671": {
+      "op": "DUP2"
+    },
+    "672": {
+      "op": "DUP2"
+    },
+    "673": {
+      "op": "GT"
+    },
+    "674": {
+      "op": "ISZERO"
+    },
+    "675": {
+      "op": "PUSH2",
+      "value": "0x2AD"
+    },
+    "678": {
+      "op": "JUMPI"
+    },
+    "679": {
+      "op": "PUSH1",
+      "value": "0x0"
+    },
+    "681": {
+      "op": "DUP3"
+    },
+    "682": {
+      "op": "DUP6"
+    },
+    "683": {
+      "op": "ADD"
+    },
+    "684": {
+      "op": "MSTORE"
+    },
+    "685": {
+      "op": "JUMPDEST"
+    },
+    "686": {
+      "op": "POP"
+    },
+    "687": {
+      "op": "SWAP2"
+    },
+    "688": {
+      "op": "SWAP1"
+    },
+    "689": {
+      "op": "SWAP2"
+    },
+    "690": {
+      "op": "ADD"
+    },
+    "691": {
+      "op": "SWAP3"
+    },
+    "692": {
+      "op": "SWAP2"
+    },
+    "693": {
+      "op": "POP"
+    },
+    "694": {
+      "op": "POP"
+    },
+    "695": {
       "jump": "o",
       "op": "JUMP"
     }
   },
-  "sha1": "a19bbad6ce95400e677d15110aebc8d8f6367b67",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\ncontract DPublish {\n    mapping(string => address) public submitted_manuscripts;\n\n    /**\n    * Submit manuscript\n     */\n    function submit_manuscript(string memory idmanuscript) public view{\n        submitted_manuscripts[idmanuscript]; \n    }\n\n\n}\n",
-  "sourceMap": "57:249:36:-:0;;;;;;;;;;;;;;;;;;;",
+  "sha1": "54c15a510c7e04ecf8129cbfd51f3e4ed162497a",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\ncontract DPublish {\n    mapping(string => address) public submitted_manuscripts;\n\n    /**\n    * Submit manuscript\n     */\n    function submit_manuscript(string memory idmanuscript, address submit_to) public payable{\n        submitted_manuscripts[idmanuscript] = submit_to; \n    }\n\n    function get_submitted_manuscript(string memory idmanuscript) public view returns (address){\n\t    return submitted_manuscripts[idmanuscript]; \n    } \n\n\n}\n",
+  "sourceMap": "57:438:30:-:0;;;;;;;;;;;;;;;;;;;",
   "sourcePath": "contracts/DPublish.sol",
   "type": "contract"
 }
