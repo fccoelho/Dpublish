@@ -21,8 +21,9 @@ def test_submit_manuscript():
     # Submit again 
     try: 
         dpublish.submit_manuscript("a", {"from": accounts[1]}) 
-    except VirtualMachineError: 
-        assert True 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")]
+        assert strerr == "revert: Manuscript already submitted! Wait for a review." 
     
     # Unsubmit manuscript 
     dpublish.unsubmit_manuscript("a", {"from": accounts[1]}) 
@@ -33,14 +34,31 @@ def test_submit_manuscript():
     # Unsubmit non existing manuscript 
     try: 
         dpublish.unsubmit_manuscript("a", {"from": accounts[1]}) 
-    except VirtualMachineError: 
-        assert True 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: Thou must burn an existing manuscript!" 
 
     # Trying to unsubmit a manuscript from other author 
     dpublish.submit_manuscript("a", {"from": accounts[1], "value": value}) 
 
     try: 
         dpublish.unsubmit_manuscript("a", {"from": accounts[2], "value": value}) 
-    except VirtualMachineError: 
-        assert True 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: You must be the author!" 
+
+
+def test_register_reviewer(): 
+    dpublish = DPublish.deploy({"from": address}) 
     
+    curr_balance = accounts[1].balance() 
+
+    # Register reviewer for non existing manuscript 
+    try: 
+        dpublish.registerReviewer("a", {"from": accounts[1]}) 
+    except VirtualMachineError as err:    
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: The paper doesn't exist!" 
+
+
+
