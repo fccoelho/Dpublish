@@ -60,5 +60,27 @@ def test_register_reviewer():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: The paper doesn't exist!" 
 
+    # Submit a manuscript 
+    dpublish.submit_manuscript("a", {"from": accounts[1], 
+        "value": 9999}) 
+    
+    # Register a reviewer for the manuscript 
+    curr_balance = accounts[2].balance() 
 
+    value = 999 
+    dpublish.registerReviewer("a", {"from": accounts[2], "value": value}) 
+    
+    balance = accounts[2].balance() 
+    assert curr_balance - balance == value 
+    
+    # Check fee for reviewing 
+    try: 
+        dpublish.registerReviewer("a", {"from": accounts[1], "value": 1}) 
+        # Notice that it is possible that the author register as a reviewer 
+        # for her own article; however, she should pay to do so. 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: There is a fee for reviewing!" 
+
+ 
 
