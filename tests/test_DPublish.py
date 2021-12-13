@@ -1,7 +1,9 @@
 import pytest 
 
-from brownie import accounts, DPublish 
+from brownie import accounts, DPublish, ReviewToken 
 from brownie.exceptions import VirtualMachineError 
+
+import numpy as np 
 
 address = '0x8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
 assertion_msg = "An exception should be raised in this case!" 
@@ -116,7 +118,31 @@ def test_review():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: The review must be a number between 1 and 5, reviewer!" 
 
+def test_rateReview(): 
+    dpublish = DPublish.deploy({"from": address}) 
 
-    
-    
+    # Submit manuscript 
+    dpublish.submit_manuscript("a", {"from": accounts[1], 
+        "value": 9999}) 
+
+    # Register reviewers 
+    reviewers = 5 
+    for i in range(reviewers): 
+        dpublish.registerReviewer("a", 
+                {"from": accounts[i], "value": 999}) 
+
+    # Review manuscript 
+    for i in range(reviewers): 
+        dpublish.review("a", np.random.randint(1, 6),  
+                {"from": accounts[i]}) 
+
+    # Rate review 
+    reviews = dpublish.getRatingsList().return_value 
+    dpublish.rateReview(reviews[1], 5, {"from": accounts[2]}) 
+    reviews = dpublish.getReviewsList("a").return_value 
+    reviewers = dpublish.getReviewersList("a").return_value 
+
+    # assert reviews[1] == 1, reviews 
+
+
 
