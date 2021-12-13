@@ -172,7 +172,7 @@ def test_rateReview():
 
     # assert reviews[1] == 1, reviews
 
-class TestReleaseManuscript(object): 
+class ReleaseManuscript(object): 
     # Test different scenarios for the 
     # release of the manuscript; 
     # explicitly, it will check whether the document 
@@ -182,7 +182,7 @@ class TestReleaseManuscript(object):
     
     def __init__(self, 
             value_submission: int, 
-            reviews_ratings = List[int], 
+            # reviews_ratings = List[int], 
             reviews_values = List[int], 
             reviews_scores = List[int]): 
         """ 
@@ -196,7 +196,7 @@ class TestReleaseManuscript(object):
             "value": value_submission}) 
         
         # Register reviewers 
-        reviewers = len(reviews_ratings) 
+        reviewers = len(reviews_scores) 
         for i in range(reviewers): 
             self.dpublish.registerReviewer("a", {"from": accounts[i], 
                 "value": reviews_values[i]}) 
@@ -217,6 +217,27 @@ class TestReleaseManuscript(object):
             # Anyone (with enough state) can rate the review 
             self.dpublish.rateReview(address, ratings[i],  
                     {"from": accounts[9]}) 
+    
+    def balances(self): 
+        return [a.balance() for a in accounts] 
+
+def test_releaseManuscript(): 
+    # Scenario in which the reviews are okay 
+    value_submission = 9999 
+    reviewers = 5 
+    reviews_values = [99 * (i + 1) for i in range(reviewers)] 
+    reviews_scores = [5 for i in range(reviewers)] 
+    
+    contract = ReleaseManuscript(value_submission, 
+            reviews_values, 
+            reviews_scores) 
+    balances = contract.balances()[:reviewers] 
+
+    contract.dpublish.releaseManuscript("a") 
+    # In this context, all reviewers should increase their income 
+    for i in range(reviewers): 
+        assert accounts[i].balance() >= balances[i], i 
+    
 
 
 
