@@ -12,6 +12,7 @@ struct PaperTokens {
         mapping (string => address) manuscriptIdentifiers; 
 	mapping (address => uint) manuscriptsFee; 
 	mapping (address => bool) isReleased; // Map paper to its current status 
+	mapping (address => bool) isInReview; // Assert whether paper is in review (to avoid unsubmission) 
 } 	
 
 contract PaperToken is ERC721, ERC721URIStorage, Ownable {

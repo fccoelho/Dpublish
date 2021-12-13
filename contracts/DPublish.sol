@@ -26,7 +26,6 @@ contract DPublish {
     function submit_manuscript(string memory idmanuscript) public payable {
         require(!papersMetadata.isSubmitted[idmanuscript],
                 "Manuscript already submitted! Wait for a review.");
-
 	require(msg.value >= getSubmissionFee(), 
 		"There is a submission fee!"); 
         PaperToken tk = new PaperToken();
@@ -39,6 +38,7 @@ contract DPublish {
 
 	papersMetadata.manuscriptsFee[address(tk)] = msg.value; 
 	papersMetadata.isReleased[address(tk)] = false; 
+	papersMetadata.isInReview[address(tk)] = false; 
     }
 	
 
@@ -47,7 +47,11 @@ contract DPublish {
                     "Thou must burn an existing manuscript!");
 	require(checkAuthorship(msg.sender, idmanuscript), 
 		"You must be the author!"); 
+
         address _id = papersMetadata.manuscriptIdentifiers[idmanuscript];
+
+	require(!papersMetadata.isInReview[_id], 
+		"The manuscript is already being subjected to a review, author!"); 
         // delete manuscripts[_id]; // Keep!
 	
 	// The sender is the author 
@@ -115,6 +119,9 @@ contract DPublish {
 	reviewsMetadata.reviewToReviewer[address(tk)] = msg.sender;  
 
 	ratingsList.push(address(tk)); 
+
+	address tkPaper = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	papersMetadata.isInReview[tkPaper] = true; 
     } 
 
     function isReviewing(address reviewer, string memory idmanuscript) private returns(bool) { 
@@ -205,6 +212,7 @@ contract DPublish {
 	     require(msg.sender.balance >= getRatingThreshold(), 
 			"There is a (stake) threshold for rating reviews!"); 
 		require(u.is_in(ratingReview, ratingsList), "Review should exist!");  
+		require(1 <= score && score <= 5, "The score must be a number between 1 and 5, human!"); 
 		
 	     address reviewer = reviewsMetadata.reviewToReviewer[ratingReview]; 
 	     reviewsMetadata.scores[reviewer].push(score); 
@@ -248,7 +256,7 @@ contract DPublish {
 	   	    // return false; 
 	    } 
 
-	    require(true, "The document will be relsead, author!"); 
+	    require(true, "The document will be released, author!"); 
 	    
 	    papersMetadata.isReleased[manuscriptToken] = true; 
 	    
