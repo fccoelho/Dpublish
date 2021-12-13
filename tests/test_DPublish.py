@@ -54,7 +54,6 @@ def test_submit_manuscript():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: You must be the author!" 
 
-
 def test_register_reviewer(): 
     dpublish = DPublish.deploy({"from": address}) 
     
@@ -90,6 +89,12 @@ def test_register_reviewer():
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: There is a fee for reviewing!" 
+    # Try to unsubmit a manuscript on review 
+    try: 
+        dpublish.unsubmit_manuscript("a", {"from": accounts[1]}) 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: The manuscript is already being subjected to a review, author!" 
 
 def test_review(): 
     dpublish = DPublish.deploy({"from": address}) 
