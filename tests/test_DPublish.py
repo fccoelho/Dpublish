@@ -276,7 +276,24 @@ def test_releaseManuscript():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: The document doesn't has appropriate rating!" 
 
+def test_buyToken(): 
+    dpublish = DPublish.deploy({"from": address}) 
+    # Scenario in which the token is bought 
+    curr_balance = accounts[1].balance() 
+    value = 9999 
+    dpublish.buyToken({"from": accounts[1], "value": value}) 
+
+    assert curr_balance - accounts[1].balance() == value 
+
+    # Context in which the user provide an inconvenient 
+    # amount of tokens. 
+
+    try: 
+        dpublish.buyToken({"from": accounts[1], "value": 1}) 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: You must provide more currencies!"   
 
 
-    
 
