@@ -4,6 +4,7 @@ from brownie import accounts, DPublish, ReviewToken
 from brownie.exceptions import VirtualMachineError 
 
 import numpy as np 
+from typing import List 
 
 address = '0x8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
 assertion_msg = "An exception should be raised in this case!" 
@@ -171,47 +172,51 @@ def test_rateReview():
 
     # assert reviews[1] == 1, reviews
 
-class TestReleaseManuscript(): 
+class TestReleaseManuscript(object): 
     # Test different scenarios for the 
     # release of the manuscript; 
     # explicitly, it will check whether the document 
     # has (1) an appropriate set of ratings, (2) a 
     # adequate set of reviewers and (3) a disposition 
     # to send tokens to the reviewers. 
-
-def test_releaseManuscript(): 
-    dpublish = DPublish.deploy({"from": address}) 
-
-    # Submit 
-    dpublish.submit_manuscript("a", {"from": accounts[1], 
-        "value": 9999}) 
     
-    # Register reviewers 
-    reviewers = 5 
-    values = [111 * (i + 1) for i in range(reviewers)] 
-    for i in range(reviewers): 
-        dpublish.registerReviewer("a", {"from": accounts[i], 
-            "value": values[i]}) 
-    
-    # Review manuscripts 
-    rates = [5 for _ in range(reviewers)] 
-    
-    rates[1] = 3 
+    def __init__(self, 
+            value_submission: int, 
+            reviews_ratings = List[int], 
+            reviews_values = List[int], 
+            reviews_scores = List[int]): 
+        """ 
+        Constructor method for TestReleaseManuscript. 
+        """ 
 
-    for i in range(reviewers): 
-        dpublish.review("a", rates[i], 
-                {"from": accounts[i]}) 
+        self.dpublish = DPublish.deploy({"from": address}) 
 
+        # Submit manuscript 
+        self.dpublish.submit_manuscript("a", {"from": accounts[1], 
+            "value": value_submission}) 
+        
+        # Register reviewers 
+        reviewers = len(reviews_ratings) 
+        for i in range(reviewers): 
+            self.dpublish.registerReviewer("a", {"from": accounts[i], 
+                "value": reviews_values[i]}) 
+        
+        # Review manuscripts 
+        for i in range(reviewers): 
+            self.dpublish.review("a", reviews_scores[i], 
+                    {"from": accounts[i]}) 
 
-    # Rate reviews 
-    reviews = dpublish.getRatingsList().return_value 
-    
-    curr_balance = accounts[2].balance() 
+        
+    def rate_reviews(self, ratings: List[int]): 
+        """ 
+        Rate the reviews. 
+        """ 
+        reviews = self.dpublish.getRatingsList().return_value 
 
-    dpublish.releaseManuscript("a") 
-    
-    assert accounts[2].balance() > curr_balance, accounts[2].balance() 
-
+        for i, review in enumerate(reviews): 
+            # Anyone (with enough state) can rate the review 
+            self.dpublish.rateReview(address, ratings[i],  
+                    {"from": accounts[9]}) 
 
 
 
