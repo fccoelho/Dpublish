@@ -86,6 +86,12 @@ contract DPublish {
 	    return review_fee; 
     } 
        
+    address[] reviewsList; // A list of the reviews 
+
+    function getReviewsList() public returns(address[] memory) { 
+	    return reviewsList; 
+    } 
+
     function registerReviewer(string memory idmanuscript) public payable {
 	require(papersMetadata.isSubmitted[idmanuscript], 
 		"The paper doesn't exist!"); 
@@ -97,6 +103,8 @@ contract DPublish {
 	reviewsMetadata.reviewers[msg.sender].push(address(tk)); 
 	reviewsMetadata.papers[address(tk)] = papersMetadata.manuscriptIdentifiers[idmanuscript];   
 	reviewsMetadata.reviewToReviewer[address(tk)] = msg.sender;  
+
+	reviewsList.push(address(tk)); 
     } 
 
     function isReviewing(address reviewer, string memory idmanuscript) private returns(bool) { 
@@ -128,6 +136,7 @@ contract DPublish {
     } 
 
     function review(string memory idmanuscript, uint score) public { 
+	    require(papersMetadata.isSubmitted[idmanuscript], "The paper must exist!"); 
 	    require(isReviewing(msg.sender, idmanuscript), 
 		    "You must register to review a paper!"); 
 	    // In the real world, the reviewer would update e copyedited version 
