@@ -4,6 +4,7 @@ from brownie import accounts, DPublish
 from brownie.exceptions import VirtualMachineError 
 
 address = '0x8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
+assertion_msg = "An exception should be raised in this case!" 
 
 def test_submit_manuscript(): 
     dpublish = DPublish.deploy({"from": address}) 
@@ -21,6 +22,7 @@ def test_submit_manuscript():
     # Submit again 
     try: 
         dpublish.submit_manuscript("a", {"from": accounts[1]}) 
+        assert False, assertion_msg 
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")]
         assert strerr == "revert: Manuscript already submitted! Wait for a review." 
@@ -34,6 +36,7 @@ def test_submit_manuscript():
     # Unsubmit non existing manuscript 
     try: 
         dpublish.unsubmit_manuscript("a", {"from": accounts[1]}) 
+        assert False, assertion_msg 
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: Thou must burn an existing manuscript!" 
@@ -56,6 +59,7 @@ def test_register_reviewer():
     # Register reviewer for non existing manuscript 
     try: 
         dpublish.registerReviewer("a", {"from": accounts[1]}) 
+        assert False, assertion_msg 
     except VirtualMachineError as err:    
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: The paper doesn't exist!" 
@@ -78,6 +82,7 @@ def test_register_reviewer():
         dpublish.registerReviewer("a", {"from": accounts[1], "value": 1}) 
         # Notice that it is possible that the author register as a reviewer 
         # for her own article; however, she should pay to do so. 
+        assert False, assertion_msg 
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: There is a fee for reviewing!" 
