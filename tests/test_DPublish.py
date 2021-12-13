@@ -244,7 +244,10 @@ def test_releaseManuscript():
     contract = ReleaseManuscript(value_submission, 
             reviews_values, 
             reviews_scores) 
-    # When we rate the reviews, some of them are rejected on the reviewing process
+    # When we rate the reviews, some of them 
+    # are rejected on the reviewing process; 
+    # in this particular case, there will not be enough reviews 
+    # to release the manuscript. 
     contract.rate_reviews([5, 1, 1, 1, 1]) 
     balances = contract.balances()[:reviewers] 
 
@@ -255,9 +258,25 @@ def test_releaseManuscript():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: The document must be reviewed more!" 
      
+    # Verify, now, the context in which the reviews 
+    # are in quantity enough, but their rating 
+    # are inappropriate to release the manuscript 
+    reviewers = 5 
+    inappropriate_reviews = [1 for i in range(reviewers)] 
+    contract = ReleaseManuscript(value_submission, 
+            reviews_values, 
+            inappropriate_reviews) 
+
+    balances = contract.balances()[:reviewers] 
     
+    try: 
+        contract.dpublish.releaseManuscript("a") 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: The document doesn't has appropriate rating!" 
+
+
+
     
-
-
-
 
