@@ -86,10 +86,20 @@ contract DPublish {
 	    return review_fee; 
     } 
        
-    address[] reviewsList; // A list of the reviews 
+    address[] ratingsList; // A list of the reviews 
+    
+    function getReviewsList(string memory idmanuscript) public returns(uint[] memory) {
+	    require(papersMetadata.isSubmitted[idmanuscript], "The paper should exist!"); 
+	    address tk = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	    ReviewsList memory reviews = reviewsMetadata.reviews[tk]; 
+	    return reviews.reviews; 
+    } 
 
-    function getReviewsList() public returns(address[] memory) { 
-	    return reviewsList; 
+    function getReviewersList(string memory idmanuscript) public returns(address[] memory) {
+	    require(papersMetadata.isSubmitted[idmanuscript], "The paper should exist!"); 
+	    address tk = papersMetadata.manuscriptIdentifiers[idmanuscript]; 
+	    ReviewsList memory reviews = reviewsMetadata.reviews[tk]; 
+	    return reviews.reviewers; 
     } 
 
     function registerReviewer(string memory idmanuscript) public payable {
@@ -104,7 +114,7 @@ contract DPublish {
 	reviewsMetadata.papers[address(tk)] = papersMetadata.manuscriptIdentifiers[idmanuscript];   
 	reviewsMetadata.reviewToReviewer[address(tk)] = msg.sender;  
 
-	reviewsList.push(address(tk)); 
+	ratingsList.push(address(tk)); 
     } 
 
     function isReviewing(address reviewer, string memory idmanuscript) private returns(bool) { 
@@ -182,12 +192,19 @@ contract DPublish {
 	    return quantityReviewers; 
     } 
    
+    Utils u = new Utils(); 
+	
+    function getRatingsList() public returns(address[] memory) {
+	    return ratingsList; 
+    } 
+
     function rateReview(address ratingReview, uint score) public {
 	     require(!isReviewing(msg.sender, ratingReview), 
 		     "You shouldn't rate your own reviews!"); 
 	     
 	     require(msg.sender.balance >= getRatingThreshold(), 
 			"There is a (stake) threshold for rating reviews!"); 
+		require(u.is_in(ratingReview, ratingsList), "Review should exist!");  
 		
 	     address reviewer = reviewsMetadata.reviewToReviewer[ratingReview]; 
 	     reviewsMetadata.scores[reviewer].push(score); 

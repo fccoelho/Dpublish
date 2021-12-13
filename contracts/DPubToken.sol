@@ -6,6 +6,16 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 // import "@openzeppelin/contracts/token/ERC777/ERC777.sol"; 
 
+contract Utils {
+	function is_in(address tk, address[] memory tkList) public returns(bool) {
+		for(uint i = 0; i < tkList.length; i++) {
+			if(tkList[i] == tk) 
+				return true; 
+		} 
+		return false; 
+	} 
+} 
+
 contract DPubToken is ERC20, ERC20Permit, ERC20Votes {
     constructor(
 	    uint256 initialSupply 
