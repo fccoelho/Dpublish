@@ -105,3 +105,6 @@ dist
 
 # Open Zeppelin 
 @openzeppelin
+
+tests/__pycache__ 
+build/ 
