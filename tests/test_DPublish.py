@@ -149,13 +149,13 @@ def test_rateReview():
 
     # Verify stake threshold for rating a review 
 
-    # Initially, we modify accounts[2] balance 
+    # Initially, we modify accounts[9]' balance 
     dpublish.submit_manuscript("ax", 
-            {"from": accounts[2], "value": accounts[2].balance()}) 
+            {"from": accounts[9], "value": accounts[9].balance()}) 
     
     # Then, we check the rating process   
     try: 
-        dpublish.rateReview(reviews[1], 5, {"from": accounts[2]}) 
+        dpublish.rateReview(reviews[1], 5, {"from": accounts[-1]}) 
         assert False, assertion_msg 
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")] 
@@ -171,7 +171,48 @@ def test_rateReview():
 
     # assert reviews[1] == 1, reviews
 
+class TestReleaseManuscript(): 
+    # Test different scenarios for the 
+    # release of the manuscript; 
+    # explicitly, it will check whether the document 
+    # has (1) an appropriate set of ratings, (2) a 
+    # adequate set of reviewers and (3) a disposition 
+    # to send tokens to the reviewers. 
+
 def test_releaseManuscript(): 
     dpublish = DPublish.deploy({"from": address}) 
+
+    # Submit 
+    dpublish.submit_manuscript("a", {"from": accounts[1], 
+        "value": 9999}) 
     
+    # Register reviewers 
+    reviewers = 5 
+    values = [111 * (i + 1) for i in range(reviewers)] 
+    for i in range(reviewers): 
+        dpublish.registerReviewer("a", {"from": accounts[i], 
+            "value": values[i]}) 
+    
+    # Review manuscripts 
+    rates = [5 for _ in range(reviewers)] 
+    
+    rates[1] = 3 
+
+    for i in range(reviewers): 
+        dpublish.review("a", rates[i], 
+                {"from": accounts[i]}) 
+
+
+    # Rate reviews 
+    reviews = dpublish.getRatingsList().return_value 
+    
+    curr_balance = accounts[2].balance() 
+
+    dpublish.releaseManuscript("a") 
+    
+    assert accounts[2].balance() > curr_balance, accounts[2].balance() 
+
+
+
+
 
