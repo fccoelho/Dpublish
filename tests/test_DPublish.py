@@ -224,7 +224,7 @@ class ReleaseManuscript(object):
             self.dpublish.rateReview(review, ratings[i],  
                     {"from": accounts[8]}) 
     
-    def balances(self): 
+    def balances(self) -> List[int]: 
         return [a.balance() for a in accounts] 
 
 def test_releaseManuscript(): 
