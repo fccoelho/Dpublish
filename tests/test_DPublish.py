@@ -138,9 +138,29 @@ def test_rateReview():
 
     # Rate review 
     reviews = dpublish.getRatingsList().return_value 
-    dpublish.rateReview(reviews[1], 5, {"from": accounts[2]}) 
-    reviews = dpublish.getReviewsList("a").return_value 
-    reviewers = dpublish.getReviewersList("a").return_value 
+    
+    # Try to rate your own review 
+    try: 
+        dpublish.rateReview(reviews[1], 5, {"from": accounts[1]}) 
+        assert False, assertion_msg   
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: You shouldn't rate your own reviews!", strerr 
+
+    # Verify stake threshold for rating a review 
+
+    # Initially, we modify accounts[2] balance 
+    dpublish.submit_manuscript("ax", 
+            {"from": accounts[2], "value": accounts[2].balance()}) 
+    
+    # Then, we check the rating process   
+    try: 
+        dpublish.rateReview(reviews[1], 5, {"from": accounts[2]}) 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: There is a (stake) threshold for rating reviews!", strerr 
+
 
     # assert reviews[1] == 1, reviews 
 
