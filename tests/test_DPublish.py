@@ -161,8 +161,17 @@ def test_rateReview():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: There is a (stake) threshold for rating reviews!", strerr 
 
+    # Rate a review that doesn't exist 
+    try: 
+        dpublish.rateReview(address, 5, {"from": accounts[3]}) 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: Review should exist!", strerr 
 
-    # assert reviews[1] == 1, reviews 
+    # assert reviews[1] == 1, reviews
 
-
+def test_releaseManuscript(): 
+    dpublish = DPublish.deploy({"from": address}) 
+    
 
