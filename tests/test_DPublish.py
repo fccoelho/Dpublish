@@ -87,5 +87,36 @@ def test_register_reviewer():
         strerr = str(err)[:str(err).index("\n")] 
         assert strerr == "revert: There is a fee for reviewing!" 
 
- 
+def test_review(): 
+    dpublish = DPublish.deploy({"from": address}) 
+
+    # Submit manuscript 
+    dpublish.submit_manuscript("a", {"from": accounts[1], 
+        "value": 9999}) 
+
+    # Register reviewer 
+    dpublish.registerReviewer("a", {"from": accounts[2], "value": 999}) 
+   
+    # Expected behaviour of review 
+    dpublish.review("a", 5, {"from": accounts[2]}) 
+    
+    # Try to review without being a reviewer 
+    try: 
+        dpublish.review("a", 5, {"from": accounts[3]}) 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: You must register to review a paper!" 
+    
+    # Inappropriate scale for review 
+    try: 
+        dpublish.review("a", 999, {"from": accounts[2]}) 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: The review must be a number between 1 and 5, reviewer!" 
+
+
+    
+    
 
