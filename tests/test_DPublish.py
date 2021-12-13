@@ -4,9 +4,10 @@ from brownie import accounts, DPublish, ReviewToken
 from brownie.exceptions import VirtualMachineError 
 
 import numpy as np 
+import secrets  
 from typing import List 
 
-address = '0x8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
+address = '0x' + secrets.token_hex(20) # 8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
 assertion_msg = "An exception should be raised in this case!" 
 
 def test_submit_manuscript(): 
@@ -215,8 +216,8 @@ class ReleaseManuscript(object):
 
         for i, review in enumerate(reviews): 
             # Anyone (with enough state) can rate the review 
-            self.dpublish.rateReview(address, ratings[i],  
-                    {"from": accounts[9]}) 
+            self.dpublish.rateReview(review, ratings[i],  
+                    {"from": accounts[8]}) 
     
     def balances(self): 
         return [a.balance() for a in accounts] 
@@ -235,8 +236,26 @@ def test_releaseManuscript():
 
     contract.dpublish.releaseManuscript("a") 
     # In this context, all reviewers should increase their income 
-    for i in range(reviewers): 
-        assert accounts[i].balance() >= balances[i], i 
+    for i in range(reviewers):  
+        assert accounts[i].balance() - balances[i] == value_submission//reviewers, i  
+
+    # Check scenario in which the manuscript still need more reviews 
+    reviewers = 5    
+    contract = ReleaseManuscript(value_submission, 
+            reviews_values, 
+            reviews_scores) 
+    # When we rate the reviews, some of them are rejected on the reviewing process
+    contract.rate_reviews([5, 1, 1, 1, 1]) 
+    balances = contract.balances()[:reviewers] 
+
+    try: 
+        contract.dpublish.releaseManuscript("a") 
+        assert False, assertion_msg 
+    except VirtualMachineError as err: 
+        strerr = str(err)[:str(err).index("\n")] 
+        assert strerr == "revert: The document must be reviewed more!" 
+     
+    
     
 
 
