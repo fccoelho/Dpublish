@@ -31,7 +31,14 @@ mv network-config.yaml ~/.brownie/
 
 if the dotfile `.brownie` is located at `~` in your machine). 
 
-Therefore, we implemented a (simple) blockchain based system to manage scientific publications; to verify that it is conveniently executing its procedures, we designed some tests (in the folder [tests](./tests/)), which check the proper behaviour of submissions, reviews and release of manuscripts (look at, for instance, the file [tests/test_DPublish.py](./tests/test_DPublish.py)).
+Therefore, we implemented a (simple) blockchain based system to manage scientific publications; to verify that it is conveniently executing its procedures, we designed some tests (in the folder [tests](./tests/)), which check the proper behaviour of submissions, reviews and release of manuscripts (look at, for instance, the file [tests/test_DPublish.py](./tests/test_DPublish.py)) -- if you want to use them, execute (using the configuration file [network-config.yaml](./network-config.yaml))  
 
+```
+brownie test 
+``` 
+
+in your terminal ([Brownie](https://eth-brownie.readthedocs.io/en/stable/) should be installed for this!), which should culminate in the following image. 
+
+<img src = ./imgs/tests.png></img> 
 
 
