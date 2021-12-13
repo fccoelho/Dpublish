@@ -9,7 +9,7 @@ This project uses openzeppelin contrats, so make sure to install it in your proj
 $ npm install @openzeppelin/contracts
 ```
 
-# An overview 
+# An overview of our implementation  
 
 In this section, we will provide a description of what we did and, equally important, what we didn't do. Initially, however, we will reiterate that our goal is the reproduction of the Descentralized Autonomous Organization (DAO; henceforth, DAPH) described in [this paper](https://www.arca.fiocruz.br/handle/icict/41380), which proposes a high-level view of a blockchain based mechanism to decentralize scientific publishing; in particular, we should make an implementation compatible with [Ethereum](https://ethereum.org/en/) and, for this, we use [Solidity](https://docs.soliditylang.org/en/v0.8.10/). 
 
