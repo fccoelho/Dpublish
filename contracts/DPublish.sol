@@ -100,7 +100,7 @@ contract DPublish is Context{
 
     }
 
-    function finsh_review(string memory idmanuscript, bool review_1) public{
+    function finish_review(string memory idmanuscript, bool review_1) public{
         //O artigo precisa estar sendo revisado
         require(reviewing[idmanuscript] = true, "This manuscript is not being revised");
 
@@ -115,6 +115,17 @@ contract DPublish is Context{
             //pay reviewr DPTK and RTK
         }
         else{
+            //Apenas a pessoa que esta revisando o arquivo pode finalizar
+            require(review2_manuscripts[idmanuscript] == msg.sender,"You cannot finish this review");
+            //Incrementa 1 na quantidade de revisoes
+            review_qtd[idmanuscript] += 1;
+            //informa que o arquivo nao esta sendo mais revisado
+            reviewing[idmanuscript] = false;
+            //informa que o artigo foi publicado
+            published[idmanuscript] = true;
+            
+            //FALTA: pay reviewr DPTK and RTK
+            //FALTA: paper token  pro autor
 
         }
 
