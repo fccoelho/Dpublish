@@ -10,34 +10,47 @@ import "@openzeppelin/contracts/utils/Context.sol";
 
 
 contract DPublish is Context{
-    mapping(address => uint256) public balances; ///Quantiedade de DPTK por usuario
+    mapping(string => address) public submited_manuscripts;
+    mapping(string => string) public manuscripts_links;//links dos artigos
     mapping(string => uint256) public bounties; //pagamentos por artigos
     
     //Processo de Revisao
-    
-    struct manuscript{
-        string id_manuscript;// id
-        address autor;// autor
-        address reviewer1;//revisor 1
-        address reviewer2;// revisor 2
-        uint review_qtd;// quantidade de revisoes
-        bool reviewing;// mostra se o arquivo ta sendo revisado
-        bool published;//mostra se o artigo foi publicado
-    }
-
-    mapping(string => manuscript) public manuscripts;
-
-    // mappings antigos que foram trocados pela struct manuscript
-    //mapping(string => address) public review1_manuscripts;//artigos revisados uma vez
-    //mapping(string => address) public review2_manuscripts;//artigso revisados duas vezes
-    //mapping(address => bool) public reviewers;// Lista de revisores
-    //mapping(string => uint) public review_qtd; // Quantidade de vezes que o manuscrito foi revisado
-    //mapping(string => bool) public reviewing; // mostra se o arquivo ta sendo revisado
-    //mapping(string => bool) public  published;//arquivos publicados
+    mapping(string => address) public review1_manuscripts;//artigos revisados uma vez
+    mapping(string => address) public review2_manuscripts;//artigso revisados duas vezes
+    mapping(address => bool) public reviewers;// Lista de revisores
+    mapping(string => uint) public review_qtd; // Quantidade de vezes que o manuscrito foi revisado
+    mapping(string => bool) public reviewing; // mostra se o arquivo ta sendo revisado
+    mapping(string => bool) public  published;//arquivos publicados
 
     address private Editor;//Quem vai iniciar o dpublish
     uint256 public publishing_fee = 1000; //preco pra publicar
     uint256 public review_fee = 250;//preco que cada revisor recebe
+
+    //simulador de aperToken
+    struct papertoken{
+        string idmanuscript;
+        address autor;
+        string link;
+    }
+
+    //simulador de ReviewToken 
+    struct reviewtoken{
+        string idmanuscript;
+        address autor;
+        address reviewr;
+        uint256 review_number;
+        string link;
+    }
+
+    //Estrutura da carteira
+        struct wallet {
+        uint256 DPTK;//quantidade de DPTK
+        reviewtoken[] RTKs;//lista de RTKs
+        papertoken[] PTKs;//lista de PTKs
+        }
+
+    mapping(address => wallet) public wallets;
+
 
     //events
     event PaymentReceived(address from, uint256 amount);// evento quando o pagamento e recebido
@@ -56,6 +69,22 @@ contract DPublish is Context{
         //DPubTokens = new DPubToken();
         //ReviewTokens  = new ReviewToken();
         //PaperTokens = new PaperToken();
+
+    }
+
+    //Funcao que concatena duas strings
+    //precisa de teste
+    function append(string memory a, string memory b) internal pure returns (string memory ) {
+
+    return string(abi.encodePacked(a, b));
+
+}
+
+    //Gera um link para o artigo mas nao deixa publico
+    function generate_link(string memory idmanuscript)public{
+        //criando um link , precisa de teste
+        manuscripts_links[idmanuscript] = append("https://dpublish.org/", idmanuscript);
+
 
     }
 
@@ -82,27 +111,42 @@ contract DPublish is Context{
 
     //Publica artigo
     function publish_manuscript(string memory idmanuscript) public {
-        manuscripts[idmanuscript].published = true;
+        published[idmanuscript] = true;
     }
 
     //Emite ReviewToken
-    function emits_reviewtoken(address reviewer, uint256 tokenId) public{
+    function emits_reviewtoken(string memory idmanuscript, uint256 review_number) public{
         //ReviewTokens.safeMint(reviewer, tokenId);
+        wallets[msg.sender].RTKs.push(reviewtoken(idmanuscript,submited_manuscripts[idmanuscript],msg.sender,review_number,manuscripts_links[idmanuscript]));
+        }
 
-        }
     //Emite PaperToken
-    function emits_papertoken(address reviewer, uint256 tokenId) public{
+    function emits_papertoken(string memory idmanuscript, address autor) public{
         //PaperTokens.safeMint(reviewer, tokenId);
+        wallets[autor].PTKs.push(papertoken(idmanuscript,submited_manuscripts[idmanuscript],manuscripts_links[idmanuscript]));
         }
+
+    //Pagando DPTK  para os revisores
+    function pay_reviewers() public {
+        wallets[msg.sender].DPTK += review_fee;
+
+    }
     
     //Envia manuscrito
     function submit_manuscript(string memory idmanuscript) public payable{
-        manuscripts[idmanuscript] = msg.sender;
-        uint balance = balances[msg.sender];
+        submited_manuscripts[idmanuscript] = msg.sender;
+        generate_link(idmanuscript);
+        uint balance = wallets[msg.sender].DPTK;
         if (balance < publishing_fee)
             revert NotEnoughFunds(publishing_fee, balance);
-        balances[msg.sender] -= publishing_fee;
+        wallets[msg.sender].DPTK -= publishing_fee;
         bounties[idmanuscript] = publishing_fee;
+
+        //nao esta sendo revisado
+        review_qtd[idmanuscript] = 0;
+        reviewing[idmanuscript] = false;
+        published[idmanuscript] = false;
+
         emit PaymentReceived(msg.sender, publishing_fee);
     }
 
@@ -162,6 +206,9 @@ contract DPublish is Context{
             //informa que o arquivo nao esta sendo mais revisado
             reviewing[idmanuscript] = false;
             //pay reviewr DPTK and RTK
+            emits_reviewtoken(idmanuscript, 1);
+            pay_reviewers();
+            //emitindo evento
             emit ManuscriptRevised(msg.sender, idmanuscript, 1);
         }
         else{
@@ -173,13 +220,14 @@ contract DPublish is Context{
             reviewing[idmanuscript]  =  false;
             //informa que o artigo foi publicado
             publish_manuscript(idmanuscript);
+            //pay reviewer DPTK and RTK
+            emits_reviewtoken(idmanuscript, 1);
+            pay_reviewers();
+            //paper token  pro autor
+            emits_papertoken(idmanuscript, submited_manuscripts[idmanuscript]);
+            //emitindo os eventos
             emit ManuscriptRevised(msg.sender, idmanuscript, 2);
             emit ManuscriptPublished(submited_manuscripts[idmanuscript], review1_manuscripts[idmanuscript],review2_manuscripts[idmanuscript], idmanuscript);
-
-
-            
-            //FALTA: pay reviewer DPTK and RTK
-            //FALTA: paper token  pro autor
 
         }
 
