@@ -1,0 +1,26 @@
+{
+  "name": "Dpublish",
+  "version": "1.0.0",
+  "description": "Distributed platform for peer-reviewing scientific articles based on the Ethereum Blockchain.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AriOliv/Dpublish.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AriOliv/Dpublish/issues"
+  },
+  "homepage": "https://github.com/AriOliv/Dpublish#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.0"
+  }
+}
