@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "./DPubToken.sol";
-import "./ReviewToken.sol";
-import "./PaperToken.sol";
 
 import "@openzeppelin/contracts/utils/Context.sol";
 
@@ -31,7 +28,7 @@ contract DPublish is Context{
     uint256 public review_fee = 250;//preco que cada revisor recebe
 
     //-----------------------------------------------------------------------------------------
-                             //SIMULADORES DE TOKENS
+                    //SIMULADORES DE TOKENS E CRIACAO DE UMA ESTRUTURA DE CARTEIRA
     //-----------------------------------------------------------------------------------------
     
     //simulador de aperToken
@@ -50,10 +47,15 @@ contract DPublish is Context{
         string link;
     }
 
-    mapping(address => uint256) public wallet_dptk;
-    address[] wallet_owners;// pessoas que possuem carteiras
-    mapping(address => papertoken[]) public wallet_ptk;
-    mapping(address => reviewtoken[]) public wallet_rtk;
+    //Estrutura da carteira
+        struct wallet {
+        uint256 DPTK;//quantidade de DPTK
+        reviewtoken[] RTKs;//lista de RTKs
+        papertoken[] PTKs;//lista de PTKs
+        }
+
+    mapping(address => wallet) public wallets;
+    address[] wallet_owners;//lista com todos que possuem carteiras
 
 
     //-----------------------------------------------------------------------------------------
@@ -76,7 +78,8 @@ contract DPublish is Context{
 
     constructor(){
         Editor = msg.sender;
-        wallet_dptk[Editor] = 1000000000;// Valor arbitrario de DPTK para o editor
+        create_wallet(msg.sender);
+        wallets[msg.sender].DPTK = 1000000000;// Valor arbitrario de DPTK para o editor
         //DPubTokens = new DPubToken();
         //ReviewTokens  = new ReviewToken();
         //PaperTokens = new PaperToken();
@@ -103,27 +106,23 @@ contract DPublish is Context{
 
     }
 
-
-    //Criando carteira
-    function create_wallet(address owner_wallet) public {
-        wallet_dptk[owner_wallet] = 0;
-        wallet_ptk[owner_wallet];
-        wallet_rtk[owner_wallet];
-        wallet_owners.push(owner_wallet);
-
+    //Criar uma carteira
+    function create_wallet(address owner_wallet)internal{
+    reviewtoken[] memory rtk;
+    papertoken[] memory ptk;
+    wallets[owner_wallet] = wallet(0,rtk,ptk);
+    wallet_owners.push(owner_wallet);
     }
 
 
     //Descobrir se uma carteira existe
-    function exist_wallet_dptk(address owner_wallet)internal view returns(bool){
+    function exist_wallet(address owner_wallet)internal view returns(bool){
         for (uint256 index = 0; index < wallet_owners.length; index++) {
             if(owner_wallet == wallet_owners[index]){
                 return true;}
         }
         return false;
     }
-
-    
 
     //Editor pode mudar o preco do publishing fee
     function set_publishing_fee(uint256 fee) private{
@@ -144,19 +143,20 @@ contract DPublish is Context{
 
     //Emite ReviewToken
     function emits_reviewtoken(string memory idmanuscript, address reviewer,uint256 review_number) internal{
-        require(reviewers[reviewer]==true, "Only for reviewers");
-        wallet_rtk[reviewer].push(reviewtoken(idmanuscript,submited_manuscripts[idmanuscript],reviewer,review_number,manuscripts_links[idmanuscript]));
+        //ReviewTokens.safeMint(reviewer, tokenId);
+        wallets[reviewer].RTKs.push(reviewtoken(idmanuscript,submited_manuscripts[idmanuscript],reviewer,review_number,manuscripts_links[idmanuscript]));
         }
 
     //Emite PaperToken
     function emits_papertoken(string memory idmanuscript, address autor) internal{
-        wallet_ptk[autor].push(papertoken(idmanuscript,submited_manuscripts[idmanuscript],manuscripts_links[idmanuscript]));
+        //PaperTokens.safeMint(reviewer, tokenId);
+        wallets[autor].PTKs.push(papertoken(idmanuscript,submited_manuscripts[idmanuscript],manuscripts_links[idmanuscript]));
         }
 
     //Pagando DPTK  para os revisores
     function pay_reviewers(address reviewer) internal{
         require(reviewers[reviewer]==true, "Only for reviewers");
-        wallet_dptk[reviewer] += review_fee;
+        wallets[reviewer].DPTK += review_fee;
 
     }
 
@@ -185,11 +185,19 @@ contract DPublish is Context{
      //Comprar DPubTokens
     function buy_DPTK(uint256 qtd_DPTK)public payable{
         require(msg.sender.balance >= WeiDPTK*qtd_DPTK, "You need more Weis");
-        if(!exist_wallet_dptk(msg.sender)){
-            create_wallet(msg.sender);
-            wallet_dptk[msg.sender] += qtd_DPTK;}
+        if(exist_wallet(msg.sender)){
+            wallets[msg.sender].DPTK += qtd_DPTK;
+            //nao sei como tirar o valor do msg.sender.balance
+            //msg.sender.balance -= WeiDPTK*qtd_DPTK;
+        }
         else{
-            wallet_dptk[msg.sender] += qtd_DPTK;
+            //Criando uma carteira
+            create_wallet(msg.sender);
+            //Adicionando o endereco do comprador na lista de proprietarios de carteira
+            wallets[msg.sender].DPTK += qtd_DPTK;
+            //nao sei como tirar o valor do msg.sender.balance
+            //msg.sender.balance -= WeiDPTK*qtd_DPTK;
+
         }
 
     }
@@ -197,15 +205,16 @@ contract DPublish is Context{
     //-----------------------------------------------------------------------------------------
                                           //ENVIAR MANUSCRITO
     //-----------------------------------------------------------------------------------------
+
     
     //Envia manuscrito
     function submit_manuscript(string memory idmanuscript) public payable{
         submited_manuscripts[idmanuscript] = msg.sender;
         generate_link(idmanuscript);
-        uint balance = wallet_dptk[msg.sender];
+        uint balance = wallets[msg.sender].DPTK;
         if (balance < publishing_fee)
             revert NotEnoughFunds(publishing_fee, balance);
-        wallet_dptk[msg.sender] -= publishing_fee;
+        wallets[msg.sender].DPTK -= publishing_fee;
         bounties[idmanuscript] = publishing_fee;
 
         //nao esta sendo revisado
@@ -223,8 +232,12 @@ contract DPublish is Context{
 
     //revisor se inscreve
     function subscribe_reviewer()public {
-        if(!exist_wallet_dptk(msg.sender)){
-            create_wallet(msg.sender);}
+        //Criando uma carteira
+        if(!exist_wallet(msg.sender)){
+            //Criando a carteira
+            create_wallet(msg.sender);
+            //Adicionando o endereco do comprador na lista de proprietarios de carteira
+        }
         reviewers[msg.sender] =  true;   
     }
 
