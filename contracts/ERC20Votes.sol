@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts v4.3.2 (token/ERC20/extensions/ERC20Votes.sol)
 
-pragma solidity ^0.8.0;
-
+//pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/math/SafeCast.sol";
