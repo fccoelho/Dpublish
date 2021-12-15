@@ -1,9 +1,9 @@
 {
   "contractName": "Timers",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.2+commit.661d1103\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Tooling for timepoints, timers and delays\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@openzeppelin/contracts/utils/Timers.sol\":\"Timers\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Timers.sol\":{\"keccak256\":\"0x4ee48c919791e995144cc79f46fb70a5c5d4b3baa51175da799aac67acb8cb10\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e7b26a72f4dbb9a9622516d05c8d8027cb523b7696e651429a703abd03cb989b\",\"dweb:/ipfs/QmbT8na9UsJwXtL8pnk3UCd9AXSWgUxkEihFAtg6zLWxXd\"]}},\"version\":1}",
-  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205f29005259e842aa6d925d0edd886659263b5fe8b1224819fe5b68ffa89c324264736f6c63430008020033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205f29005259e842aa6d925d0edd886659263b5fe8b1224819fe5b68ffa89c324264736f6c63430008020033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Tooling for timepoints, timers and delays\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@openzeppelin/contracts/utils/Timers.sol\":\"Timers\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Timers.sol\":{\"keccak256\":\"0x4ee48c919791e995144cc79f46fb70a5c5d4b3baa51175da799aac67acb8cb10\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e7b26a72f4dbb9a9622516d05c8d8027cb523b7696e651429a703abd03cb989b\",\"dweb:/ipfs/QmbT8na9UsJwXtL8pnk3UCd9AXSWgUxkEihFAtg6zLWxXd\"]}},\"version\":1}",
+  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220cc0fe0b347bae975c9de83c1220a46964cb5b226c413ce8324a7a1ffc5aa4da164736f6c63430008040033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220cc0fe0b347bae975c9de83c1220a46964cb5b226c413ce8324a7a1ffc5aa4da164736f6c63430008040033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
@@ -2439,7 +2439,8 @@
           }
         ],
         "scope": 7234,
-        "src": "168:1873:27"
+        "src": "168:1873:27",
+        "usedErrors": []
       }
     ],
     "src": "85:1957:27"
@@ -4872,18 +4873,19 @@
           }
         ],
         "scope": 7234,
-        "src": "168:1873:27"
+        "src": "168:1873:27",
+        "usedErrors": []
       }
     ],
     "src": "85:1957:27"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.2+commit.661d1103.Emscripten.clang"
+    "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-12-14T17:24:57.442Z",
+  "updatedAt": "2021-12-15T00:04:58.187Z",
   "devdoc": {
     "details": "Tooling for timepoints, timers and delays",
     "kind": "dev",

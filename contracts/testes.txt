@@ -1,0 +1,21 @@
+
+        function publish_manuscript(string memory idmanuscript) public {
+            published[idmanuscript] = true;
+
+        }
+
+                function emits_reviewtoken(){
+
+        }
+
+        function emits_papertoken(){
+
+        }
+
+        function send_papertoken(){
+
+        }
+
+        function pay_reviewer(){
+
+        }
