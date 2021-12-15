@@ -35,7 +35,7 @@ contract DPublish {
 
         uint funds = wallet_funds[msg.sender];
         if (price > funds)// Verificando se o usuário possui saldo suficiente
-            revert MissingFunds(price, wallet_funds);
+            revert MissingFunds(price, funds);
         
         wallet_funds[msg.sender] -= price;// Pagamento feito
         payments[idmanuscript] = price;// Armazena pagamento

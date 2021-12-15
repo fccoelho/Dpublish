@@ -43174,7 +43174,8 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-29T09:26:01.352Z",
+  "updatedAt": "2021-12-15T18:24:40.914Z",
+  "networkType": "ethereum",
   "devdoc": {
     "custom:security-contact": "fccoelho@gmail.com",
     "kind": "dev",
