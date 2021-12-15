@@ -51,4 +51,41 @@ Temos funções que o Editor pode configurar os valores de uma submissão de art
 
 Na imagem acima temos uma função onde a pessoa que chama ela faz uma compra de DPubTokens, caso essa pessoa não tenha carteira, é criada uma pra ela. O balanço dela precisa ser maior ou igual ao valor da quantidade de DPubToken que ela deseja comprar.
 
-Já na função de submissão de 
+Já na função de submissão de artigo, é gerado um link do seu artigo, mas esse link não é para o público. Caso o autor não tenha a quantidade suficiente de DPubTokens então a função retorna um erro, já se ele tiver o valor é descontado da sua carteira e adicionado em bounties. Depois são feitas algumas definições que auxiliarão no processo de revisão.  Ao final é emitido um evento de que o pagamento foi recebido.
+
+### Sétima parte : PROCESSO DE REVISÃO
+
+<img src="./imgs/71.png">
+<img src="./imgs/72.png">
+
+Na primeira imagem temos duas funções, a primeira função serve para um revisor se inscrever como revisor, caso ele não tenhe uma carteira é criada uma pra ele. Caso esse revisor tenha comprado DPubTokens ele já tem sua carteira e não precisa ser criada.
+
+A segunda função server para começar a revisão, ele pode escolher qual revisão ele estará fazendo, se for a primeira, o segundo parâmetro será igual a `True`, caso seja a segunda será `False`. Apenas pessoas inscritas como revisores podem chamar essa função. As linhas estão todas comentadas, dizendo pra que serve cada linha.
+
+Na segundo imagem e nossa terceira função dessa parte, temos uma função que finaliza a revisão. Novamente o revisor pode escolher qual revisão está finalizando, apenas o revisor que começou a revisão pode finalizá-la. Ao finalizar a primeira revisão, o revisor recebe seu ReviewToken e seu pagamento e um evento é emitido. Já na segunda revisão o revisor recebe seu ReviewToken e seu pagamento, mas agora o artigo é publicado e o PaperToken do autor é emito, além da emissão de dois eventos.
+
+
+### Erro na primeira versão
+
+Durante o projeto aprendi muito de solidity e muito foram pelos erros e por pesquisas por exemplo, porém teve um erro que não consegui consertar e vou falar um pouco sobre ele aqui, o arquivo com essa versão pode ser encontrado nesse arquivo [`./dpublish.sol`](./dpublish.sol). Vamos ver a imagem abaixo pra entender esse erro melhor.
+
+<img src="./imgs/81.png">
+<img src="./imgs/82.png">
+
+
+Na primeira parte temos as estruturas dos Tokens não fungíveis e também uma estrutura de carteira pra pessoa, com todos os possíveis Tokens que essa pessoa pode ter, note que os Tokens não fungíveis são um Array. Porém, aí que estã o problema quando fui compilar o código e adicionar uma lista vazia nos dois tokens como pode-se ver na segunda imagem. Então quando fui compilar tive o seguinte erro.
+
+<img src="./imgs/83.png">
+
+Que diz que os tipos não são suportados, procurei várias maneiras para consertar esse erro, mas não encontrei muita coisa sobre e infelizmente não consegui resolver.
+
+
+### Conclusão
+
+
+
+
+
+
+
+

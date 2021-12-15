@@ -192,9 +192,11 @@ contract DPublish is Context{
         wallet_dptk[msg.sender] -= publishing_fee;
         bounties[idmanuscript] = publishing_fee;
 
-        //nao esta sendo revisado
+        //artigo nao teve nenhuma revisao
         review_qtd[idmanuscript] = 0;
+        //artigo nao esta sendo revisado
         reviewing[idmanuscript] = false;
+        //artigo nao foi publicado
         published[idmanuscript] = false;
 
         emit PaymentReceived(msg.sender, publishing_fee);
