@@ -82,6 +82,8 @@ Que diz que os tipos não são suportados, procurei várias maneiras para conser
 
 ### Conclusão
 
+Fazendo o trabalho me dediquei a aprender mais sobre os smart contracts, a linguagem solidity e esse mundo imenso da blockchain. Achei meu resultado final interessante, mesmo não estando totalmente completo. Busquei modelar o trabalho o mais próximo do mundo real possível. Solidity é uma linguagem poderosa, mas não tão fácil de aprender, precisa de bastante tempo e esforço, e ela está sempre sendo atualizada, então um desenvolvedor de blockchain precisa sempre estar ligado com as mudanças e os avanços da linguagem.
+
 
 
 
