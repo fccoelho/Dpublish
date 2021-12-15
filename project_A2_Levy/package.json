@@ -1,0 +1,8 @@
+{
+  "name": "project_A2",
+  "version": "0.0.1",
+  "engines": {
+    "node": "11.6.x",
+    "npm": "6.5.x"
+  }
+}
