@@ -7,8 +7,6 @@ import "./PaperToken.sol";
 
 import "@openzeppelin/contracts/utils/Context.sol";
 
-
-
 contract DPublish is Context{
     //-----------------------------------------------------------------------------------------
                                       //DEFINICAO DE VARIAVEIS
