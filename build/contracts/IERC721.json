@@ -2991,7 +2991,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-12-15T00:04:58.179Z",
+  "updatedAt": "2021-12-15T16:50:23.481Z",
   "devdoc": {
     "details": "Required interface of an ERC721 compliant contract.",
     "events": {

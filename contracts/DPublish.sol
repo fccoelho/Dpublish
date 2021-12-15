@@ -60,50 +60,17 @@ contract DPublish is Context{
                                           //EVENTOS E ERROS
     //-----------------------------------------------------------------------------------------
     event PaymentReceived(address from, uint256 amount);// evento quando o pagamento e recebido
+    event PaymentSent(address to, uint256 amount);//evento quando um pagamento e enviado pra um revisorS
+    event PurchasedDPTK(address buyer, uint256 amount);//evento quando alguem compra tokens
     event ManuscriptRevised(address reviwer, string idmanuscript, uint review_number);//Evento quando um artigo e revisado
     event ManuscriptPublished(address autor,address reviwer_1,address reviwer_2, string idmanuscript);//Evento quando um artigo e publicado
     
     error NotEnoughFunds(uint256 requested, uint256 avaible);
 
-    //DPubToken  private DPubTokens;
-    //ReviewToken private ReviewTokens;
-    //PaperToken private PaperTokens;
-
     //-----------------------------------------------------------------------------------------
                                           //CONSTRUTOR
     //-----------------------------------------------------------------------------------------
-
-
-    constructor(){
-        Editor = msg.sender;
-        wallet_dptk[Editor] = 1000000000;// Valor arbitrario de DPTK para o editor
-        //DPubTokens = new DPubToken();
-        //ReviewTokens  = new ReviewToken();
-        //PaperTokens = new PaperToken();
-
-    }
-
-    //Funcao que concatena duas strings
-    //precisa de teste
-    function append(string memory a, string memory b) internal pure returns (string memory ) {
-
-    return string(abi.encodePacked(a, b));
-
-}
-
-    //-----------------------------------------------------------------------------------------
-                                          //FUNCOES AUXILIARES
-    //-----------------------------------------------------------------------------------------
-
-
-    //Gera um link para o artigo mas nao deixa publico
-    function generate_link(string memory idmanuscript)public{
-        //criando um link , precisa de teste
-        manuscripts_links[idmanuscript] = append("https://dpublish.org/", idmanuscript);
-
-    }
-
-
+    
     //Criando carteira
     function create_wallet(address owner_wallet) public {
         wallet_dptk[owner_wallet] = 0;
@@ -114,33 +81,40 @@ contract DPublish is Context{
     }
 
 
+    constructor(){
+        Editor = msg.sender;
+        create_wallet(Editor);
+        wallet_dptk[Editor] = 1000000000;// Valor arbitrario de DPTK para o editor
+
+    }
+
+    //-----------------------------------------------------------------------------------------
+                                          //FUNCOES AUXILIARES
+    //-----------------------------------------------------------------------------------------
+
+    //Funcao que concatena duas strings
+    function concat_string(string memory a, string memory b) internal pure returns (string memory ) {
+
+    return string(abi.encodePacked(a, b));}
+
+    //Gera um link para o artigo mas nao deixa aberto para o publico
+    function generate_link(string memory idmanuscript)public{
+        //criando um link 
+        manuscripts_links[idmanuscript] = concat_string("https://dpublish.org/", idmanuscript);}
+
     //Descobrir se uma carteira existe
     function exist_wallet_dptk(address owner_wallet)internal view returns(bool){
         for (uint256 index = 0; index < wallet_owners.length; index++) {
             if(owner_wallet == wallet_owners[index]){
                 return true;}
         }
-        return false;
-    }
-
-    
-
-    //Editor pode mudar o preco do publishing fee
-    function set_publishing_fee(uint256 fee) private{
-        require(msg.sender == Editor);
-        publishing_fee = fee;
-    }
-
-
-        //Editor pode mudar o preco do review fee
-    function set_review_fee(uint256 fee) private{
-        review_fee = fee;
-    }
+        return false;}
 
     //Publica artigo
     function publish_manuscript(string memory idmanuscript) internal {
         published[idmanuscript] = true;
-    }
+        //Aqui seria interessante adicionar um mecanismo que publique o artigo 
+        }
 
     //Emite ReviewToken
     function emits_reviewtoken(string memory idmanuscript, address reviewer,uint256 review_number) internal{
@@ -150,19 +124,31 @@ contract DPublish is Context{
 
     //Emite PaperToken
     function emits_papertoken(string memory idmanuscript, address autor) internal{
-        wallet_ptk[autor].push(papertoken(idmanuscript,submited_manuscripts[idmanuscript],manuscripts_links[idmanuscript]));
-        }
+        wallet_ptk[autor].push(papertoken(idmanuscript,submited_manuscripts[idmanuscript],manuscripts_links[idmanuscript]));}
 
     //Pagando DPTK  para os revisores
-    function pay_reviewers(address reviewer) internal{
+    function pay_reviewers(address reviewer, string memory idmanuscript) internal{
         require(reviewers[reviewer]==true, "Only for reviewers");
         wallet_dptk[reviewer] += review_fee;
+        bounties[idmanuscript]-= review_fee;
+        emit PaymentSent(reviewer, review_fee);}
 
+    //-----------------------------------------------------------------------------------------
+                                          //OBTER E CONFIGURAR VALORES DE PAGAMENTOS
+    //-----------------------------------------------------------------------------------------
+
+        //Editor pode mudar o preco do publishing fee
+    function set_publishing_fee(uint256 fee) public{
+        require(msg.sender==Editor, "You aren't Editor");
+        publishing_fee = fee;
     }
 
-    //-----------------------------------------------------------------------------------------
-                                          //OBTER VALORES DE PAGAMENTOS
-    //-----------------------------------------------------------------------------------------
+
+        //Editor pode mudar o preco do review fee
+    function set_review_fee(uint256 fee) public{
+        require(msg.sender==Editor, "You aren't Editor");
+        review_fee = fee;
+    }
 
     //Ver o preco do publishing fee
     function get_publishing_fee() view public returns(uint256) {
@@ -176,11 +162,8 @@ contract DPublish is Context{
     }
 
     //-----------------------------------------------------------------------------------------
-                                          //COMPRAR DPubTokens
+                                          //COMPRA de DPubTokens
     //-----------------------------------------------------------------------------------------
-
-
-
 
      //Comprar DPubTokens
     function buy_DPTK(uint256 qtd_DPTK)public payable{
@@ -191,14 +174,15 @@ contract DPublish is Context{
         else{
             wallet_dptk[msg.sender] += qtd_DPTK;
         }
+        emit PurchasedDPTK(msg.sender, qtd_DPTK);
 
     }
 
     //-----------------------------------------------------------------------------------------
-                                          //ENVIAR MANUSCRITO
+                                          //SUBMISSAO DE ARTIGO
     //-----------------------------------------------------------------------------------------
     
-    //Envia manuscrito
+    //Submete artigo
     function submit_manuscript(string memory idmanuscript) public payable{
         submited_manuscripts[idmanuscript] = msg.sender;
         generate_link(idmanuscript);
@@ -218,7 +202,7 @@ contract DPublish is Context{
 
 
     //-----------------------------------------------------------------------------------------
-                                    //PROCESSO DE REVISÃO
+                                    //PROCESSO DE REVISAO
     //-----------------------------------------------------------------------------------------
 
     //revisor se inscreve
@@ -277,7 +261,7 @@ contract DPublish is Context{
             reviewing[idmanuscript] = false;
             //pay reviewr DPTK and RTK
             emits_reviewtoken(idmanuscript,msg.sender, 1);
-            pay_reviewers(msg.sender);
+            pay_reviewers(msg.sender,idmanuscript);
             //emitindo evento
             emit ManuscriptRevised(msg.sender, idmanuscript, 1);
         }
@@ -292,7 +276,7 @@ contract DPublish is Context{
             publish_manuscript(idmanuscript);
             //pay reviewer DPTK and RTK
             emits_reviewtoken(idmanuscript,msg.sender, 1);
-            pay_reviewers(msg.sender);
+            pay_reviewers(msg.sender,idmanuscript);
             //paper token  pro autor
             emits_papertoken(idmanuscript, submited_manuscripts[idmanuscript]);
             //emitindo os eventos
