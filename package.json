@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@openzeppelin/contracts": "^4.4.0"
+    "@openzeppelin/contracts": "^4.4.0",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "ethereumjs-wallet": "^1.0.2"
   }
 }
