@@ -44,7 +44,7 @@ Cria um contrato não-fungível que fará o papel de certificado de revisão.
 
 ## Dificuldades
 
-Uma vez que não finalizei a implementação de todos os contratos, tive dificuldades em realizar as suas devidas conexões como no diagrama. Naturalmente, como esperado, tive dificuldades em traduzir o modelo do artigo para Solidity, especialmente por ser uma nova ferramenta - ou seja, soma-se a dificuldade de aprende-la melhor. Além disso, tive muitos problemas de hardware para executar o truffle develop. 
+Uma vez que não finalizei a implementação de todos os contratos, tive dificuldades em realizar as suas devidas conexões como no diagrama. Naturalmente, como esperado, tive dificuldades em traduzir o modelo do artigo para Solidity, especialmente por ser uma nova ferramenta - ou seja, soma-se a dificuldade de aprende-la melhor. Além disso, tive muitos problemas de hardware para executar o truffle develop, o que, infelizmente, acaretou em vários tavamentos prolongados da ferramenta.
 
 ## Referências
 1. Conteúdo visto em aula
