@@ -18,8 +18,14 @@ contract DPublish {
     mapping(address => address[]) tokens; // The DPubTokens of each user. 
     uint weiToDPubToken = 1000; // A (arbitrary) value to compute DPubTokens given the balance. 
 
+    address editor; // Owner of the contract 
+
     PaperTokens papersMetadata; 
     ReviewTokens reviewsMetadata; 
+
+    function contructor() public {
+	    editor = msg.sender; 
+    } 
 
     receive() external payable {} 
 
@@ -303,6 +309,8 @@ contract DPublish {
 
 	function buyToken() public payable {
 		// Buy a DPubToken. 
+		// Honestly, I'm not sure whether this is appropriate for the contract, 
+	        // but I guess it is? 	
 		require(msg.value >= weiToDPubToken, 
 			"You must provide more currencies!"); 
 		DPubToken tk = new DPubToken(msg.value); 

@@ -7,11 +7,12 @@ import numpy as np
 import secrets  
 from typing import List 
 
-address = '0x' + secrets.token_hex(20) # 8954d0c17F3056A6C98c7A6056C63aBFD3e8FA6f'
+editor = lambda i: accounts[i] 
+
 assertion_msg = "An exception should be raised in this case!" 
 
 def test_submit_manuscript(): 
-    dpublish = DPublish.deploy({"from": address}) 
+    dpublish = DPublish.deploy({"from": editor(1)}) 
     
     curr_balance = accounts[1].balance() 
     
@@ -55,7 +56,7 @@ def test_submit_manuscript():
         assert strerr == "revert: You must be the author!" 
 
 def test_register_reviewer(): 
-    dpublish = DPublish.deploy({"from": address}) 
+    dpublish = DPublish.deploy({"from": editor(1)}) 
     
     curr_balance = accounts[1].balance() 
 
@@ -97,7 +98,7 @@ def test_register_reviewer():
         assert strerr == "revert: The manuscript is already being subjected to a review, author!" 
 
 def test_review(): 
-    dpublish = DPublish.deploy({"from": address}) 
+    dpublish = DPublish.deploy({"from": editor(1)}) 
 
     # Submit manuscript 
     dpublish.submit_manuscript("a", {"from": accounts[1], 
@@ -126,7 +127,7 @@ def test_review():
         assert strerr == "revert: The review must be a number between 1 and 5, reviewer!" 
 
 def test_rateReview(): 
-    dpublish = DPublish.deploy({"from": address}) 
+    dpublish = DPublish.deploy({"from": editor(1)}) 
 
     # Submit manuscript 
     dpublish.submit_manuscript("a", {"from": accounts[1], 
@@ -170,7 +171,7 @@ def test_rateReview():
 
     # Rate a review that doesn't exist 
     try: 
-        dpublish.rateReview(address, 5, {"from": accounts[3]}) 
+        dpublish.rateReview("0x" + secrets.token_hex(20), 5, {"from": accounts[3]}) 
         assert False, assertion_msg 
     except VirtualMachineError as err: 
         strerr = str(err)[:str(err).index("\n")] 
@@ -195,7 +196,7 @@ class ReleaseManuscript(object):
         Constructor method for TestReleaseManuscript. 
         """ 
 
-        self.dpublish = DPublish.deploy({"from": address}) 
+        self.dpublish = DPublish.deploy({"from": editor(1)}) 
 
         # Submit manuscript 
         self.dpublish.submit_manuscript("a", {"from": accounts[1], 
@@ -282,7 +283,7 @@ def test_releaseManuscript():
         assert strerr == "revert: The document doesn't has appropriate rating!" 
 
 def test_buyToken(): 
-    dpublish = DPublish.deploy({"from": address}) 
+    dpublish = DPublish.deploy({"from": editor(1)}) 
     # Scenario in which the token is bought 
     curr_balance = accounts[1].balance() 
     value = 9999 
