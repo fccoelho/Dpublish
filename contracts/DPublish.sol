@@ -118,8 +118,7 @@ contract DPublish is Context {
         // NOTE: we don't check if the same reviewer is reviewing the same paper twice.
         address reviewer = msg.sender;
 
-        // TODO check if paper really is under review
-        Paper memory paper = papers_under_review[papertoken];
+        Paper memory paper = get_paper_under_review(papertoken);
         require(reviewer != paper.author);
 
         // Reviewing a paper has a corresponding bounty.
@@ -143,13 +142,15 @@ contract DPublish is Context {
     function accept_or_reject_paper(address papertoken, bool accept) public payable {
         require(msg.sender == Editor);
 
-        // TODO check if paper really is under review
-        Paper memory paper = papers_under_review[papertoken];
+        // Get the paper.
+        Paper memory paper = get_paper_under_review(papertoken);
 
+        // Add the paper to either the `accepted_papers` or `rejected_papers` mappings.
         if (accept)
             accepted_papers[papertoken] = paper;
         else
             rejected_papers[papertoken] = paper;
+        // Remove it from the `papers_under_review` mapping.
         delete papers_under_review[papertoken];
     }
 }
