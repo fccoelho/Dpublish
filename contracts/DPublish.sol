@@ -6,9 +6,12 @@ contract DPublish {
     mapping(string => address) public submitted_manuscripts;
     mapping(address => uint256) public wallet_amount; // armazena o total da carteira
     mapping (address => string) public review_completed; // armazena os links dos artigos revisados
+    mapping(address => bool) public reviewer_list;
     
     address private reviewr; // endereço do revisor
+    address private editor; // endereço do revisor
     uint256 public actual_fee; // taxa pela revisao
+    uint256 public payed_value; 
     uint256 min_fee = 10000; // taxa mínima
     // no futuro, este valor deverá ser mutável por um usuáio com permissão (comitê)
     
@@ -16,7 +19,7 @@ contract DPublish {
 
     constructor(){
         // o autor do contrato é o revisor
-        reviewr = msg.sender;
+        editor = msg.sender;
     }
 
     function submit_manuscript(string memory idmanuscript) public payable{
@@ -50,30 +53,43 @@ contract DPublish {
 
     function set_fee(uint256 amount) public payable{
         // set revieww fee 
-        require(msg.sender == reviewr, "You don't have permission for that");
+        require(msg.sender == editor, "You don't have permission for that");
         require(amount > min_fee, "Your fee must be higher");
         actual_fee = amount;
     }
 
     function set_balance(address account, uint256 amount) public{
         // set wallet balance for account
-        require(msg.sender == reviewr);
+        require(msg.sender == editor);
         wallet_amount[account] = amount;
     }
 
-    function review_article(string memory article_link) public{
+    function assign_reviewer(address account) public{
+        // only editor can assign reviewers
+        require(msg.sender == editor, "You don't have permission for that");
+        require(!(reviewer_list[account]==true), "This account is already from a reviewer");
+        reviewer_list[account] = true;
+    }
+
+    function review_article(string memory review_link) public{
         // publica o link do artigo revisado e recebe o pagamento
-        review_completed[msg.sender] = article_link;
+        require(reviewer_list[msg.sender]==true, "You don't have permission for that");
+        review_completed[msg.sender] = review_link;
         receive_payment(msg.sender);
     }
 
     function receive_payment(address reviewer) private{
+        require(payed_value == actual_fee, "Error");
         wallet_amount[reviewer] += actual_fee;
+        payed_value -= actual_fee; // evita pagamentos multiplos
     }
 
     function make_payment(address author) private{
         wallet_amount[author] -= actual_fee;
+        payed_value = actual_fee; // armazena o valor pago
     }
+
+    
 
 
 }

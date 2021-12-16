@@ -25,6 +25,7 @@ Nesta implementação, criei funções para:
 6. *(review_article)*: permite que o revisor publique o link para do artigo revisado e receba seu pagamento;
 7. *(receive_payment)*: realiza a transação para o revisor
 8. *(make_payment)*: remove o valor pago da conta do autor
+9. *(assign_reviewer)*: designa revisores para o manuscrito
 
 As funções acima também possuem alguns comentário em [DPublish.sol](contracts/DPublish.sol), mas, no geral, sua implementação é simples, permitindo fácil entendimento.
 
