@@ -1,5 +1,5 @@
 # Dpublish
-Distributed platform for peer-reviewing scientific articles based on the Ethereum Blockchain.
+Distributed platform for peer-reviewing scientific articles based on the Ethereum Blockchain. The implementation offered here follows [this article](https://www.scielo.br/j/mioc/a/pGbLcFHfhKGvXvTYPcGrfWw/abstract/?lang=en).
 
 # Setting up the project
 
