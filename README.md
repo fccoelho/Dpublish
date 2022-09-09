@@ -8,3 +8,5 @@ This project uses openzeppelin contrats, so make sure to install it in your proj
 ```bash
 $ npm install @openzeppelin/contracts
 ```
+
+The outline of the platform as is currently stands can be found in the [docs folder](docs/README.md).
