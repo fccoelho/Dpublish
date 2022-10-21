@@ -72,6 +72,12 @@ module.exports = {
     // production: true    // Treats this network as if it was a public net. (default: false)
     // }
   },
+  settings: {
+    optimizer: {
+      enabled: true,
+      runs: 200,
+    },
+  },
 
   // Set default mocha options here, use special reporters etc.
   mocha: {

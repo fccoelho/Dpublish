@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "@openzeppelin/contracts": "^4.7.3"
+    "@openzeppelin/contracts": "^4.7.3",
+    "eip-712": "^1.0.0",
+    "eth-sig-util": "^3.0.1",
+    "got": "^12.5.2"
   },
   "devDependencies": {
     "@openzeppelin/test-helpers": "^0.5.16"
