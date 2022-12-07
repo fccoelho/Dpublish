@@ -21,6 +21,7 @@ contract DPublish {
     * Submit manuscript
      */
     function submit_manuscript(string memory idmanuscript) public payable{
+        // allow the author to submit a manuscript
         submitted_manuscripts[idmanuscript] = msg.sender;
         uint funds = balance[msg.sender];
 
@@ -34,15 +35,23 @@ contract DPublish {
     }
 
     function set_fee(uint256 sub_fee) public {
+        // define the submission fee
         // only the editor can set the fee
         require(msg.sender == editor);
         fee = sub_fee;
     }
 
     function set_balance(address user, uint256 amount) public {
+        // define the balance of a user
         // only the editor can set the balance
         require(msg.sender == editor);
         balance[user] = amount;
+    }
+
+    function get_balance(address user) public view returns (uint256) {
+        // get user balance
+        require(msg.sender == user, "Only the user can get its balance"); 
+        return balance[user];
     }
 
 }
