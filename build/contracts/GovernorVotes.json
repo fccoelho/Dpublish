@@ -888,7 +888,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v4.6.0) (governance/extensions/GovernorVotes.sol)\n\npragma solidity ^0.8.0;\n\nimport \"../Governor.sol\";\nimport \"../utils/IVotes.sol\";\n\n/**\n * @dev Extension of {Governor} for voting weight extraction from an {ERC20Votes} token, or since v4.5 an {ERC721Votes} token.\n *\n * _Available since v4.3._\n */\nabstract contract GovernorVotes is Governor {\n    IVotes public immutable token;\n\n    constructor(IVotes tokenAddress) {\n        token = tokenAddress;\n    }\n\n    /**\n     * Read the voting weight from the token's built in snapshot mechanism (see {Governor-_getVotes}).\n     */\n    function _getVotes(\n        address account,\n        uint256 blockNumber,\n        bytes memory /*params*/\n    ) internal view virtual override returns (uint256) {\n        return token.getPastVotes(account, blockNumber);\n    }\n}\n",
-  "sourcePath": "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
+  "sourcePath": "@openzeppelin\\contracts\\governance\\extensions\\GovernorVotes.sol",
   "ast": {
     "absolutePath": "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
     "exportedSymbols": {
@@ -1426,8 +1426,8 @@
     "version": "0.8.4+commit.c7e474f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.9",
-  "updatedAt": "2022-10-16T21:07:22.951Z",
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-12-16T02:45:51.200Z",
   "devdoc": {
     "details": "Extension of {Governor} for voting weight extraction from an {ERC20Votes} token, or since v4.5 an {ERC721Votes} token. _Available since v4.3._",
     "errors": {
